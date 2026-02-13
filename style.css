@@ -1,85 +1,17 @@
-
-/* Configuración General */
-body {
-    margin: 0;
-    padding: 0;
-    background-color: #050505;
-    color: white;
-    font-family: 'Inter', sans-serif;
-    line-height: 1.6;
-}
-
-/* Diseño de la Navbar */
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 50px;
-    background: rgba(0, 0, 0, 0.9);
-    border-bottom: 1px solid #222;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-.logo {
-    font-weight: bold;
-    letter-spacing: 2px;
-}
-
-.thin { font-weight: 200; }
-
-.nav-links {
-    list-style: none;
-    display: flex;
-    gap: 30px;
-}
-
-.nav-links a {
-    color: #888;
+.btn-buy {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    border: 1px solid #d4af37;
+    color: #d4af37;
     text-decoration: none;
-    font-size: 0.9rem;
+    border-radius: 5px;
+    font-size: 0.8rem;
     transition: 0.3s;
-}
-
-.nav-links a:hover { color: white; }
-
-/* Botones */
-.btn-login {
-    background: transparent;
-    border: 1px solid #444;
-    color: white;
-    padding: 8px 20px;
-    border-radius: 20px;
-    cursor: pointer;
-}
-
-.btn-premium, .btn-start {
-    background: white;
-    border: none;
-    color: black;
-    padding: 10px 25px;
-    border-radius: 25px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.btn-premium:hover { background: #ccc; }
-
-/* Hero Section */
-.hero {
-    height: 70vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     text-align: center;
-    padding: 0 20px;
 }
 
-.hero h1 {
-    font-size: 3.5rem;
-    font-weight: 200;
-    margin-bottom: 20px;
+.btn-buy:hover {
+    background: #d4af37;
+    color: black;
 }
