@@ -12,72 +12,73 @@
     <nav class="navbar">
         <div class="logo">ZEN SPACE | <span class="thin">DIGITAL SANCTUARY</span></div>
         <ul class="nav-links">
-            <li><a href="#explore">Explorar</a></li>
-            <li><a href="#science">Ciencia</a></li>
-            <li><a href="#shop">Tienda</a></li>
+            <li><a href="#explore" data-key="nav-explore">Explorar</a></li>
+            <li><a href="#science" data-key="nav-science">Ciencia</a></li>
+            <li><a href="#shop" data-key="nav-shop">Tienda</a></li>
         </ul>
         <div class="nav-buttons">
-            <button class="btn-login">Login</button>
-            <button class="btn-premium">Get Premium</button>
+            <button id="lang-btn" class="btn-lang">EN</button>
+            <button class="btn-login" data-key="btn-login">Login</button>
+            <button class="btn-premium" data-key="btn-premium">Get Premium</button>
         </div>
     </nav>
 
     <header class="hero">
-        <h1>Bienvenida a tu Santuario</h1>
-        <p>Arte generativo y ciencia para tu bienestar mental.</p>
-        <button class="btn-start">Empezar Gratis</button>
+        <h1 data-key="hero-title">Bienvenida a tu Santuario</h1>
+        <p data-key="hero-desc">Arte generativo y ciencia para tu bienestar mental.</p>
+        <button class="btn-start" data-key="btn-start">Empezar Gratis</button>
     </header>
 
     <main>
         <section id="explore" class="grid-container">
-            <h2 class="category-title">Deep Focus <span style="font-weight: 200;">(ADHD Edition)</span></h2>
+            <h2 class="category-title" data-key="cat-focus">Deep Focus (ADHD Edition)</h2>
             <div class="cards-wrapper">
                 <div class="card">
-                    <div class="preview-box"><span class="badge">Gratis</span></div>
-                    <h3>Patrones Geométricos</h3>
-                    <p>Concentración rítmica para trabajo profundo.</p>
+                    <div class="preview-box"><span class="badge" data-key="badge-free">Gratis</span></div>
+                    <h3 data-key="card1-t">Patrones Geométricos</h3>
+                    <p data-key="card1-d">Concentración rítmica para trabajo profundo.</p>
                 </div>
                 <div class="card">
-                    <div class="preview-box"><span class="badge">Gratis</span></div>
-                    <h3>Ruido Marrón Visual</h3>
-                    <p>Bloqueo de distracciones externas.</p>
+                    <div class="preview-box"><span class="badge" data-key="badge-free">Gratis</span></div>
+                    <h3 data-key="card2-t">Ruido Marrón Visual</h3>
+                    <p data-key="card2-d">Bloqueo de distracciones externas.</p>
                 </div>
                 <div class="card premium">
-                    <div class="preview-box"><span class="badge gold">Premium 🔒</span></div>
-                    <h3>Flujo de Partículas</h3>
-                    <p>Estimulación visual suave para mentes inquietas.</p>
+                    <div class="preview-box"><span class="badge gold" data-key="badge-premium">Premium 🔒</span></div>
+                    <h3 data-key="card3-t">Flujo de Partículas</h3>
+                    <p data-key="card3-d">Estimulación visual suave para mentes inquietas.</p>
                 </div>
             </div>
         </section>
 
         <section id="science" class="science-section">
             <div class="science-content">
-                <h2 class="category-title">La Ciencia del Santuario</h2>
+                <h2 class="category-title" data-key="nav-science">Ciencia</h2>
                 <div class="science-grid">
                     <div class="science-item">
-                        <h3>Ondas Alpha y Theta</h3>
-                        <p>Nuestras animaciones Zen están calibradas para inducir estados de relajación profunda.</p>
+                        <h3 data-key="sci1-t">Ondas Alpha y Theta</h3>
+                        <p data-key="sci1-d">Nuestras animaciones Zen están calibradas para inducir estados de relajación profunda.</p>
                     </div>
                     <div class="science-item">
-                        <h3>Apoyo para ADHD</h3>
-                        <p>El foco visual actúa como un ancla externa para silenciar el ruido mental.</p>
+                        <h3 data-key="sci2-t">Apoyo para ADHD</h3>
+                        <p data-key="sci2-d">El foco visual actúa como un ancla externa para silenciar el ruido mental.</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <section id="shop" class="grid-container">
-            <h2 class="category-title">Herramientas Recomendadas</h2>
+            <h2 class="category-title" data-key="nav-shop">Tienda</h2>
             <div class="cards-wrapper">
                 <div class="card">
                     <div class="preview-box"><span class="badge">Amazon</span></div>
-                    <h3>Auriculares Noise Cancelling</h3>
-                    <a href="#" class="btn-buy">Ver en Amazon</a>
+                    <h3 data-key="prod1-t">Auriculares Noise Cancelling</h3>
+                    <a href="#" class="btn-buy" data-key="btn-buy">Ver en Amazon</a>
                 </div>
                 <div class="card">
                     <div class="preview-box"><span class="badge">Zen Choice</span></div>
-                    <h3>Lámpara de Sal</h3>
-                    <a href="#" class="btn-buy">Ver en Amazon</a>
+                    <h3 data-key="prod2-t">Lámpara de Sal</h3>
+                    <a href="#" class="btn-buy" data-key="btn-buy">Ver en Amazon</a>
                 </div>
             </div>
         </section>
@@ -87,5 +88,76 @@
         &copy; 2026 ZEN SPACE | DIGITAL SANCTUARY.
     </footer>
 
+    <script>
+        const translations = {
+            'es': {
+                'nav-explore': 'Explorar',
+                'nav-science': 'Ciencia',
+                'nav-shop': 'Tienda',
+                'btn-login': 'Login',
+                'btn-premium': 'Get Premium',
+                'hero-title': 'Bienvenida a tu Santuario',
+                'hero-desc': 'Arte generativo y ciencia para tu bienestar mental.',
+                'btn-start': 'Empezar Gratis',
+                'cat-focus': 'Deep Focus (ADHD Edition)',
+                'badge-free': 'Gratis',
+                'badge-premium': 'Premium 🔒',
+                'card1-t': 'Patrones Geométricos',
+                'card1-d': 'Concentración rítmica para trabajo profundo.',
+                'card2-t': 'Ruido Marrón Visual',
+                'card2-d': 'Bloqueo de distracciones externas.',
+                'card3-t': 'Flujo de Partículas',
+                'card3-d': 'Estimulación visual suave para mentes inquietas.',
+                'sci1-t': 'Ondas Alpha y Theta',
+                'sci1-d': 'Nuestras animaciones Zen están calibradas para inducir estados de relajación profunda.',
+                'sci2-t': 'Apoyo para ADHD',
+                'sci2-d': 'El foco visual actúa como un ancla externa para silenciar el ruido mental.',
+                'prod1-t': 'Auriculares Noise Cancelling',
+                'prod2-t': 'Lámpara de Sal',
+                'btn-buy': 'Ver en Amazon'
+            },
+            'en': {
+                'nav-explore': 'Explore',
+                'nav-science': 'Science',
+                'nav-shop': 'Shop',
+                'btn-login': 'Login',
+                'btn-premium': 'Get Premium',
+                'hero-title': 'Welcome to your Sanctuary',
+                'hero-desc': 'Generative art and science for your mental wellbeing.',
+                'btn-start': 'Start for Free',
+                'cat-focus': 'Deep Focus (ADHD Edition)',
+                'badge-free': 'Free',
+                'badge-premium': 'Premium 🔒',
+                'card1-t': 'Geometric Patterns',
+                'card1-d': 'Rhythmic concentration for deep work.',
+                'card2-t': 'Visual Brown Noise',
+                'card2-d': 'Blocking external distractions.',
+                'card3-t': 'Particle Flow',
+                'card3-d': 'Gentle visual stimulation for restless minds.',
+                'sci1-t': 'Alpha & Theta Waves',
+                'sci1-d': 'Our Zen animations are calibrated to induce deep relaxation states.',
+                'sci2-t': 'ADHD Support',
+                'sci2-d': 'Visual focus acts as an external anchor to quiet mental noise.',
+                'prod1-t': 'Noise Cancelling Headphones',
+                'prod2-t': 'Salt Lamp',
+                'btn-buy': 'View on Amazon'
+            }
+        };
+
+        const langBtn = document.getElementById('lang-btn');
+        let currentLang = 'es';
+
+        langBtn.addEventListener('click', () => {
+            currentLang = currentLang === 'es' ? 'en' : 'es';
+            langBtn.innerText = currentLang === 'es' ? 'EN' : 'ES';
+            
+            document.querySelectorAll('[data-key]').forEach(element => {
+                const key = element.getAttribute('data-key');
+                if (translations[currentLang][key]) {
+                    element.innerText = translations[currentLang][key];
+                }
+            });
+        });
+    </script>
 </body>
 </html>
