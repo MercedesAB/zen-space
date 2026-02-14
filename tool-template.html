@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore | Zen Space</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        /* Reuse styles from index.html */
+        :root { --bg: #050505; --glass: rgba(255,255,255,0.03); --border: rgba(255,255,255,0.08); --accent: #a855f7; }
+        body { background: var(--bg); color: white; font-family: 'Inter', sans-serif; padding-bottom: 100px; }
+        
+        .navbar { display: flex; justify-content: space-between; padding: 25px 5%; border-bottom: 1px solid var(--border); }
+        .logo { font-weight: bold; letter-spacing: 2px; text-decoration: none; color: white; }
+        
+        .header { text-align: center; padding: 80px 20px; }
+        .header h1 { font-family: 'Playfair Display', serif; font-size: 3rem; margin-bottom: 10px; }
+        .header p { color: #888; }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .tool-card {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .tool-card:hover { transform: translateY(-5px); border-color: var(--accent); }
+
+        .thumb {
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.6;
+        }
+
+        .content { padding: 25px; }
+        .tag { font-size: 0.7rem; text-transform: uppercase; color: var(--accent); letter-spacing: 1px; }
+        .title { font-size: 1.2rem; margin: 10px 0; font-weight: 400; }
+        .desc { font-size: 0.85rem; color: #888; line-height: 1.5; margin-bottom: 20px; }
+        
+        .btn-launch {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: white;
+            color: black;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .btn-launch.premium { background: transparent; border: 1px solid #333; color: #888; cursor: not-allowed; }
+        
+        .lock { position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.5); padding: 5px 10px; border-radius: 10px; font-size: 0.8rem; backdrop-filter: blur(5px); }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="logo">ZEN SPACE</a>
+        <div>
+            <a href="index.html" style="color: #888; text-decoration: none; margin-right: 20px;">Home</a>
+            <a href="#" style="color: white; text-decoration: none;">Premium Login</a>
+        </div>
+    </nav>
+
+    <div class="header">
+        <h1>Focus Collection</h1>
+        <p>Tools designed for deep work and ADHD regulation.</p>
+    </div>
+
+    <div class="grid-container">
+        
+        <!-- Free Tool -->
+        <div class="tool-card">
+            <div class="thumb" style="background-image: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=600');"></div>
+            <div class="content">
+                <span class="tag">FREE</span>
+                <div class="title">Starry Night Focus</div>
+                <div class="desc">Slow moving particles to simulate a night sky. Ideal for reading.</div>
+                <a href="tool-template.html" class="btn-launch">Launch Tool</a>
+            </div>
+        </div>
+
+        <!-- Free Tool -->
+        <div class="tool-card">
+            <div class="thumb" style="background-image: url('https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?auto=format&fit=crop&w=600');"></div>
+            <div class="content">
+                <span class="tag">FREE</span>
+                <div class="title">Digital Rain</div>
+                <div class="desc">Matrix-style falling code with brown noise integration.</div>
+                <!-- You would create a rain.html file and link here -->
+                <a href="tool-template.html" class="btn-launch">Launch Tool</a>
+            </div>
+        </div>
+
+        <!-- Premium Tool -->
+        <div class="tool-card">
+            <div class="thumb" style="background-image: url('https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&w=600');"></div>
+            <div class="lock">🔒 Premium</div>
+            <div class="content">
+                <span class="tag" style="color: gold;">PREMIUM</span>
+                <div class="title">Hyperfocus Tunnel</div>
+                <div class="desc">A high-speed warp tunnel effect for extreme coding sessions.</div>
+                <a href="#" class="btn-launch premium" onclick="alert('Upgrade to Premium to unlock')">Unlock</a>
+            </div>
+        </div>
+
+         <!-- Premium Tool -->
+         <div class="tool-card">
+            <div class="thumb" style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600');"></div>
+            <div class="lock">🔒 Premium</div>
+            <div class="content">
+                <span class="tag" style="color: gold;">PREMIUM</span>
+                <div class="title">Bioluminescent Deep Sea</div>
+                <div class="desc">Reactive jellyfish that follow your mouse cursor.</div>
+                <a href="#" class="btn-launch premium" onclick="alert('Upgrade to Premium to unlock')">Unlock</a>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
