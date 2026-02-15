@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deep Flow | Pulse</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap" rel="stylesheet">
+    <!-- This loads the p5.js library for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <style>
+        :root { --bg: #050505; --glass: rgba(255,255,255,0.05); --accent: #00ffff; }
+        body { margin: 0; overflow: hidden; background: var(--bg); color: white; font-family: 'Inter', sans-serif; }
+        
+        /* The Canvas is the background */
+        #canvas-container { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            z-index: 1; 
+        }
+
+        /* The UI floats on top */
+        #ui-layer { 
+            position: fixed; 
+            inset: 0; 
+            z-index: 10; 
+            pointer-events: none; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: space-between; 
+            padding: 20px; 
+        }
+        
+        /* Header */
+        .top-bar { display: flex; justify-content: space-between; align-items: center; pointer-events: auto; }
+        .back-btn { 
+            background: var(--glass); 
+            border: 1px solid rgba(255,255,255,0.1); 
+            color: white; 
+            padding: 10px 20px; 
+            border-radius: 30px; 
+            text-decoration: none; 
+            font-size: 0.9rem; 
+            backdrop-filter: blur(5px); 
+            transition: 0.3s; 
+        }
+        .back-btn:hover { background: rgba(255,255,255,0.1); }
+        .timer { font-size: 1.2rem; font-weight: 300; letter-spacing: 2px; opacity: 0.8; }
+
+        /* Center Text */
+        .center-msg { 
+            text-align: center; 
+            opacity: 0; 
+            transition: opacity 1s; 
+            pointer-events: none; 
+            margin-top: 20%; 
+            font-size: 1.5rem;
+            letter-spacing: 3px;
+            font-weight: 200;
+        }
+        .center-msg.visible { opacity: 0.7; }
+
+        /* Bottom Controls */
+        .controls { 
+            display: flex; 
+            justify-content: center; 
+            gap: 20px; 
+            pointer-events: auto; 
+            background: var(--glass); 
+            padding: 15px 30px; 
+            border-radius: 50px; 
+            backdrop-filter: blur(10px); 
+            border: 1px solid rgba(255,255,255,0.05); 
+            align-self: center; 
+            margin-bottom: 20px; 
+        }
+        
+        .control-btn { 
+            background: none; 
+            border: none; 
+            color: white; 
+            cursor: pointer; 
+            font-size: 1.2rem; 
+            opacity: 0.7; 
+            transition: 0.2s; 
+        }
+        .control-btn:hover { opacity: 1; transform: scale(1.1); }
+        .control-btn.active { color: var(--accent); opacity: 1; }
+    </style>
+</head>
+<body>
+
+    <div id="canvas-container"></div>
+
+    <div id="ui-layer">
+        <div class="top-bar">
+            <!-- This button takes you back to the main menu -->
+            <a href="index.html" class="back-btn">← Exit to Menu</a>
+            <div class="timer" id="timer">00:00</div>
+        </div>
+
+        <div class="center-msg" id="instruction">Inhale...</div>
+
+        <div class="controls">
+            <button class="control-btn" onclick="toggleAudio()" title="Sound">🔊</button>
+            <button class="control-btn" onclick="toggleFullscreen()" title="Fullscreen">⛶</button>
+            <button class="control-btn active" onclick="togglePlay()" id="playBtn" title="Play/Pause">❚❚</button>
+        </div>
+    </div>
+
+    <script>
+        // --- 1. UI LOGIC (Buttons and Timer) ---
+        let isPlaying = true;
+        let seconds = 0;
+        let timerInterval;
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                seconds++;
+                const m = Math.floor(seconds / 60).toString().padStart(2, '0');
+                const s = (seconds % 60).toString().padStart(2, '0');
+                document.getElementById('timer').innerText = `${m}:${s}`;
+            }, 1000);
+        }
+        startTimer();
+
+        function togglePlay() {
+            isPlaying = !isPlaying;
+            const btn = document.getElementById('playBtn');
+            btn.innerHTML = isPlaying ? '❚❚' : '▶';
+            if(isPlaying) loop(); else noLoop();
+        }
+
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+            else if (document.exitFullscreen) document.exitFullscreen();
+        }
+
+        function toggleAudio() {
+            alert("Brown noise would start here.");
+        }
+
+        // --- 2. P5.JS ANIMATION (THE PULSE) ---
+        let centerX, centerY;
+        let angle = 0;
+
+        function setup() {
+            // Create canvas inside the specific div
+            let container = document.getElementById('canvas-container');
+            let canvas = createCanvas(container.clientWidth, container.clientHeight);
+            canvas.parent('canvas-container');
+            
+            centerX = width / 2;
+            centerY = height / 2;
+            
+            noFill();
+            strokeWeight(3);
+            colorMode(HSB, 360, 100, 100, 1); // Hue, Saturation, Brightness, Alpha
+        }
+
+        function draw() {
+            // Create the trail effect (Motion Blur)
+            // Instead of clearing the screen, we paint a very transparent black
+            background(230, 80, 5, 0.1); 
+
+            angle += 0.02; // Speed of the pulse
+
+            // Calculate size using Sine wave
+            let radius = map(sin(angle), -1, 1, 100, 250);
+
+            // Main Circle
+            stroke(180, 80, 100); // Cyan
+            ellipse(centerX, centerY, radius * 2);
+
+            // Echo Circle (Lagging behind)
+            stroke(280, 60, 80, 0.5); // Purple
+            let radius2 = map(sin(angle - 0.5), -1, 1, 80, 200); 
+            ellipse(centerX, centerY, radius2 * 2);
+            
+            // Center Anchor
+            fill(180, 80, 100);
+            noStroke();
+            ellipse(centerX, centerY, 10);
+
+            // Update Text based on breath
+            let val = sin(angle);
+            let msg = document.getElementById('instruction');
+            if (val > 0.8) { msg.innerText = "Hold"; msg.classList.add('visible'); }
+            else if (val > 0) { msg.innerText = "Inhale"; msg.classList.add('visible'); }
+            else if (val < -0.8) { msg.innerText = "Hold"; msg.classList.add('visible'); }
+            else { msg.innerText = "Exhale"; msg.classList.add('visible'); }
+        }
+
+        function windowResized() {
+            let container = document.getElementById('canvas-container');
+            resizeCanvas(container.clientWidth, container.clientHeight);
+            centerX = width / 2;
+            centerY = height / 2;
+        }
+    </script>
+</body>
+</html>
