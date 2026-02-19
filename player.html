@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player | Zen Space</title>
+    <style>
+        body { margin: 0; background: #000; overflow: hidden; }
+        iframe { width: 100vw; height: 100vh; border: none; }
+        .back-btn { position: fixed; top: 20px; left: 20px; z-index: 100; background: rgba(0,0,0,0.5); color: white; padding: 10px 20px; border-radius: 20px; text-decoration: none; border: 1px solid #333; backdrop-filter: blur(5px); font-family: sans-serif; }
+        .back-btn:hover { background: rgba(255,255,255,0.2); }
+    </style>
+</head>
+<body>
+    <a href="library.html" class="back-btn">← Back to Library</a>
+    <iframe id="tool-frame" src=""></iframe>
+
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const url = params.get('url');
+    if (url) {
+        document.getElementById('tool-frame').src = url;
+    } else {
+        window.location.href = 'library.html';
+    }
+</script></body>
+</html>
