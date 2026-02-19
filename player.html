@@ -1,3 +1,8 @@
+Here is the updated code. I have added the logic to automatically hide the p5.js logo and editor (using "embed mode").
+
+Replace your entire `player.html` file with this:
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,8 +22,11 @@
 
     <script>
         const params = new URLSearchParams(window.location.search);
-        const url = params.get('url');
+        let url = params.get('url');
+        
         if (url) {
+            // FIX: This changes the link from /full/ to /embed/ to hide the p5.js logo
+            url = url.replace('/full/', '/embed/');
             document.getElementById('tool-frame').src = url;
         } else {
             window.location.href = 'library.html';
@@ -26,3 +34,4 @@
     </script>
 </body>
 </html>
+```
