@@ -1,614 +1,91 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zen Space | Digital Sanctuary</title>
-    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    <!-- Three.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    
     <style>
         :root {
             --bg-color: #050505;
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --accent: #a855f7; /* Purple for Zen */
-            --accent-glow: rgba(168, 85, 247, 0.3);
             --text-main: #ffffff;
             --text-muted: #a1a1aa;
+            --accent: #a855f7;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-        }
-
-        /* --- Three.js Background --- */
-        #canvas-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            z-index: -1;
-            opacity: 0.4; /* Subtle background */
-        }
-
-        /* --- Navigation --- */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 25px 5%;
-            background: rgba(5, 5, 5, 0.8);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--glass-border);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .logo {
-            font-size: 1.5rem; 
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .logo span {
-            font-weight: 300;
-            opacity: 0.7;
-            display: block; 
-            font-size: 0.8rem;
-            letter-spacing: 3px;
-            margin-top: -2px;
-        }
+        body { margin: 0; background-color: var(--bg-color); color: var(--text-main); font-family: 'Inter', sans-serif; line-height: 1.6; }
+        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: rgba(5,5,5,0.9); backdrop-filter: blur(10px); z-index: 100; }
+        .logo { font-weight: 700; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; color: white; }
+        .nav-links { display: flex; gap: 30px; list-style: none; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; transition: 0.3s; font-size: 0.9rem; }
+        .nav-links a:hover { color: white; }
+        .btn { padding: 10px 25px; border-radius: 30px; text-decoration: none; font-weight: 600; transition: 0.3s; display: inline-block; cursor: pointer; border: none; }
+        .btn-premium { background: white; color: black; }
+        .btn-premium:hover { transform: translateY(-2px); box-shadow: 0 0 15px rgba(255,255,255,0.2); }
         
-        @media (min-width: 768px) {
-            .logo span { display: inline; font-size: 1.5rem; margin-left: 10px; }
-        }
+        .hero { height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 20px; }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 400; margin-bottom: 20px; max-width: 800px; }
+        .hero p { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin-bottom: 40px; font-weight: 300; }
 
-        .nav-links {
-            display: none; /* Mobile first hidden */
-            list-style: none;
-            gap: 30px;
-        }
+        .section { padding: 80px 5%; border-top: 1px solid var(--border); }
+        .section h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 20px; }
+        .content-block { max-width: 800px; margin: 0 auto; color: var(--text-muted); font-size: 1.05rem; }
+        .highlight { color: var(--accent); }
 
-        @media (min-width: 768px) {
-            .nav-links { display: flex; }
-        }
-
-        .nav-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 300;
-        }
-
-        .nav-links a:hover { color: white; text-shadow: 0 0 10px var(--accent); }
-
-        .nav-buttons {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-
-        /* Buttons */
-        .btn {
-            padding: 10px 25px;
-            border-radius: 30px;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .btn-login {
-            background: transparent;
-            border: 1px solid var(--glass-border);
-            color: white;
-        }
-        .btn-login:hover { border-color: white; }
-
-        .btn-premium, .btn-start {
-            background: white;
-            color: black;
-            border: none;
-            font-weight: 600;
-        }
-        .btn-premium:hover, .btn-start:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px var(--accent-glow);
-            background: #f0f0f0;
-        }
-
-        /* --- Hero Section --- */
-        .hero {
-            height: 80vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 20px;
-            position: relative;
-        }
-
-        .hero h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
-            font-weight: 400;
-            margin-bottom: 20px;
-            line-height: 1.1;
-            max-width: 800px;
-        }
-
-        .hero p {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            margin-bottom: 40px;
-            max-width: 600px;
-            font-weight: 300;
-        }
-
-        /* --- Grid Layout --- */
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            text-align: center;
-        }
-        
-        .section-subtitle {
-            text-align: center;
-            color: var(--text-muted);
-            margin-bottom: 60px;
-            font-size: 0.9rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto 100px auto;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
-        }
-
-        .card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 0;
-            position: relative;
-            transition: 0.4s ease;
-            overflow: hidden;
-            cursor: pointer;
-            height: 350px;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent);
-            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.5);
-        }
-
-        .card-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            opacity: 0.4;
-            transition: 0.4s;
-            z-index: 1;
-        }
-
-        .card:hover .card-bg { opacity: 0.6; transform: scale(1.05); }
-
-        .card-content {
-            position: relative;
-            z-index: 2;
-            padding: 25px;
-            background: linear-gradient(to top, black, transparent);
-        }
-
-        .card-tag {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--accent);
-            margin-bottom: 8px;
-            display: block;
-        }
-
-        .card h3 {
-            font-size: 1.4rem;
-            font-weight: 400;
-            margin-bottom: 5px;
-        }
-
-        .lock-overlay {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(0,0,0,0.6);
-            backdrop-filter: blur(5px);
-            padding: 8px;
-            border-radius: 50%;
-            border: 1px solid var(--glass-border);
-            z-index: 3;
-        }
-
-        /* --- Science Section (Bento Style) --- */
-        .science-section {
-            padding: 100px 0;
-            border-top: 1px solid var(--glass-border);
-            border-bottom: 1px solid var(--glass-border);
-            background: rgba(255,255,255,0.01);
-        }
-
-        .bento-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
-
-        @media(min-width: 768px) {
-            .bento-grid { grid-template-columns: repeat(3, 1fr); }
-        }
-
-        .bento-box {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            padding: 40px;
-            border-radius: 20px;
-        }
-
-        .bento-box.full-width {
-            grid-column: 1 / -1;
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .bento-box h4 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            color: var(--accent);
-        }
-
-        .bento-box p {
-            color: var(--text-muted);
-            line-height: 1.8;
-            font-size: 0.95rem;
-            font-weight: 300;
-        }
-
-        .highlight-quote {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            font-size: 1.2rem;
-            color: white;
-            margin-top: 20px;
-            display: block;
-        }
-
-        /* --- Affiliate Section --- */
-        .affiliate-section {
-            padding: 100px 0;
-        }
-
-        .affiliate-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-
-        .affiliate-card {
-            text-align: center;
-            padding: 30px;
-            background: linear-gradient(145deg, #0a0a0a, #000);
-            border: 1px solid var(--glass-border);
-            border-radius: 15px;
-            transition: 0.3s;
-        }
-
-        .affiliate-card:hover {
-            border-color: #444;
-        }
-
-        .affiliate-icon {
-            font-size: 2rem;
-            margin-bottom: 15px;
-        }
-
-        .affiliate-btn {
-            margin-top: 20px;
-            display: inline-block;
-            color: var(--accent);
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            text-decoration: none;
-            border-bottom: 1px solid var(--accent);
-            padding-bottom: 2px;
-        }
-
-        /* --- Footer --- */
-        footer {
-            border-top: 1px solid var(--glass-border);
-            padding: 60px 5%;
-            text-align: center;
-            color: #555;
-            font-size: 0.8rem;
-        }
-
-        .footer-logo {
-            font-size: 1.2rem;
-            color: white;
-            margin-bottom: 20px;
-            display: inline-block;
-            letter-spacing: 2px;
-        }
-
+        footer { padding: 60px 5%; text-align: center; border-top: 1px solid var(--border); font-size: 0.8rem; color: #555; }
+        .disclaimer { margin-top: 30px; font-size: 0.7rem; color: #444; line-height: 1.4; max-width: 600px; margin-left: auto; margin-right: auto; }
     </style>
 </head>
 <body>
 
-    <!-- Three.js Background -->
-    <div id="canvas-container"></div>
-
-    <!-- Navigation -->
     <nav class="navbar">
-        <div class="logo">
-            ZEN SPACE
-            <span>| Digital Sanctuary</span>
-        </div>
+        <a href="index.html" class="logo">Zen Space</a>
         <ul class="nav-links">
-            <li><a href="#explore">Explore</a></li>
-            <li><a href="#science">Science</a></li>
-            <li><a href="#affiliates">Tools</a></li>
+            <li><a href="library.html">Explore Tools</a></li>
+            <li><a href="#science">The Science</a></li>
+            <li><a href="https://formspitch.com/e/your-form-id" target="_blank">Contact</a></li>
         </ul>
-        <div class="nav-buttons">
-            <a href="#" class="btn btn-login">Login</a>
-            <a href="#premium" class="btn btn-premium">Get Premium</a>
-        </div>
+        <a href="library.html" class="btn btn-premium">Start Free Session</a>
     </nav>
 
-    <!-- Hero Section -->
     <header class="hero">
-        <h1>Reclaim your focus.<br>Find your stillness.</h1>
-        <p>Interactive art and science-backed tools for ADHD, anxiety, and deep work.</p>
-        <a href="#explore" class="btn btn-start">Start Free Session</a>
+        <h1>We live in an environment designed for interruption.</h1>
+        <p>Focus is not about forcing the mind into submission. It is about creating the conditions where stability naturally emerges.</p>
+        <a href="library.html" class="btn btn-premium">Enter The Sanctuary</a>
     </header>
 
-    <!-- The Grid (Explore Section) -->
-    <section id="explore" class="container">
-        <h2 class="section-title">Choose Your Frequency</h2>
-        <p class="section-subtitle">5 Free Tools • 5 Premium Tools per Category</p>
-
-        <div class="grid">
-            <!-- Focus Category -->
-            <article class="card">
-                <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=600');"></div>
-                <div class="card-content">
-                    <span class="card-tag">Focus • ADHD</span>
-                    <h3>Deep Flow State</h3>
-                </div>
-            </article>
-            
-            <article class="card">
-                <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1516110833967-0b5716ca1387?auto=format&fit=crop&q=80&w=600');"></div>
-                <div class="lock-overlay">🔒</div>
-                <div class="card-content">
-                    <span class="card-tag">Premium</span>
-                    <h3>Hyperfocus Engine</h3>
-                </div>
-            </article>
-
-            <!-- Relax Category -->
-            <article class="card">
-                <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=600');"></div>
-                <div class="card-content">
-                    <span class="card-tag">Relax • Anxiety</span>
-                    <h3>Oceanic Breath</h3>
-                </div>
-            </article>
-
-            <!-- Zen Category -->
-            <article class="card">
-                <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1499209974431-276c5bb28f4c?auto=format&fit=crop&q=80&w=600');"></div>
-                <div class="card-content">
-                    <span class="card-tag">Zen • Meditation</span>
-                    <h3>Ensō Circle</h3>
-                </div>
-            </article>
-
-            <article class="card">
-                <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&q=80&w=600');"></div>
-                <div class="lock-overlay">🔒</div>
-                <div class="card-content">
-                    <span class="card-tag">Premium</span>
-                    <h3>Karesansui Sand</h3>
-                </div>
-            </article>
-
-            <!-- Sleep Category -->
-            <article class="card">
-                <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1511296933631-18b540fd3385?auto=format&fit=crop&q=80&w=600');"></div>
-                <div class="card-content">
-                    <span class="card-tag">Sleep • Rest</span>
-                    <h3>Delta Drift</h3>
-                </div>
-            </article>
+    <section id="science" class="section">
+        <div class="content-block">
+            <h2>The Cognitive Architecture of Focus</h2>
+            <p>Focus is not a personality trait. It is a regulated neural state. Sustained attention depends on coordination between large-scale brain networks. When the sensory environment is unpredictable, the brain allocates resources toward scanning rather than task engagement.</p>
+            <br>
+            <p>Zen Space uses <strong>Gradual Induction</strong> and <strong>Sensory Coherence</strong>. We minimize sudden transients, high-frequency motion, and sharp auditory attacks. Instead, we provide continuous, low-velocity animation and stable harmonic intervals.</p>
+            <br>
+            <p class="highlight">"Focus emerges when the nervous system stops anticipating interruption."</p>
         </div>
     </section>
 
-    <!-- The Science Section -->
-    <section id="science" class="science-section">
-        <div class="container">
-            <h2 class="section-title">The Science</h2>
-            <p class="section-subtitle">Why Digital Regulation Works</p>
-            
-            <div class="bento-grid">
-                <div class="bento-box full-width">
-                    <h4>The Neuroscience of Zen</h4>
-                    <p>
-                        In Digital Sanctuary, meditation is not just spiritual; it is neurological optimization. 
-                        While the modern world competes for your attention, our tools are designed to return control to you.
-                    </p>
-                    <span class="highlight-quote">"Zen is not something you do, it is something you are when you stop trying to do everything else."</span>
-                </div>
-
-                <div class="bento-box">
-                    <h4>Alpha & Theta Waves</h4>
-                    <p>Interactive generative art helps shift brain activity from Beta (stress/alert) to Alpha and Theta states. This reduces cognitive load and activates the parasympathetic nervous system.</p>
-                </div>
-
-                <div class="bento-box">
-                    <h4>Visual Anchors</h4>
-                    <p>Instead of struggling with thoughts, we use visual anchors. Following a digital brushstroke or a water ripple allows you to maintain focus effortlessly.</p>
-                </div>
-
-                <div class="bento-box">
-                    <h4>Impermanence</h4>
-                    <p>p5.js patterns never repeat exactly. This trains the mind to accept change and let go of the need for absolute control.</p>
-                </div>
-            </div>
+    <section class="section" style="text-align: center;">
+        <h2>Ready to begin?</h2>
+        <p style="color: var(--text-muted); margin-bottom: 30px;">Choose your state of mind.</p>
+        <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+            <a href="library.html?cat=focus" class="btn" style="border: 1px solid var(--border); color: white;">Deep Focus</a>
+            <a href="library.html?cat=relax" class="btn" style="border: 1px solid var(--border); color: white;">Relaxation</a>
+            <a href="library.html?cat=grounding" class="btn" style="border: 1px solid var(--border); color: white;">Grounding</a>
         </div>
     </section>
 
-    <!-- Affiliate Corner -->
-    <section id="affiliates" class="affiliate-section container">
-        <h2 class="section-title">Curated Tools</h2>
-        <p class="section-subtitle">Products we recommend for your environment</p>
-
-        <div class="affiliate-grid">
-            <div class="affiliate-card">
-                <div class="affiliate-icon">🎧</div>
-                <h3>Sony WH-1000XM5</h3>
-                <p style="font-size: 0.8rem; color: #888; margin-top: 10px;">Industry leading noise cancellation for deep focus.</p>
-                <a href="#" class="affiliate-btn">View on Amazon</a>
-            </div>
-            <div class="affiliate-card">
-                <div class="affiliate-icon">💡</div>
-                <h3>Himalayan Salt Lamp</h3>
-                <p style="font-size: 0.8rem; color: #888; margin-top: 10px;">Warm ambient lighting to reduce eye strain.</p>
-                <a href="#" class="affiliate-btn">View on Amazon</a>
-            </div>
-            <div class="affiliate-card">
-                <div class="affiliate-icon">🪑</div>
-                <h3>Ergonomic Stool</h3>
-                <p style="font-size: 0.8rem; color: #888; margin-top: 10px;">Active seating to maintain energy flow.</p>
-                <a href="#" class="affiliate-btn">View on Amazon</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
     <footer>
-        <div class="footer-logo">ZEN SPACE</div>
+        <div style="font-size: 1.2rem; font-weight: bold; color: white; margin-bottom: 10px;">ZEN SPACE</div>
         <p>&copy; 2023 Zen Space Digital Sanctuary. All rights reserved.</p>
-        <div style="margin-top: 20px;">
-            <a href="#" style="color: #555; margin: 0 10px; text-decoration: none;">Privacy Policy</a>
-            <a href="#" style="color: #555; margin: 0 10px; text-decoration: none;">Terms of Service</a>
+        
+        <div class="disclaimer">
+            <strong>MEDICAL DISCLAIMER:</strong> This site does not provide medical advice. The content is intended for informational and wellness purposes only. It is not a substitute for professional medical advice, diagnosis, or treatment. Never disregard professional medical advice or delay in seeking it because of something you have read on this website.<br><br>
+            <strong>PHOTOSENSITIVITY WARNING:</strong> This site contains visual animations. If you have a history of epilepsy or photosensitive seizures, please consult a doctor before use.<br><br>
+            <strong>SERVICE TERMS:</strong> Access to premium content is provided for the current hosting cycle. The catalog may change over time. Due to the digital nature of the product, refunds are not provided once access is granted.
         </div>
     </footer>
 
-    <!-- Three.js Implementation -->
-    <script>
-        const initThreeJS = () => {
-            const container = document.getElementById('canvas-container');
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            
-            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            container.appendChild(renderer.domElement);
-
-            // Create a flowing wave geometry
-            const geometry = new THREE.PlaneGeometry(20, 20, 64, 64);
-            
-            // Shader Material for liquid effect
-            const material = new THREE.ShaderMaterial({
-                uniforms: {
-                    u_time: { value: 0.0 },
-                    u_color: { value: new THREE.Color(0x050505) } // Dark deep color
-                },
-                vertexShader: `
-                    varying vec2 vUv;
-                    uniform float u_time;
-                    void main() {
-                        vUv = uv;
-                        vec3 pos = position;
-                        // Gentle wave movement
-                        pos.z += sin(pos.x * 2.0 + u_time * 0.5) * 0.5;
-                        pos.z += cos(pos.y * 1.5 + u_time * 0.3) * 0.5;
-                        gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
-                    }
-                `,
-                fragmentShader: `
-                    varying vec2 vUv;
-                    uniform vec3 u_color;
-                    void main() {
-                        // Create a gradient
-                        float alpha = 1.0 - distance(vUv, vec2(0.5));
-                        gl_FragColor = vec4(u_color, alpha * 0.3); // Very subtle
-                    }
-                `,
-                wireframe: true,
-                transparent: true
-            });
-
-            const plane = new THREE.Mesh(geometry, material);
-            scene.add(plane);
-
-            camera.position.z = 5;
-            plane.rotation.x = -0.5;
-
-            const animate = () => {
-                requestAnimationFrame(animate);
-                material.uniforms.u_time.value += 0.01;
-                renderer.render(scene, camera);
-            };
-
-            animate();
-
-            window.addEventListener('resize', () => {
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-            });
-        };
-
-        initThreeJS();
-    </script>
 </body>
 </html>
