@@ -15,13 +15,14 @@
     <a href="library.html" class="back-btn">← Back to Library</a>
     <iframe id="tool-frame" src=""></iframe>
 
-<script>
-    const params = new URLSearchParams(window.location.search);
-    const url = params.get('url');
-    if (url) {
-        document.getElementById('tool-frame').src = url;
-    } else {
-        window.location.href = 'library.html';
-    }
-</script></body>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const url = params.get('url');
+        if (url) {
+            document.getElementById('tool-frame').src = url;
+        } else {
+            window.location.href = 'library.html';
+        }
+    </script>
+</body>
 </html>
