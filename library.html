@@ -1,63 +1,168 @@
 <script>
-    // --- PASTE YOUR PREMIUM LINKS HERE (UPDATED WITH YOUR LIST) ---
-    const premiumContent = {
-        focus: [
-            { title: "Hyperfocus Engine", url: "https://editor.p5js.org/Mercedes_Ayala/full/PWdu-sswf" },
-            { title: "Warp Tunnel", url: "https://editor.p5js.org/Mercedes_Ayala/full/jkEnBQQ_X" },
-            { title: "Code Matrix", url: "https://editor.p5js.org/Mercedes_Ayala/full/hzZMLDBaR" },
-            { title: "Synthwave", url: "https://editor.p5js.org/Mercedes_Ayala/full/y0Z_wunUy" },
-            { title: "Neon Pulse", url: "https://editor.p5js.org/Mercedes_Ayala/full/ku21f_sS7" }
-        ],
-        relax: [
-            { title: "Deep Ocean", url: "https://editor.p5js.org/Mercedes_Ayala/full/HrXpNFPYx" },
-            { title: "Zen Garden", url: "https://editor.p5js.org/Mercedes_Ayala/full/1ZixQL9xw" },
-            { title: "Star Dust", url: "https://editor.p5js.org/Mercedes_Ayala/full/PTXU8HehC" },
-            { title: "Flow State", url: "https://editor.p5js.org/Mercedes_Ayala/full/SN8hf5Sa9" },
-            { title: "Astral Plane", url: "https://editor.p5js.org/Mercedes_Ayala/full/KuqSeVzRP" }
-        ],
-        grounding: [
-            { title: "Grounding Premium 1", url: "https://editor.p5js.org/Mercedes_Ayala/full/yTGc67rBr" },
-            { title: "Grounding Premium 2", url: "https://editor.p5js.org/Mercedes_Ayala/full/Z6nQXy1zP" },
-            { title: "Grounding Premium 3", url: "https://editor.p5js.org/Mercedes_Ayala/full/OibxJJ-QE" },
-            { title: "Grounding Premium 4", url: "https://editor.p5js.org/Mercedes_Ayala/full/X7Wr7RDXJ" },
-            { title: "Grounding Premium 5", url: "https://editor.p5js.org/Mercedes_Ayala/full/snMiBnklw" },
-            { title: "PTSD Support (Advanced)", url: "https://editor.p5js.org/Mercedes_Ayala/full/2YYRCgclb" }
-        ],
-        zen: [
-            { title: "Zen Premium 1", url: "https://editor.p5js.org/Mercedes_Ayala/full/dgRqEP_qP" },
-            { title: "Zen Premium 2", url: "https://editor.p5js.org/Mercedes_Ayala/full/EVsWrqcnv" },
-            { title: "Zen Premium 3", url: "https://editor.p5js.org/Mercedes_Ayala/full/ZCSS4Z_2P" },
-            { title: "Zen Premium 4", url: "https://editor.p5js.org/Mercedes_Ayala/full/dzhIUqoPX" },
-            { title: "Zen Premium 5", url: "https://editor.p5js.org/Mercedes_Ayala/full/c-jmoixnN" }
-        ],
-        sleep: [
-            { title: "Sleep Premium 1", url: "https://editor.p5js.org/Mercedes_Ayala/full/E4QlsSfMG" },
-            { title: "Sleep Premium 2", url: "https://editor.p5js.org/Mercedes_Ayala/full/8PAtivdfq" },
-            { title: "Sleep Premium 3", url: "https://editor.p5js.org/Mercedes_Ayala/full/NLJt5RerC" },
-            { title: "Sleep Premium 4", url: "https://editor.p5js.org/Mercedes_Ayala/full/8DJpEh9QO" },
-            { title: "Sleep Premium 5", url: "https://editor.p5js.org/Mercedes_Ayala/full/8DJpEh9QO" }
-        ]
+    // --- DATA: YOUR P5.JS LINKS (UPDATED WITH YOUR LINKS) ---
+    const data = {
+        focus: {
+            name: "Deep Focus",
+            tools: [
+                // FREE
+                { name: "Deep Flow State", free: true, url: "https://editor.p5js.org/Mercedes_Ayala/full/TFHDFHMr0" },
+                { name: "Neon Rain", free: true, url: "https://editor.p5js.org/Mercedes_Ayala/full/uJfDjvh3y" },
+                { name: "Binary Horizon", free: true, url: "https://editor.p5js.org/Mercedes_Ayala/full/-OSPfA0sB" },
+                { name: "Grid Lock", free: true, url: "https://editor.p5js.org/Mercedes_Ayala/full/7pTycsg6d" },
+                { name: "Cyber Focus", free: true, url: "https://editor.p5js.org/Mercedes_Ayala/full/jkEnBQQ_X" },
+                // PREMIUM (Locked - No URL here)
+                { name: "Hyperfocus Engine", free: false },
+                { name: "Warp Tunnel", free: false },
+                { name: "Code Matrix", free: false },
+                { name: "Synthwave", free: false },
+                { name: "Neon Pulse", free: false }
+            ]
+        },
+        relax: {
+            name: "Relaxation",
+            tools: [
+                // FREE
+                { name: "Oceanic Breath", free: true, url: "https://editor.p5js.org/Mercedes_Ayala/full/dnzZb8xBd" },
+                { name: "Soft Clouds", free: true, url: "https://editor.p5js.org/Mercedes_Ayala/full/9VAiu79OW" },
+                { name: "Aurora", free: true, url: "https://editor.p5js.org/Mercedes_Ayala/full/RPClofbsf" },
+                { name: "Liquid Blue", free: true, url: "https://editor.p5js.org/Mercedes_Ayala/full/5xc817z64" },
+                { name: "Gentle Waves", free: true, url: "https://editor.p5js.org/Mercedes_Ayala/full/WiEjHEUgJ" },
+                // PREMIUM (Locked)
+                { name: "Deep Ocean", free: false },
+                { name: "Zen Garden", free: false },
+                { name: "Star Dust", free: false },
+                { name: "Flow State", free: false },
+                { name: "Astral Plane", free: false }
+            ]
+        },
+        grounding: {
+            name: "Grounding",
+            tools: [
+                // FREE
+                { name: "Earth Anchor 1", free: true, url: "https://editor.p5js.org/Mercedes_Ayala/full/dScm7qKGr" },
+                { name: "Earth Anchor 2", free: true, url: "https://editor.p5js.org/Mercedes_Ayala/full/mxHIun5M0" },
+                { name: "Earth Anchor 3", free: true, url: "https://editor.p5js.org/Mercedes_Ayala/full/E9k-hwwXu" },
+                { name: "Earth Anchor 4", free: true, url: "https://editor.p5js.org/Mercedes_Ayala/full/Zvy6MvvyW" },
+                { name: "Earth Anchor 5", free: true, url: "https://editor.p5js.org/Mercedes_Ayala/full/yTGc67rBr" },
+                // PREMIUM (Locked)
+                { name: "Grounding Premium 1", free: false },
+                { name: "Grounding Premium 2", free: false },
+                { name: "Grounding Premium 3", free: false },
+                { name: "Grounding Premium 4", free: false },
+                { name: "Grounding Premium 5", free: false },
+                { name: "PTSD Support (Advanced)", free: false }
+            ]
+        },
+        zen: {
+            name: "Zen",
+            tools: [
+                // FREE
+                { name: "Ensō Circle", free: true, url: "https://editor.p5js.org/Mercedes_Ayala/full/FY7ku-xMo" },
+                { name: "Zen Breath", free: true, url: "https://editor.p5js.org/Mercedes_Ayala/full/hK_gKnTfb" },
+                { name: "Minimalist Flow", free: true, url: "https://editor.p5js.org/Mercedes_Ayala/full/a9eJDhjOl" },
+                { name: "Zen Line", free: true, url: "https://editor.p5js.org/Mercedes_Ayala/full/FFrEkv_OV" },
+                { name: "Void State", free: true, url: "https://editor.p5js.org/Mercedes_Ayala/full/dwpEgtMWV" },
+                // PREMIUM (Locked)
+                { name: "Sacred Geometry", free: false },
+                { name: "Gold Dust", free: false },
+                { name: "Infinite Loop", free: false },
+                { name: "White Lotus", free: false },
+                { name: "Inner Peace", free: false }
+            ]
+        },
+        sleep: {
+            name: "Sleep",
+            tools: [
+                // FREE
+                { name: "Delta Drift", free: true, url: "https://editor.p5js.org/Mercedes_Ayala/full/lcHfR8MaE" },
+                { name: "Night Sky", free: true, url: "https://editor.p5js.org/Mercedes_Ayala/full/je26WV9jW" },
+                { name: "Deep Rest", free: true, url: "https://editor.p5js.org/Mercedes_Ayala/full/TYHsvQUin" },
+                { name: "Starfield", free: true, url: "https://editor.p5js.org/Mercedes_Ayala/full/1okyPd1vf" },
+                { name: "Dark Void", free: true, url: "https://editor.p5js.org/Mercedes_Ayala/full/iLgbFHq1q" },
+                // PREMIUM (Locked)
+                { name: "Lucid Dream", free: false },
+                { name: "Deep Sleep", free: false },
+                { name: "REM Cycle", free: false },
+                { name: "Coma", free: false },
+                { name: "Hypnagogia", free: false }
+            ]
+        }
     };
 
-    // --- LOGIC TO SHOW LINKS ---
-    const params = new URLSearchParams(window.location.search);
-    const packageType = params.get('package'); 
-    const container = document.getElementById('content-area');
+    // --- PAYPAL LINKS ---
+    // (Don't forget to replace these with your real PayPal button IDs later)
+    const paypalLinks = {
+        focus: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=REPLACE_WITH_FOCUS_ID",
+        relax: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=REPLACE_WITH_RELAX_ID",
+        grounding: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=REPLACE_WITH_GROUNDING_ID",
+        zen: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=REPLACE_WITH_ZEN_ID",
+        sleep: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=REPLACE_WITH_SLEEP_ID"
+    };
 
-    if (packageType && premiumContent[packageType]) {
-        const links = premiumContent[packageType];
-        links.forEach(link => {
-            const a = document.createElement('a');
-            a.className = 'tool-link';
-            a.href = `player.html?url=${encodeURIComponent(link.url)}`;
-            a.target = "_blank";
-            a.innerHTML = `
-                <span class="tool-title">${link.title}</span>
-                <span class="tool-desc">Click to Launch</span>
-            `;
-            container.appendChild(a);
+    let currentCategory = 'focus';
+
+    function showCategory(cat) {
+        currentCategory = cat;
+        // Update buttons
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        event.target.classList.add('active');
+
+        const container = document.getElementById('grid-container');
+        container.innerHTML = '';
+        
+        const tools = data[cat].tools;
+        
+        if(tools.length === 0) {
+            container.innerHTML = '<p style="text-align:center; color:#666;">Tools loading soon...</p>';
+            return;
+        }
+
+        tools.forEach(tool => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            
+            let content = '';
+            if (tool.free) {
+                content = `
+                    <div class="thumb">▶</div>
+                    <div class="info">
+                        <div class="tag">FREE</div>
+                        <div class="title">${tool.name}</div>
+                        <a href="player.html?url=${encodeURIComponent(tool.url)}" class="btn-play" target="_blank">Launch Tool</a>
+                    </div>
+                `;
+            } else {
+                content = `
+                    <div class="thumb" style="color: #333;">🔒</div>
+                    <div class="lock">PREMIUM</div>
+                    <div class="info">
+                        <div class="tag" style="color:gold;">PREMIUM</div>
+                        <div class="title">${tool.name}</div>
+                        <button class="btn-play" style="background:transparent; border:1px solid #444; color:#888; cursor:not-allowed;">Locked</button>
+                        <button onclick="openModal()" style="margin-top:10px; background:none; border:none; color:var(--accent); text-decoration:underline; cursor:pointer;">Unlock $10</button>
+                    </div>
+                `;
+            }
+            card.innerHTML = content;
+            container.appendChild(card);
         });
-    } else {
-        container.innerHTML = "<p>Invalid or missing package reference. Please contact support.</p>";
     }
+
+    // Modal Logic
+    function openModal() {
+        const catName = data[currentCategory].name;
+        document.getElementById('modal-category-name').innerText = catName;
+        
+        // Set the correct PayPal link based on category
+        const buyBtn = document.getElementById('paypal-btn');
+        buyBtn.href = paypalLinks[currentCategory];
+        
+        document.getElementById('premium-modal').style.display = 'flex';
+    }
+    function closeModal() {
+        document.getElementById('premium-modal').style.display = 'none';
+    }
+
+    // Initialize
+    showCategory('focus');
 </script>
