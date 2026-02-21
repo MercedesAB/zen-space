@@ -25,6 +25,7 @@ body { margin:0; background:var(--bg); color:var(--text); font-family:'Inter',sa
 .modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); backdrop-filter:blur(5px); z-index:1000; align-items:center; justify-content:center; }
 .modal-content { background:#111; border:1px solid var(--border); padding:40px; border-radius:20px; max-width:500px; text-align:center; position:relative; }
 .close-modal { position:absolute; top:15px; right:20px; font-size:1.5rem; cursor:pointer; color:var(--muted); }
+.back-library { position:absolute; top:15px; left:20px; font-size:0.9rem; color:var(--accent); cursor:pointer; text-decoration:underline; }
 .price-tag { font-size:2.5rem; font-family:'Playfair Display', serif; margin:20px 0; color:white; }
 .btn-buy { background:var(--accent); color:white; padding:15px 30px; border-radius:30px; text-decoration:none; display:inline-block; margin-top:20px; font-weight:bold; }
 .fine-print { font-size:0.7rem; color:#666; margin-top:20px; }
@@ -51,6 +52,7 @@ body { margin:0; background:var(--bg); color:var(--text); font-family:'Inter',sa
 <div id="premium-modal" class="modal">
 <div class="modal-content">
 <span class="close-modal" onclick="closeModal()">&times;</span>
+<span class="back-library" onclick="closeModal()">Back to Library</span>
 <h2 style="font-family:'Playfair Display';">Premium Access Required</h2>
 <p style="color:#aaa;">You selected <span id="modal-tool-name" class="selected-tool">Tool Name</span>.</p>
 <p style="color:#fff;">To unlock this tool, get full access to the <span id="modal-category-name" style="color:white; font-weight:bold;"></span> collection.</p>
@@ -126,18 +128,18 @@ sleep: { name:"Sleep", tools:[
 ] }
 };
 
-// --- PAYPAL LINKS ---
+// --- PAYPAL LINKS (UPDATED) ---
 const paypalLinks = {
-focus:"https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=DPBPUJADKK4E4",
-relax:"https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=NN8Y4ZBVDLH36",
-grounding:"https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=J7WUU8TXEJB5S",
-zen:"https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7G2PUUCFU99DW",
-sleep:"https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QEZM27CHBCJ8E"
+focus:"https://www.paypal.com/ncp/payment/DPBPUJADKK4E4",
+relax:"https://www.paypal.com/ncp/payment/NN8Y4ZBVDLH36",
+grounding:"https://www.paypal.com/ncp/payment/J7WUU8TXEJB5S",
+zen:"https://www.paypal.com/ncp/payment/7G2PUUCFU99DW",
+sleep:"https://www.paypal.com/ncp/payment/QEZM27CHBCJ8E"
 };
 
 let currentCategory='focus';
 
-// --- FUNCIONES ---
+// --- FUNCTIONS ---
 function showCategory(cat){
 currentCategory=cat;
 document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
