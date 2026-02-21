@@ -3,52 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Thank You | Zen Space</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<title>Welcome | Zen Space</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
-body { margin:0; background:#050505; color:white; font-family:'Inter',sans-serif; display:flex; align-items:center; justify-content:center; height:100vh; text-align:center; padding:20px; }
-h1 { font-family:'Playfair Display', serif; font-size:2.5rem; margin-bottom:20px; color:#a855f7; }
-p { font-size:1.1rem; margin-bottom:30px; color:#ccc; }
-.btn { display:inline-block; padding:15px 30px; border-radius:30px; background:#a855f7; color:white; font-weight:bold; text-decoration:none; }
-</style>
-</head>
-<body>
-
-<div>
-<h1>Thank You!</h1>
-<p>Your purchase was successful. You now have full access to the <span id="category-name" style="font-weight:bold;"></span> collection.</p>
-<a id="launch-tool" class="btn" href="#">Launch First Tool</a>
-</div>
-
-<script>
-// --- LEER QUERY PARAM ---
-function getQueryParam(param) {
-  const urlParams = new URLSearchParams(window.location.search);
-  return urlParams.get(param);
-}
-
-// --- DESBLOQUEAR ---
-const category = getQueryParam('cat');
-if(category) {
-    localStorage.setItem('zen-unlocked-' + category, 'true');
-    document.getElementById('category-name').innerText = category.charAt(0).toUpperCase() + category.slice(1);
-}
-
-// --- LINK AL PRIMER TOOL ---
-const tools = {
-focus: "https://editor.p5js.org/Mercedes_Ayala/present/hyper1",
-relax: "https://editor.p5js.org/Mercedes_Ayala/present/relax1",
-grounding: "https://editor.p5js.org/Mercedes_Ayala/present/ground1",
-zen: "https://editor.p5js.org/Mercedes_Ayala/present/zen1",
-sleep: "https://editor.p5js.org/Mercedes_Ayala/present/sleep1"
-};
-
-if(category && tools[category]) {
-    document.getElementById('launch-tool').href = `player.html?url=${encodeURIComponent(tools[category])}`;
-} else {
-    document.getElementById('launch-tool').style.display = 'none';
-}
-</script>
-
-</body>
-</html>
+body { background: #050505; color: white; font-family: 'Inter', sans-serif; padding: 40px 20px; }
+.container { max-width: 800px; margin: 0 auto; text-align: center; }
+h1 { font-family: 'Playfair Display'; font-size: 3rem; margin-bottom: 10px; color: #a855f7; }
+.subtitle { color: #888; margin-bottom: 50px; }
+.link-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 60px; }
+.tool-link { background: #111; border: 1px solid #333; padding: 30px; border-radius: 15px; text-decoration: none; color: white; transition: 0.3s; display: block; }
+.tool-link:hover { border-color: #a855f7; transform: translateY(-5px); }
+.tool-title { font-weight: bold; font-size: 1.1rem; display: block; margin-bottom: 5px; }
+.tool-desc { font-size: 0.8rem; color: #666; }
+.disclaimer-box { background: #0a0a0a; border: 1px solid #222; padding: 20px; font-size: 0.8rem; color: #555; line-height: 1.6; text-align: left; margin-top: 50px; }
+.btn-home { display: inline-block; margin-top: 30px; color: #666; text-decoration: none; border-bottom: 1px solid #444; }
+</
