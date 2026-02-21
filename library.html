@@ -33,6 +33,7 @@
         .price-tag { font-size: 2.5rem; font-family: 'Playfair Display', serif; margin: 20px 0; color: white; }
         .btn-buy { background: var(--accent); color: white; padding: 15px 30px; border-radius: 30px; text-decoration: none; display: inline-block; margin-top: 20px; font-weight: bold; }
         .fine-print { font-size: 0.7rem; color: #666; margin-top: 20px; }
+        .selected-tool { color: var(--accent); font-weight: bold; font-size: 1.1rem; margin: 10px 0; display: block; }
     </style>
 </head>
 <body>
@@ -58,14 +59,17 @@
     <div id="premium-modal" class="modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal()">&times;</span>
-            <h2 style="font-family: 'Playfair Display';">Unlock Premium</h2>
-            <p style="color: #aaa;">Get full access to the <span id="modal-category-name" style="color: white; font-weight: bold;"></span> collection.</p>
+            <h2 style="font-family: 'Playfair Display';">Premium Access Required</h2>
+            
+            <p style="color: #aaa;">You selected <span id="modal-tool-name" class="selected-tool">Tool Name</span>.</p>
+            
+            <p style="color: #fff;">To unlock this tool, get full access to the <span id="modal-category-name" style="color: white; font-weight: bold;"></span> collection.</p>
             
             <div class="price-tag">$10.00</div>
             
-            <p>5 Advanced Generative Art Tools.<br>No subscription. One-time payment.</p>
+            <p style="font-size: 0.9rem; color: #ccc;">Includes this tool + 4 others.<br>No subscription. One-time payment.</p>
             
-            <a id="paypal-btn" href="#" class="btn-buy">Unlock for $10</a>
+            <a id="paypal-btn" href="#" class="btn-buy">Unlock Pack for $10</a>
             
             <p class="fine-print">Access is usually instant. Please allow up to 24 hours for manual verification.</p>
         </div>
@@ -205,7 +209,8 @@
                             <div class="tag" style="color:gold;">PREMIUM</div>
                             <div class="title">${tool.name}</div>
                             <button class="btn-play" style="background:transparent; border:1px solid #444; color:#888; cursor:not-allowed;">Locked</button>
-                            <button onclick="openModal()" style="margin-top:10px; background:none; border:none; color:var(--accent); text-decoration:underline; cursor:pointer;">Unlock $10</button>
+                            <!-- Pass the tool name to the modal -->
+                            <button onclick="openModal('${tool.name}')" style="margin-top:10px; background:none; border:none; color:var(--accent); text-decoration:underline; cursor:pointer;">Unlock $10</button>
                         </div>
                     `;
                 }
@@ -214,11 +219,17 @@
             });
         }
 
-        function openModal() {
+        // Updated Modal Logic to accept the tool name
+        function openModal(toolName) {
             const catName = data[currentCategory].name;
+            
+            // Update the text with the specific tool name
+            document.getElementById('modal-tool-name').innerText = toolName;
             document.getElementById('modal-category-name').innerText = catName;
+            
             const buyBtn = document.getElementById('paypal-btn');
             buyBtn.href = paypalLinks[currentCategory];
+            
             document.getElementById('premium-modal').style.display = 'flex';
         }
         function closeModal() {
