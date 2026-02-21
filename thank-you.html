@@ -6,21 +6,28 @@
     <title>Welcome | Zen Space</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
-        body { background: #050505; color: white; font-family: 'Inter', sans-serif; padding: 40px 20px; }
+        body { background: #050505; color: white; font-family: 'Inter', sans-serif; padding: 40px 20px; margin: 0; }
         .container { max-width: 800px; margin: 0 auto; text-align: center; }
         h1 { font-family: 'Playfair Display'; font-size: 3rem; margin-bottom: 10px; color: #a855f7; }
         .subtitle { color: #888; margin-bottom: 50px; }
         
+        /* Grid de Herramientas */
         .link-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 60px; }
         .tool-link { 
-            background: #111; border: 1px solid #333; padding: 30px; border-radius: 15px; text-decoration: none; color: white; transition: 0.3s; display: block; 
+            background: #111; border: 1px solid #333; padding: 30px; border-radius: 15px; text-decoration: none; color: white; transition: 0.3s; display: block; cursor: pointer; position: relative; overflow: hidden;
         }
-        .tool-link:hover { border-color: #a855f7; transform: translateY(-5px); }
+        .tool-link:hover { border-color: #a855f7; transform: translateY(-5px); background: #1a1a1a; }
         .tool-title { font-weight: bold; font-size: 1.1rem; display: block; margin-bottom: 5px; }
         .tool-desc { font-size: 0.8rem; color: #666; }
         
         .disclaimer-box { background: #0a0a0a; border: 1px solid #222; padding: 20px; font-size: 0.8rem; color: #555; line-height: 1.6; text-align: left; margin-top: 50px; }
         .btn-home { display: inline-block; margin-top: 30px; color: #666; text-decoration: none; border-bottom: 1px solid #444; }
+
+        /* --- ZEN PLAYER OVERLAY (El mismo que en library.html) --- */
+        #zen-player { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:black; z-index:9999; }
+        #zen-iframe { width: 100%; height: calc(100% + 42px); border: none; margin-top: -42px; }
+        .btn-back-float { position:fixed; top:20px; left:20px; z-index:10000; background:rgba(0,0,0,0.5); color:white; padding:10px 20px; border-radius:30px; border:1px solid rgba(255,255,255,0.1); backdrop-filter:blur(10px); cursor:pointer; font-family: 'Inter', sans-serif; transition: 0.3s; }
+        .btn-back-float:hover { background: rgba(255,255,255,0.2); }
     </style>
 </head>
 <body>
@@ -30,7 +37,7 @@
         <p class="subtitle">Thank you for supporting Zen Space. Your premium tools are ready below.</p>
 
         <div id="content-area" class="link-grid">
-            <!-- Links will be injected here by JavaScript -->
+            <!-- Los links se inyectan con JavaScript -->
         </div>
 
         <div class="disclaimer-box">
@@ -40,8 +47,14 @@
         <a href="index.html" class="btn-home">Return to Home</a>
     </div>
 
+    <!-- CONTENEDOR DEL REPRODUCTOR (Oculto por defecto) -->
+    <div id="zen-player">
+        <button class="btn-back-float" onclick="closePlayer()">← Back to Library</button>
+        <iframe id="zen-iframe" src="" allow="autoplay"></iframe>
+    </div>
+
     <script>
-        // --- PREMIUM LINKS CHANGED TO /PRESENT/ ---
+        // --- BASE DE DATOS DE PREMIUM (Los links correctos de p5.js) ---
         const premiumContent = {
             focus: [
                 { title: "Hyperfocus Engine", url: "https://editor.p5js.org/Mercedes_Ayala/present/PWdu-sswf" },
@@ -81,6 +94,7 @@
             ]
         };
 
+        // --- LÓGICA DE FILTRADO Y PLAYER ---
         const params = new URLSearchParams(window.location.search);
         const packageType = params.get('package'); 
         const container = document.getElementById('content-area');
@@ -88,18 +102,30 @@
         if (packageType && premiumContent[packageType]) {
             const links = premiumContent[packageType];
             links.forEach(link => {
-                const a = document.createElement('a');
-                a.className = 'tool-link';
-                a.href = `player.html?url=${encodeURIComponent(link.url)}`;
-                a.target = "_blank";
-                a.innerHTML = `
+                // Creamos un div que actúa como botón
+                const div = document.createElement('div');
+                div.className = 'tool-link';
+                div.onclick = () => openPlayer(link.url); // Llama al player integrado
+                div.innerHTML = `
                     <span class="tool-title">${link.title}</span>
                     <span class="tool-desc">Click to Launch</span>
                 `;
-                container.appendChild(a);
+                container.appendChild(div);
             });
         } else {
             container.innerHTML = "<p>Invalid or missing package reference. Please contact support.</p>";
+        }
+
+        // --- FUNCIONES DEL PLAYER (Iguales a library.html) ---
+        function openPlayer(url) {
+            document.getElementById('zen-iframe').src = url;
+            document.getElementById('zen-player').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+        function closePlayer() {
+            document.getElementById('zen-player').style.display = 'none';
+            document.getElementById('zen-iframe').src = '';
+            document.body.style.overflow = 'auto';
         }
     </script>
 </body>
