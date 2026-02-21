@@ -3,62 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loading Tool | Zen Space</title>
+    <title>Player | Zen Space</title>
     <style>
         body { 
             margin: 0; 
-            background: #050505; 
+            background: #000; 
+            overflow: hidden; /* Prevents scrollbars */
+            height: 100vh;
+        }
+
+        /* 
+           THE ZOOM TRICK: 
+           We push the iframe UP by 70px (top: -70px).
+           This cuts off the top header of p5.js (where the logo is).
+           We make the iframe taller (height + 70px) to fill the bottom.
+        */
+        iframe { 
+            position: absolute; 
+            top: -70px; 
+            left: 0; 
+            width: 100%; 
+            height: calc(100vh + 70px); 
+            border: none; 
+            z-index: 1; 
+        }
+
+        /* Back Button Styling */
+        .back-btn { 
+            position: fixed; 
+            top: 20px; 
+            left: 20px; 
+            z-index: 9999; /* Ensures it sits ON TOP of the animation */
+            background: rgba(0, 0, 0, 0.6); 
+            backdrop-filter: blur(4px);
             color: white; 
-            font-family: 'Inter', sans-serif; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            height: 100vh; 
-            flex-direction: column; 
-            text-align: center; 
+            padding: 10px 20px; 
+            border-radius: 30px; 
+            text-decoration: none; 
+            border: 1px solid rgba(255,255,255,0.3); 
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
-        /* A simple spinning circle */
-        .loader {
-            width: 50px; height: 50px;
-            border: 4px solid #333;
-            border-top: 4px solid #a855f7; /* Your accent color */
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 20px;
+        .back-btn:hover { 
+            background: rgba(168, 85, 247, 0.6); /* Purple hover */
+            border-color: #a855f7;
         }
-        @keyframes spin { 
-            0% { transform: rotate(0deg); } 
-            100% { transform: rotate(360deg); } 
-        }
-        h2 { margin: 0; font-weight: 400; }
-        p { color: #666; font-size: 0.9rem; }
-        a { color: #a855f7; text-decoration: underline; margin-top: 20px; display: inline-block; }
     </style>
 </head>
 <body>
 
-    <div class="loader"></div>
-    <h2>Initializing...</h2>
-    <p>Preparing your environment.</p>
-    
-    <!-- Backup link in case automatic redirect fails -->
-    <a id="manual-link" href="#">Click here if not redirected</a>
+    <!-- Back Button -->
+    <a href="library.html" class="back-btn">
+        ← Back to Library
+    </a>
+
+    <!-- Iframe Container -->
+    <iframe id="tool-frame" src="" allowfullscreen sandbox="allow-scripts allow-same-origin allow-presentation"></iframe>
 
 <script>
-    // 1. Get the animation URL from the address bar (e.g., player.html?url=...)
     const params = new URLSearchParams(window.location.search);
     const url = params.get('url');
-
+    
     if (url) {
-        // Set the backup link
-        document.getElementById('manual-link').href = url;
-
-        // 2. Wait 1 second, then go to the animation
-        setTimeout(function() {
-            window.location.href = url;
-        }, 1000); 
+        document.getElementById('tool-frame').src = url;
     } else {
-        // If no URL is found, go back to the library
+        // If no URL is found, go back to library
         window.location.href = 'library.html';
     }
 </script>
