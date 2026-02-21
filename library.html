@@ -158,14 +158,13 @@
             }
         };
 
-        // --- PAYPAL LINKS ---
-        // REPLACE THESE WITH YOUR REAL PAYPAL BUTTON LINKS
+        // --- PAYPAL LINKS (FINALIZED WITH YOUR IDs) ---
         const paypalLinks = {
-            focus: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=REPLACE_WITH_FOCUS_ID",
-            relax: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=REPLACE_WITH_RELAX_ID",
-            grounding: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=REPLACE_WITH_GROUNDING_ID",
-            zen: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=REPLACE_WITH_ZEN_ID",
-            sleep: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=REPLACE_WITH_SLEEP_ID"
+            focus: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=DPBPUJADKK4E4",
+            relax: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=NN8Y4ZBVDLH36",
+            grounding: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=J7WUU8TXEJB5S",
+            zen: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7G2PUUCFU99DW",
+            sleep: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QEZM27CHBCJ8E"
         };
 
         let currentCategory = 'focus';
@@ -177,10 +176,6 @@
             // Fix: Check if event exists (in case called from script)
             if(window.event) {
                 window.event.target.classList.add('active');
-            } else {
-                // If called from script (init), find button manually
-                const btns = document.querySelectorAll('.tab-btn');
-                // This is a rough match for init, usually not strictly needed but good for safety
             }
 
             const container = document.getElementById('grid-container');
@@ -240,7 +235,6 @@
         }
 
         // Initialize
-        // We use a small timeout to ensure DOM is ready, though script is at bottom
         window.onload = function() {
             showCategory('focus');
         };
