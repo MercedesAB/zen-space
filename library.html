@@ -156,7 +156,8 @@ content=`
 <div class="info">
 <div class="tag">FREE</div>
 <div class="title">${tool.name}</div>
-<a href="${tool.url}" class="btn-play" target="_blank">Launch Tool</a>
+<!-- CAMBIO AQUÍ: Apunta a player.html en vez de la URL directa -->
+<a href="player.html?url=${encodeURIComponent(tool.url)}" class="btn-play">Launch Tool</a>
 </div>`;
 }else{
 content=`
