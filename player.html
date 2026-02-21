@@ -1,53 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Loading Tool | Zen Space</title>
-<style>
-body { 
-    margin: 0; background: #050505; color: white; font-family: 'Inter', sans-serif; 
-    display: flex; justify-content: center; align-items: center; height: 100vh; 
-    flex-direction: column; text-align: center; 
-}
-.loader {
-    width:50px; height:50px; border:4px solid #333; border-top:4px solid #a855f7; 
-    border-radius:50%; animation:spin 1s linear infinite; margin-bottom:20px;
-}
-@keyframes spin { 0%{transform:rotate(0deg);} 100%{transform:rotate(360deg);} }
-h2{margin:0; font-weight:400;}
-p{color:#666; font-size:0.9rem;}
-a{color:#a855f7;text-decoration:underline;margin-top:20px;display:inline-block;}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading Tool | Zen Space</title>
+    <style>
+        body { 
+            margin: 0; 
+            background: #050505; 
+            color: white; 
+            font-family: 'Inter', sans-serif; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            flex-direction: column; 
+            text-align: center; 
+        }
+        /* A simple spinning circle */
+        .loader {
+            width: 50px; height: 50px;
+            border: 4px solid #333;
+            border-top: 4px solid #a855f7; /* Your accent color */
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        @keyframes spin { 
+            0% { transform: rotate(0deg); } 
+            100% { transform: rotate(360deg); } 
+        }
+        h2 { margin: 0; font-weight: 400; }
+        p { color: #666; font-size: 0.9rem; }
+        a { color: #a855f7; text-decoration: underline; margin-top: 20px; display: inline-block; }
+    </style>
 </head>
 <body>
 
-<div class="loader"></div>
-<h2>Initializing...</h2>
-<p>Preparing your environment.</p>
-<a id="manual-link" href="#">Click here if not redirected</a>
+    <div class="loader"></div>
+    <h2>Initializing...</h2>
+    <p>Preparing your environment.</p>
+    
+    <!-- Backup link in case automatic redirect fails -->
+    <a id="manual-link" href="#">Click here if not redirected</a>
 
 <script>
-// --- PARAMS ---
-const params = new URLSearchParams(window.location.search);
-const url = params.get('url');           // URL del tool
-const cat = params.get('cat');           // categoría opcional, si viene desde thankyou.html
+    // 1. Get the animation URL from the address bar (e.g., player.html?url=...)
+    const params = new URLSearchParams(window.location.search);
+    const url = params.get('url');
 
-// --- CHEQUEO DE DESBLOQUEO ---
-let unlocked = true;
-if(cat) {
-    unlocked = localStorage.getItem('zen-unlocked-' + cat) === 'true';
-}
+    if (url) {
+        // Set the backup link
+        document.getElementById('manual-link').href = url;
 
-if(url && unlocked){
-    document.getElementById('manual-link').href = url;
-    setTimeout(()=>{ window.location.href = url; }, 1000);
-} else if(!unlocked){
-    alert('This premium tool is locked. Please purchase first.');
-    window.location.href = 'library.html';
-} else {
-    window.location.href = 'library.html';
-}
+        // 2. Wait 1 second, then go to the animation
+        setTimeout(function() {
+            window.location.href = url;
+        }, 1000); 
+    } else {
+        // If no URL is found, go back to the library
+        window.location.href = 'library.html';
+    }
 </script>
 </body>
 </html>
+
+
