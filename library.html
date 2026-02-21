@@ -161,13 +161,13 @@
             }
         };
 
-        // --- PAYPAL LINKS ---
+        // --- PAYPAL LINKS (UPDATED WITH YOUR REAL NCP LINKS) ---
         const paypalLinks = {
-            focus: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=DPBPUJADKK4E4",
-            relax: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=NN8Y4ZBVDLH36",
-            grounding: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=J7WUU8TXEJB5S",
-            zen: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7G2PUUCFU99DW",
-            sleep: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QEZM27CHBCJ8E"
+            focus: "https://www.paypal.com/ncp/payment/DPBPUJADKK4E4",
+            relax: "https://www.paypal.com/ncp/payment/NN8Y4ZBVDLH36",
+            grounding: "https://www.paypal.com/ncp/payment/J7WUU8TXEJB5S",
+            zen: "https://www.paypal.com/ncp/payment/7G2PUUCFU99DW",
+            sleep: "https://www.paypal.com/ncp/payment/QEZM27CHBCJ8E"
         };
 
         let currentCategory = 'focus';
@@ -209,7 +209,6 @@
                             <div class="tag" style="color:gold;">PREMIUM</div>
                             <div class="title">${tool.name}</div>
                             <button class="btn-play" style="background:transparent; border:1px solid #444; color:#888; cursor:not-allowed;">Locked</button>
-                            <!-- Pass the tool name to the modal -->
                             <button onclick="openModal('${tool.name}')" style="margin-top:10px; background:none; border:none; color:var(--accent); text-decoration:underline; cursor:pointer;">Unlock $10</button>
                         </div>
                     `;
@@ -219,11 +218,8 @@
             });
         }
 
-        // Updated Modal Logic to accept the tool name
         function openModal(toolName) {
             const catName = data[currentCategory].name;
-            
-            // Update the text with the specific tool name
             document.getElementById('modal-tool-name').innerText = toolName;
             document.getElementById('modal-category-name').innerText = catName;
             
