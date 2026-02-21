@@ -62,7 +62,6 @@ body { margin:0; background:var(--bg); color:var(--text); font-family:'Inter',sa
 </div>
 
 <script>
-// --- DATA ---
 const data = {
 focus: { name:"Focus (ADHD)", tools:[
 { name:"Deep Flow State", free:true, url:"https://editor.p5js.org/Mercedes_Ayala/present/TFHDFHMr0" },
@@ -126,18 +125,16 @@ sleep: { name:"Sleep", tools:[
 ] }
 };
 
-// --- PAYPAL LINKS ---
 const paypalLinks = {
-focus:"https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=DPBPUJADKK4E4",
-relax:"https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=NN8Y4ZBVDLH36",
-grounding:"https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=J7WUU8TXEJB5S",
-zen:"https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7G2PUUCFU99DW",
-sleep:"https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QEZM27CHBCJ8E"
+focus:"thankyou.html?package=focus",
+relax:"thankyou.html?package=relax",
+grounding:"thankyou.html?package=grounding",
+zen:"thankyou.html?package=zen",
+sleep:"thankyou.html?package=sleep"
 };
 
 let currentCategory='focus';
 
-// --- FUNCIONES ---
 function showCategory(cat){
 currentCategory=cat;
 document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
@@ -150,11 +147,11 @@ const tools=data[cat].tools;
 tools.forEach(tool=>{
 const card=document.createElement('div'); card.className='card';
 let content='';
-if(tool.free || isUnlocked(cat)){
+if(tool.free || localStorage.getItem(cat+'Unlocked')){
 content=`
 <div class="thumb">▶</div>
 <div class="info">
-<div class="tag">${tool.free ? 'FREE' : 'PREMIUM'}</div>
+<div class="tag">FREE</div>
 <div class="title">${tool.name}</div>
 <a href="${tool.url}" class="btn-play" target="_blank">Launch Tool</a>
 </div>`;
@@ -173,36 +170,14 @@ card.innerHTML=content; container.appendChild(card);
 });
 }
 
-// --- LOCALSTORAGE LÓGICA ---
-function isUnlocked(category) {
-    return localStorage.getItem('zen-unlocked-' + category) === 'true';
-}
-
-function unlockCategory(category) {
-    localStorage.setItem('zen-unlocked-' + category, 'true');
-}
-
-// --- MODAL ---
 function openModal(toolName){
-    document.getElementById('modal-tool-name').innerText=toolName;
-    document.getElementById('modal-category-name').innerText=data[currentCategory].name;
-    document.getElementById('paypal-btn').href=paypalLinks[currentCategory];
-
-    const selectedTool = data[currentCategory].tools.find(t => t.name === toolName);
-    if(selectedTool && !selectedTool.free && isUnlocked(currentCategory)) {
-        window.location.href = `player.html?url=${encodeURIComponent(selectedTool.url)}`;
-        return;
-    }
-
-    document.getElementById('premium-modal').style.display='flex';
+document.getElementById('modal-tool-name').innerText=toolName;
+document.getElementById('modal-category-name').innerText=data[currentCategory].name;
+document.getElementById('paypal-btn').href=paypalLinks[currentCategory];
+document.getElementById('premium-modal').style.display='flex';
 }
 
 function closeModal(){ document.getElementById('premium-modal').style.display='none'; }
-
-// --- PAYPAL CLICK ---
-document.getElementById('paypal-btn').addEventListener('click', () => {
-    unlockCategory(currentCategory);
-});
 
 window.onload=function(){ showCategory('focus'); };
 </script>
