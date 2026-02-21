@@ -7,13 +7,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 :root { --bg: #050505; --text: #fff; --muted: #a1a1aa; --accent: #a855f7; --glass: rgba(255,255,255,0.03); --border: rgba(255,255,255,0.1); }
-body { margin:0; background:var(--bg); color:var(--text); font-family:'Inter',sans-serif; overflow-x: hidden; padding-bottom: 100px;}
+body { margin:0; background:var(--bg); color:var(--text); font-family:'Inter',sans-serif; padding-bottom:100px; overflow-x: hidden; }
 .navbar { display:flex; justify-content:space-between; padding:20px 5%; border-bottom:1px solid var(--border); align-items:center; }
 .logo { font-weight:bold; text-decoration:none; color:white; }
 .tabs { display:flex; justify-content:center; gap:10px; margin:40px 0; flex-wrap:wrap; padding:0 20px; }
 .tab-btn { background:transparent; border:1px solid var(--border); color:var(--muted); padding:10px 20px; border-radius:20px; cursor:pointer; transition:0.3s; }
 .tab-btn.active, .tab-btn:hover { background:var(--glass); color:white; border-color:white; }
-.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:20px; width:90%; max-width:1200px; margin:0 auto; }
+.grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px,1fr)); gap:20px; width:90%; max-width:1200px; margin:0 auto; }
 .card { background:var(--glass); border:1px solid var(--border); border-radius:15px; overflow:hidden; position:relative; transition:0.3s; }
 .card:hover { transform:translateY(-5px); border-color:var(--accent); }
 .thumb { height:160px; background:#111; display:flex; align-items:center; justify-content:center; color:#333; font-size:2rem; }
@@ -21,15 +21,16 @@ body { margin:0; background:var(--bg); color:var(--text); font-family:'Inter',sa
 .tag { font-size:0.7rem; text-transform:uppercase; letter-spacing:1px; color:var(--muted); }
 .title { font-size:1.1rem; margin:5px 0; font-weight:400; }
 .lock { position:absolute; top:10px; right:10px; background:rgba(0,0,0,0.7); padding:5px 10px; border-radius:10px; font-size:0.8rem; border:1px solid var(--border); }
-.btn-play { display:block; width:100%; padding:10px; background:white; color:black; text-align:center; text-decoration:none; margin-top:15px; border-radius:8px; font-weight:600; cursor:pointer; border:none;}
+.btn-play { display:block; width:100%; padding:10px; background:white; color:black; text-align:center; text-decoration:none; margin-top:15px; border-radius:8px; font-weight:600; cursor:pointer; border:none; }
 
+/* --- REPRODUCTOR FULLSCREEN --- */
 #zen-player { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:black; z-index:9999; }
-.iframe-wrapper { width:100%; height:100%; overflow:hidden; position:relative; }
 #zen-iframe { width: 100%; height: calc(100% + 42px); border: none; margin-top: -42px; }
-.btn-back { position:fixed; top:20px; left:20px; z-index:10000; background:rgba(0,0,0,0.5); color:white; padding:10px 20px; border-radius:30px; border:1px solid var(--border); backdrop-filter:blur(10px); cursor:pointer; font-size:0.8rem;}
+.btn-back-float { position:fixed; top:20px; left:20px; z-index:10000; background:rgba(0,0,0,0.5); color:white; padding:10px 20px; border-radius:30px; border:1px solid var(--border); backdrop-filter:blur(10px); cursor:pointer; }
 
-.modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); backdrop-filter:blur(5px); z-index:1000; align-items:center; justify-content:center; }
-.modal-content { background:#111; border:1px solid var(--border); padding:40px; border-radius:20px; max-width:500px; width:90%; text-align:center; position:relative; }
+/* --- MODAL PAYPAL --- */
+.modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); backdrop-filter:blur(5px); z-index:1000; align-items:center; justify-content:center; }
+.modal-content { background:#111; border:1px solid var(--border); padding:40px; border-radius:20px; max-width:500px; text-align:center; position:relative; }
 .close-modal { position:absolute; top:15px; right:20px; font-size:1.5rem; cursor:pointer; color:var(--muted); }
 .price-tag { font-size:2.5rem; font-family:'Playfair Display', serif; margin:20px 0; color:white; }
 .btn-buy { background:var(--accent); color:white; padding:15px 30px; border-radius:30px; text-decoration:none; display:inline-block; margin-top:20px; font-weight:bold; }
@@ -53,18 +54,16 @@ body { margin:0; background:var(--bg); color:var(--text); font-family:'Inter',sa
 <div id="grid-container" class="grid"></div>
 
 <div id="zen-player">
-    <button class="btn-back" onclick="closePlayer()">← Back to Library</button>
-    <div class="iframe-wrapper">
-        <iframe id="zen-iframe" src="" allow="autoplay"></iframe>
-    </div>
+    <button class="btn-back-float" onclick="closePlayer()">← Back to Library</button>
+    <iframe id="zen-iframe" src="" allow="autoplay"></iframe>
 </div>
 
 <div id="premium-modal" class="modal">
   <div class="modal-content">
     <span class="close-modal" onclick="closeModal()">&times;</span>
-    <h2 style="font-family:'Playfair Display';">Premium Access</h2>
-    <p style="color:#aaa;">Unlock <span id="modal-tool-name" class="selected-tool" style="color:var(--accent)">Tool Name</span>.</p>
-    <p>To access this and the full <span id="modal-category-name" style="font-weight:bold;"></span> collection.</p>
+    <h2 style="font-family:'Playfair Display';">Premium Access Required</h2>
+    <p style="color:#aaa;">You selected <span id="modal-tool-name" style="color:var(--accent); font-weight:bold;">Tool Name</span>.</p>
+    <p style="color:#fff;">Unlock the full <span id="modal-category-name" style="font-weight:bold;"></span> collection.</p>
     <div class="price-tag">$10.00</div>
     <a id="paypal-btn" href="#" class="btn-buy" target="_blank">Unlock Now</a>
   </div>
@@ -83,7 +82,7 @@ const data = {
     { name:"Code Matrix", free:false, url:"https://www.paypal.com/ncp/payment/DPBPUJADKK4E4" },
     { name:"Synthwave", free:false, url:"https://www.paypal.com/ncp/payment/DPBPUJADKK4E4" },
     { name:"Neon Pulse", free:false, url:"https://www.paypal.com/ncp/payment/DPBPUJADKK4E4" }
-  ] },
+  ]},
   relax: { name:"Relaxation", tools:[
     { name:"Oceanic Breath", free:true, url:"https://editor.p5js.org/Mercedes_Ayala/present/dnzZb8xBd" },
     { name:"Soft Clouds", free:true, url:"https://editor.p5js.org/Mercedes_Ayala/present/9VAiu79OW" },
@@ -95,7 +94,7 @@ const data = {
     { name:"Star Dust", free:false, url:"https://www.paypal.com/ncp/payment/NN8Y4ZBVDLH36" },
     { name:"Flow State", free:false, url:"https://www.paypal.com/ncp/payment/NN8Y4ZBVDLH36" },
     { name:"Astral Plane", free:false, url:"https://www.paypal.com/ncp/payment/NN8Y4ZBVDLH36" }
-  ] },
+  ]},
   grounding: { name:"Grounding", tools:[
     { name:"Earth Anchor 1", free:true, url:"https://editor.p5js.org/Mercedes_Ayala/present/dScm7qKGr" },
     { name:"Earth Anchor 2", free:true, url:"https://editor.p5js.org/Mercedes_Ayala/present/mxHIun5M0" },
@@ -106,8 +105,8 @@ const data = {
     { name:"Grounding Premium 2", free:false, url:"https://www.paypal.com/ncp/payment/J7WUU8TXEJB5S" },
     { name:"Grounding Premium 3", free:false, url:"https://www.paypal.com/ncp/payment/J7WUU8TXEJB5S" },
     { name:"Grounding Premium 4", free:false, url:"https://www.paypal.com/ncp/payment/J7WUU8TXEJB5S" },
-    { name:"PTSD Support (Advanced)", free:false, url:"https://www.paypal.com/ncp/payment/J7WUU8TXEJB5S" }
-  ] },
+    { name:"Grounding Premium 5", free:false, url:"https://www.paypal.com/ncp/payment/J7WUU8TXEJB5S" }
+  ]},
   zen: { name:"Zen", tools:[
     { name:"Ensō Circle", free:true, url:"https://editor.p5js.org/Mercedes_Ayala/present/FY7ku-xMo" },
     { name:"Zen Breath", free:true, url:"https://editor.p5js.org/Mercedes_Ayala/present/hK_gKnTfb" },
@@ -119,7 +118,7 @@ const data = {
     { name:"Infinite Loop", free:false, url:"https://www.paypal.com/ncp/payment/7G2PUUCFU99DW" },
     { name:"White Lotus", free:false, url:"https://www.paypal.com/ncp/payment/7G2PUUCFU99DW" },
     { name:"Inner Peace", free:false, url:"https://www.paypal.com/ncp/payment/7G2PUUCFU99DW" }
-  ] },
+  ]},
   sleep: { name:"Sleep", tools:[
     { name:"Delta Drift", free:true, url:"https://editor.p5js.org/Mercedes_Ayala/present/lcHfR8MaE" },
     { name:"Night Sky", free:true, url:"https://editor.p5js.org/Mercedes_Ayala/present/je26WV9jW" },
@@ -131,18 +130,19 @@ const data = {
     { name:"REM Cycle", free:false, url:"https://www.paypal.com/ncp/payment/QEZM27CHBCJ8E" },
     { name:"Coma", free:false, url:"https://www.paypal.com/ncp/payment/QEZM27CHBCJ8E" },
     { name:"Hypnagogia", free:false, url:"https://www.paypal.com/ncp/payment/QEZM27CHBCJ8E" }
-  ] }
+  ]}
 };
 
-let currentCategory='focus';
-function showCategory(cat){
-  currentCategory=cat;
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-  if(window.event && window.event.target.tagName === 'BUTTON') window.event.target.classList.add('active');
-  const container=document.getElementById('grid-container');
-  container.innerHTML='';
-  data[cat].tools.forEach(tool=>{
-    const card=document.createElement('div'); card.className='card';
+let currentCategory = 'focus';
+
+function showCategory(cat) {
+  currentCategory = cat;
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  if (window.event) window.event.target.classList.add('active');
+  const container = document.getElementById('grid-container');
+  container.innerHTML = '';
+  data[cat].tools.forEach(tool => {
+    const card = document.createElement('div'); card.className = 'card';
     card.innerHTML = tool.free ? `
       <div class="thumb">▶</div>
       <div class="info"><div class="tag">FREE</div><div class="title">${tool.name}</div>
@@ -150,20 +150,30 @@ function showCategory(cat){
       <div class="thumb" style="color:#333;">🔒</div><div class="lock">PREMIUM</div>
       <div class="info"><div class="tag" style="color:gold;">PREMIUM</div><div class="title">${tool.name}</div>
       <button class="btn-play" style="background:transparent;border:1px solid #444;color:#888;cursor:not-allowed;">Locked</button>
-      <button onclick="openPremiumModal('${tool.name}', '${tool.url}')" style="margin-top:10px;background:none;border:none;color:var(--accent);text-decoration:underline;cursor:pointer;">Unlock $10</button></div>`;
+      <button onclick="openModal('${tool.name}')" style="margin-top:10px;background:none;border:none;color:var(--accent);text-decoration:underline;cursor:pointer;">Unlock $10</button></div>`;
     container.appendChild(card);
   });
 }
-function openPlayer(url) { document.getElementById('zen-iframe').src = url; document.getElementById('zen-player').style.display = 'block'; document.body.style.overflow = 'hidden'; }
-function closePlayer() { document.getElementById('zen-player').style.display = 'none'; document.getElementById('zen-iframe').src = ''; document.body.style.overflow = 'auto'; }
-function openPremiumModal(toolName, paypalUrl) {
-    document.getElementById('modal-tool-name').innerText = toolName;
-    document.getElementById('modal-category-name').innerText = data[currentCategory].name;
-    document.getElementById('paypal-btn').href = paypalUrl;
-    document.getElementById('premium-modal').style.display = 'flex';
+
+function openPlayer(url) {
+  document.getElementById('zen-iframe').src = url;
+  document.getElementById('zen-player').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+function closePlayer() {
+  document.getElementById('zen-player').style.display = 'none';
+  document.getElementById('zen-iframe').src = '';
+  document.body.style.overflow = 'auto';
+}
+function openModal(toolName) {
+  const tool = data[currentCategory].tools.find(t => t.name === toolName);
+  document.getElementById('modal-tool-name').innerText = toolName;
+  document.getElementById('modal-category-name').innerText = data[currentCategory].name;
+  document.getElementById('paypal-btn').href = tool.url;
+  document.getElementById('premium-modal').style.display = 'flex';
 }
 function closeModal() { document.getElementById('premium-modal').style.display = 'none'; }
-window.onload=function(){ showCategory('focus'); };
+window.onload = function() { showCategory('focus'); };
 </script>
 </body>
 </html>
