@@ -1,238 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Library | Zen Space</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    <style>
-        /* CSS STYLES */
-        :root { --bg: #050505; --text: #fff; --muted: #a1a1aa; --accent: #a855f7; --glass: rgba(255,255,255,0.03); --border: rgba(255,255,255,0.1); }
-        body { margin: 0; background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; padding-bottom: 100px; }
-        .navbar { display: flex; justify-content: space-between; padding: 20px 5%; border-bottom: 1px solid var(--border); align-items: center; }
-        .logo { font-weight: bold; text-decoration: none; color: white; }
-        
-        .tabs { display: flex; justify-content: center; gap: 10px; margin: 40px 0; flex-wrap: wrap; padding: 0 20px; }
-        .tab-btn { background: transparent; border: 1px solid var(--border); color: var(--muted); padding: 10px 20px; border-radius: 20px; cursor: pointer; transition: 0.3s; }
-        .tab-btn.active, .tab-btn:hover { background: var(--glass); color: white; border-color: white; }
-
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; width: 90%; max-width: 1200px; margin: 0 auto; }
-        .card { background: var(--glass); border: 1px solid var(--border); border-radius: 15px; overflow: hidden; position: relative; transition: 0.3s; }
-        .card:hover { transform: translateY(-5px); border-color: var(--accent); }
-        .thumb { height: 160px; background: #111; display: flex; align-items: center; justify-content: center; color: #333; font-size: 2rem; }
-        .info { padding: 20px; }
-        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
-        .title { font-size: 1.1rem; margin: 5px 0; font-weight: 400; }
-        .lock { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); padding: 5px 10px; border-radius: 10px; font-size: 0.8rem; border: 1px solid var(--border); }
-        .btn-play { display: block; width: 100%; padding: 10px; background: white; color: black; text-align: center; text-decoration: none; margin-top: 15px; border-radius: 8px; font-weight: 600; }
-        
-        /* Modal Styles */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); z-index: 1000; align-items: center; justify-content: center; }
-        .modal-content { background: #111; border: 1px solid var(--border); padding: 40px; border-radius: 20px; max-width: 500px; text-align: center; position: relative; }
-        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; color: var(--muted); }
-        .price-tag { font-size: 2.5rem; font-family: 'Playfair Display', serif; margin: 20px 0; color: white; }
-        .btn-buy { background: var(--accent); color: white; padding: 15px 30px; border-radius: 30px; text-decoration: none; display: inline-block; margin-top: 20px; font-weight: bold; }
-        .fine-print { font-size: 0.7rem; color: #666; margin-top: 20px; }
-        .selected-tool { color: var(--accent); font-weight: bold; font-size: 1.1rem; margin: 10px 0; display: block; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Library | Zen Space</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root { --bg: #050505; --text: #fff; --muted: #a1a1aa; --accent: #a855f7; --glass: rgba(255,255,255,0.03); --border: rgba(255,255,255,0.1); }
+body { margin:0; background:var(--bg); color:var(--text); font-family:'Inter',sans-serif; padding-bottom:100px; }
+.navbar { display:flex; justify-content:space-between; padding:20px 5%; border-bottom:1px solid var(--border); align-items:center; }
+.logo { font-weight:bold; text-decoration:none; color:white; }
+.tabs { display:flex; justify-content:center; gap:10px; margin:40px 0; flex-wrap:wrap; padding:0 20px; }
+.tab-btn { background:transparent; border:1px solid var(--border); color:var(--muted); padding:10px 20px; border-radius:20px; cursor:pointer; transition:0.3s; }
+.tab-btn.active, .tab-btn:hover { background:var(--glass); color:white; border-color:white; }
+.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:20px; width:90%; max-width:1200px; margin:0 auto; }
+.card { background:var(--glass); border:1px solid var(--border); border-radius:15px; overflow:hidden; position:relative; transition:0.3s; }
+.card:hover { transform:translateY(-5px); border-color:var(--accent); }
+.thumb { height:160px; background:#111; display:flex; align-items:center; justify-content:center; color:#333; font-size:2rem; }
+.info { padding:20px; }
+.tag { font-size:0.7rem; text-transform:uppercase; letter-spacing:1px; color:var(--muted); }
+.title { font-size:1.1rem; margin:5px 0; font-weight:400; }
+.lock { position:absolute; top:10px; right:10px; background:rgba(0,0,0,0.7); padding:5px 10px; border-radius:10px; font-size:0.8rem; border:1px solid var(--border); }
+.btn-play { display:block; width:100%; padding:10px; background:white; color:black; text-align:center; text-decoration:none; margin-top:15px; border-radius:8px; font-weight:600; }
+.modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); backdrop-filter:blur(5px); z-index:1000; align-items:center; justify-content:center; }
+.modal-content { background:#111; border:1px solid var(--border); padding:40px; border-radius:20px; max-width:500px; text-align:center; position:relative; }
+.close-modal { position:absolute; top:15px; right:20px; font-size:1.5rem; cursor:pointer; color:var(--muted); }
+.price-tag { font-size:2.5rem; font-family:'Playfair Display', serif; margin:20px 0; color:white; }
+.btn-buy { background:var(--accent); color:white; padding:15px 30px; border-radius:30px; text-decoration:none; display:inline-block; margin-top:20px; font-weight:bold; }
+.fine-print { font-size:0.7rem; color:#666; margin-top:20px; }
+.selected-tool { color:var(--accent); font-weight:bold; font-size:1.1rem; margin:10px 0; display:block; }
+</style>
 </head>
 <body>
 
-    <nav class="navbar">
-        <a href="index.html" class="logo">ZEN SPACE</a>
-        <a href="index.html" style="color: #888; text-decoration: none;">Back Home</a>
-    </nav>
+<nav class="navbar">
+<a href="index.html" class="logo">ZEN SPACE</a>
+<a href="index.html" style="color:#888; text-decoration:none;">Back Home</a>
+</nav>
 
-    <!-- Category Tabs -->
-    <div class="tabs">
-        <button class="tab-btn active" onclick="showCategory('focus')">Focus (ADHD)</button>
-        <button class="tab-btn" onclick="showCategory('relax')">Relax</button>
-        <button class="tab-btn" onclick="showCategory('grounding')">Grounding</button>
-        <button class="tab-btn" onclick="showCategory('zen')">Zen</button>
-        <button class="tab-btn" onclick="showCategory('sleep')">Sleep</button>
-    </div>
+<div class="tabs">
+<button class="tab-btn active" onclick="showCategory('focus')">Focus (ADHD)</button>
+<button class="tab-btn" onclick="showCategory('relax')">Relax</button>
+<button class="tab-btn" onclick="showCategory('grounding')">Grounding</button>
+<button class="tab-btn" onclick="showCategory('zen')">Zen</button>
+<button class="tab-btn" onclick="showCategory('sleep')">Sleep</button>
+</div>
 
-    <!-- Grid Container -->
-    <div id="grid-container" class="grid"></div>
+<div id="grid-container" class="grid"></div>
 
-    <!-- Payment Modal -->
-    <div id="premium-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
-            <h2 style="font-family: 'Playfair Display';">Premium Access Required</h2>
-            
-            <p style="color: #aaa;">You selected <span id="modal-tool-name" class="selected-tool">Tool Name</span>.</p>
-            
-            <p style="color: #fff;">To unlock this tool, get full access to the <span id="modal-category-name" style="color: white; font-weight: bold;"></span> collection.</p>
-            
-            <div class="price-tag">$10.00</div>
-            
-            <p style="font-size: 0.9rem; color: #ccc;">Includes this tool + 4 others.<br>No subscription. One-time payment.</p>
-            
-            <a id="paypal-btn" href="#" class="btn-buy" target="_blank">Unlock Pack for $10</a>
-            
-            <p class="fine-print">Access is usually instant. Please allow up to 24 hours for manual verification.</p>
-        </div>
-    </div>
+<div id="premium-modal" class="modal">
+<div class="modal-content">
+<span class="close-modal" onclick="closeModal()">&times;</span>
+<h2 style="font-family:'Playfair Display';">Premium Access Required</h2>
+<p style="color:#aaa;">You selected <span id="modal-tool-name" class="selected-tool">Tool Name</span>.</p>
+<p style="color:#fff;">To unlock this tool, get full access to the <span id="modal-category-name" style="color:white; font-weight:bold;"></span> collection.</p>
+<div class="price-tag">$10.00</div>
+<p style="font-size:0.9rem; color:#ccc;">Includes this tool + 4 others.<br>No subscription. One-time payment.</p>
+<a id="paypal-btn" href="#" class="btn-buy" target="_blank">Unlock Pack for $10</a>
+<p class="fine-print">Access is usually instant. Please allow up to 24 hours for manual verification.</p>
+</div>
+</div>
 
-    <script>
-        // --- DATA: LINKS CHANGED TO /PRESENT/ ---
-        const data = {
-            focus: {
-                name: "Deep Focus",
-                tools: [
-                    { name: "Deep Flow State", free: true, url: "https://editor.p5js.org/Mercedes_Ayala/present/TFHDFHMr0" },
-                    { name: "Neon Rain", free: true, url: "https://editor.p5js.org/Mercedes_Ayala/present/uJfDjvh3y" },
-                    { name: "Binary Horizon", free: true, url: "https://editor.p5js.org/Mercedes_Ayala/present/-OSPfA0sB" },
-                    { name: "Grid Lock", free: true, url: "https://editor.p5js.org/Mercedes_Ayala/present/7pTycsg6d" },
-                    { name: "Cyber Focus", free: true, url: "https://editor.p5js.org/Mercedes_Ayala/present/jkEnBQQ_X" },
-                    // PREMIUM
-                    { name: "Hyperfocus Engine", free: false },
-                    { name: "Warp Tunnel", free: false },
-                    { name: "Code Matrix", free: false },
-                    { name: "Synthwave", free: false },
-                    { name: "Neon Pulse", free: false }
-                ]
-            },
-            relax: {
-                name: "Relaxation",
-                tools: [
-                    { name: "Oceanic Breath", free: true, url: "https://editor.p5js.org/Mercedes_Ayala/present/dnzZb8xBd" },
-                    { name: "Soft Clouds", free: true, url: "https://editor.p5js.org/Mercedes_Ayala/present/9VAiu79OW" },
-                    { name: "Aurora", free: true, url: "https://editor.p5js.org/Mercedes_Ayala/present/RPClofbsf" },
-                    { name: "Liquid Blue", free: true, url: "https://editor.p5js.org/Mercedes_Ayala/present/5xc817z64" },
-                    { name: "Gentle Waves", free: true, url: "https://editor.p5js.org/Mercedes_Ayala/present/WiEjHEUgJ" },
-                    // PREMIUM
-                    { name: "Deep Ocean", free: false },
-                    { name: "Zen Garden", free: false },
-                    { name: "Star Dust", free: false },
-                    { name: "Flow State", free: false },
-                    { name: "Astral Plane", free: false }
-                ]
-            },
-            grounding: {
-                name: "Grounding",
-                tools: [
-                    { name: "Earth Anchor 1", free: true, url: "https://editor.p5js.org/Mercedes_Ayala/present/dScm7qKGr" },
-                    { name: "Earth Anchor 2", free: true, url: "https://editor.p5js.org/Mercedes_Ayala/present/mxHIun5M0" },
-                    { name: "Earth Anchor 3", free: true, url: "https://editor.p5js.org/Mercedes_Ayala/present/E9k-hwwXu" },
-                    { name: "Earth Anchor 4", free: true, url: "https://editor.p5js.org/Mercedes_Ayala/present/Zvy6MvvyW" },
-                    { name: "Earth Anchor 5", free: true, url: "https://editor.p5js.org/Mercedes_Ayala/present/yTGc67rBr" },
-                    // PREMIUM
-                    { name: "Grounding Premium 1", free: false },
-                    { name: "Grounding Premium 2", free: false },
-                    { name: "Grounding Premium 3", free: false },
-                    { name: "Grounding Premium 4", free: false },
-                    { name: "Grounding Premium 5", free: false },
-                    { name: "PTSD Support (Advanced)", free: false }
-                ]
-            },
-            zen: {
-                name: "Zen",
-                tools: [
-                    { name: "Ensō Circle", free: true, url: "https://editor.p5js.org/Mercedes_Ayala/present/FY7ku-xMo" },
-                    { name: "Zen Breath", free: true, url: "https://editor.p5js.org/Mercedes_Ayala/present/hK_gKnTfb" },
-                    { name: "Minimalist Flow", free: true, url: "https://editor.p5js.org/Mercedes_Ayala/present/a9eJDhjOl" },
-                    { name: "Zen Line", free: true, url: "https://editor.p5js.org/Mercedes_Ayala/present/FFrEkv_OV" },
-                    { name: "Void State", free: true, url: "https://editor.p5js.org/Mercedes_Ayala/present/dwpEgtMWV" },
-                    // PREMIUM
-                    { name: "Sacred Geometry", free: false },
-                    { name: "Gold Dust", free: false },
-                    { name: "Infinite Loop", free: false },
-                    { name: "White Lotus", free: false },
-                    { name: "Inner Peace", free: false }
-                ]
-            },
-            sleep: {
-                name: "Sleep",
-                tools: [
-                    { name: "Delta Drift", free: true, url: "https://editor.p5js.org/Mercedes_Ayala/present/lcHfR8MaE" },
-                    { name: "Night Sky", free: true, url: "https://editor.p5js.org/Mercedes_Ayala/present/je26WV9jW" },
-                    { name: "Deep Rest", free: true, url: "https://editor.p5js.org/Mercedes_Ayala/present/TYHsvQUin" },
-                    { name: "Starfield", free: true, url: "https://editor.p5js.org/Mercedes_Ayala/present/1okyPd1vf" },
-                    { name: "Dark Void", free: true, url: "https://editor.p5js.org/Mercedes_Ayala/present/iLgbFHq1q" },
-                    // PREMIUM
-                    { name: "Lucid Dream", free: false },
-                    { name: "Deep Sleep", free: false },
-                    { name: "REM Cycle", free: false },
-                    { name: "Coma", free: false },
-                    { name: "Hypnagogia", free: false }
-                ]
-            }
-        };
+<script>
+// --- DATA ---
+const data = {
+focus: { name:"Focus (ADHD)", tools:[
+{ name:"Deep Flow State", free:true, url:"https://editor.p5js.org/Mercedes_Ayala/present/TFHDFHMr0" },
+{ name:"Neon Rain", free:true, url:"https://editor.p5js.org/Mercedes_Ayala/present/uJfDjvh3y" },
+{ name:"Binary Horizon", free:true, url:"https://editor.p5js.org/Mercedes_Ayala/present/-OSPfA0sB" },
+{ name:"Grid Lock", free:true, url:"https://editor.p5js.org/Mercedes_Ayala/present/7pTycsg6d" },
+{ name:"Cyber Focus", free:true, url:"https://editor.p5js.org/Mercedes_Ayala/present/jkEnBQQ_X" },
+{ name:"Hyperfocus Engine", free:false, url:"https://editor.p5js.org/Mercedes_Ayala/present/hyper1" },
+{ name:"Warp Tunnel", free:false, url:"https://editor.p5js.org/Mercedes_Ayala/present/hyper2" },
+{ name:"Code Matrix", free:false, url:"https://editor.p5js.org/Mercedes_Ayala/present/hyper3" },
+{ name:"Synthwave", free:false, url:"https://editor.p5js.org/Mercedes_Ayala/present/hyper4" },
+{ name:"Neon Pulse", free:false, url:"https://editor.p5js.org/Mercedes_Ayala/present/hyper5" }
+] },
+relax: { name:"Relaxation", tools:[
+{ name:"Oceanic Breath", free:true, url:"https://editor.p5js.org/Mercedes_Ayala/present/dnzZb8xBd" },
+{ name:"Soft Clouds", free:true, url:"https://editor.p5js.org/Mercedes_Ayala/present/9VAiu79OW" },
+{ name:"Aurora", free:true, url:"https://editor.p5js.org/Mercedes_Ayala/present/RPClofbsf" },
+{ name:"Liquid Blue", free:true, url:"https://editor.p5js.org/Mercedes_Ayala/present/5xc817z64" },
+{ name:"Gentle Waves", free:true, url:"https://editor.p5js.org/Mercedes_Ayala/present/WiEjHEUgJ" },
+{ name:"Deep Ocean", free:false, url:"https://editor.p5js.org/Mercedes_Ayala/present/relax1" },
+{ name:"Zen Garden", free:false, url:"https://editor.p5js.org/Mercedes_Ayala/present/relax2" },
+{ name:"Star Dust", free:false, url:"https://editor.p5js.org/Mercedes_Ayala/present/relax3" },
+{ name:"Flow State", free:false, url:"https://editor.p5js.org/Mercedes_Ayala/present/relax4" },
+{ name:"Astral Plane", free:false, url:"https://editor.p5js.org/Mercedes_Ayala/present/relax5" }
+] },
+grounding: { name:"Grounding", tools:[
+{ name:"Earth Anchor 1", free:true, url:"https://editor.p5js.org/Mercedes_Ayala/present/dScm7qKGr" },
+{ name:"Earth Anchor 2", free:true, url:"https://editor.p5js.org/Mercedes_Ayala/present/mxHIun5M0" },
+{ name:"Earth Anchor 3", free:true, url:"https://editor.p5js.org/Mercedes_Ayala/present/E9k-hwwXu" },
+{ name:"Earth Anchor 4", free:true, url:"https://editor.p5js.org/Mercedes_Ayala/present/Zvy6MvvyW" },
+{ name:"Earth Anchor 5", free:true, url:"https://editor.p5js.org/Mercedes_Ayala/present/yTGc67rBr" },
+{ name:"Grounding Premium 1", free:false, url:"https://editor.p5js.org/Mercedes_Ayala/present/ground1" },
+{ name:"Grounding Premium 2", free:false, url:"https://editor.p5js.org/Mercedes_Ayala/present/ground2" },
+{ name:"Grounding Premium 3", free:false, url:"https://editor.p5js.org/Mercedes_Ayala/present/ground3" },
+{ name:"Grounding Premium 4", free:false, url:"https://editor.p5js.org/Mercedes_Ayala/present/ground4" },
+{ name:"Grounding Premium 5", free:false, url:"https://editor.p5js.org/Mercedes_Ayala/present/ground5" }
+] },
+zen: { name:"Zen", tools:[
+{ name:"Ensō Circle", free:true, url:"https://editor.p5js.org/Mercedes_Ayala/present/FY7ku-xMo" },
+{ name:"Zen Breath", free:true, url:"https://editor.p5js.org/Mercedes_Ayala/present/hK_gKnTfb" },
+{ name:"Minimalist Flow", free:true, url:"https://editor.p5js.org/Mercedes_Ayala/present/a9eJDhjOl" },
+{ name:"Zen Line", free:true, url:"https://editor.p5js.org/Mercedes_Ayala/present/FFrEkv_OV" },
+{ name:"Void State", free:true, url:"https://editor.p5js.org/Mercedes_Ayala/present/dwpEgtMWV" },
+{ name:"Sacred Geometry", free:false, url:"https://editor.p5js.org/Mercedes_Ayala/present/zen1" },
+{ name:"Gold Dust", free:false, url:"https://editor.p5js.org/Mercedes_Ayala/present/zen2" },
+{ name:"Infinite Loop", free:false, url:"https://editor.p5js.org/Mercedes_Ayala/present/zen3" },
+{ name:"White Lotus", free:false, url:"https://editor.p5js.org/Mercedes_Ayala/present/zen4" },
+{ name:"Inner Peace", free:false, url:"https://editor.p5js.org/Mercedes_Ayala/present/zen5" }
+] },
+sleep: { name:"Sleep", tools:[
+{ name:"Delta Drift", free:true, url:"https://editor.p5js.org/Mercedes_Ayala/present/lcHfR8MaE" },
+{ name:"Night Sky", free:true, url:"https://editor.p5js.org/Mercedes_Ayala/present/je26WV9jW" },
+{ name:"Deep Rest", free:true, url:"https://editor.p5js.org/Mercedes_Ayala/present/TYHsvQUin" },
+{ name:"Starfield", free:true, url:"https://editor.p5js.org/Mercedes_Ayala/present/1okyPd1vf" },
+{ name:"Dark Void", free:true, url:"https://editor.p5js.org/Mercedes_Ayala/present/iLgbFHq1q" },
+{ name:"Lucid Dream", free:false, url:"https://editor.p5js.org/Mercedes_Ayala/present/sleep1" },
+{ name:"Deep Sleep", free:false, url:"https://editor.p5js.org/Mercedes_Ayala/present/sleep2" },
+{ name:"REM Cycle", free:false, url:"https://editor.p5js.org/Mercedes_Ayala/present/sleep3" },
+{ name:"Coma", free:false, url:"https://editor.p5js.org/Mercedes_Ayala/present/sleep4" },
+{ name:"Hypnagogia", free:false, url:"https://editor.p5js.org/Mercedes_Ayala/present/sleep5" }
+] }
+};
 
-        // --- PAYPAL LINKS (NCP FORMAT - VERIFIED WORKING) ---
-        const paypalLinks = {
-            focus: "https://www.paypal.com/ncp/payment/DPBPUJADKK4E4",
-            relax: "https://www.paypal.com/ncp/payment/NN8Y4ZBVDLH36",
-            grounding: "https://www.paypal.com/ncp/payment/J7WUU8TXEJB5S",
-            zen: "https://www.paypal.com/ncp/payment/7G2PUUCFU99DW",
-            sleep: "https://www.paypal.com/ncp/payment/QEZM27CHBCJ8E"
-        };
+// --- PAYPAL LINKS ---
+const paypalLinks = {
+focus:"https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=DPBPUJADKK4E4",
+relax:"https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=NN8Y4ZBVDLH36",
+grounding:"https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=J7WUU8TXEJB5S",
+zen:"https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7G2PUUCFU99DW",
+sleep:"https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QEZM27CHBCJ8E"
+};
 
-        let currentCategory = 'focus';
+let currentCategory='focus';
 
-        function showCategory(cat) {
-            currentCategory = cat;
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            if(window.event) { window.event.target.classList.add('active'); }
+// --- FUNCIONES ---
+function showCategory(cat){
+currentCategory=cat;
+document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+if(window.event) window.event.target.classList.add('active');
 
-            const container = document.getElementById('grid-container');
-            container.innerHTML = '';
-            
-            const tools = data[cat].tools;
-            
-            if(tools.length === 0) {
-                container.innerHTML = '<p style="text-align:center; color:#666;">Tools loading soon...</p>';
-                return;
-            }
+const container=document.getElementById('grid-container');
+container.innerHTML='';
+const tools=data[cat].tools;
 
-            tools.forEach(tool => {
-                const card = document.createElement('div');
-                card.className = 'card';
-                
-                let content = '';
-                if (tool.free) {
-                    content = `
-                        <div class="thumb">▶</div>
-                        <div class="info">
-                            <div class="tag">FREE</div>
-                            <div class="title">${tool.name}</div>
-                            <a href="player.html?url=${encodeURIComponent(tool.url)}" class="btn-play" target="_blank">Launch Tool</a>
-                        </div>
-                    `;
-                } else {
-                    content = `
-                        <div class="thumb" style="color: #333;">🔒</div>
-                        <div class="lock">PREMIUM</div>
-                        <div class="info">
-                            <div class="tag" style="color:gold;">PREMIUM</div>
-                            <div class="title">${tool.name}</div>
-                            <button class="btn-play" style="background:transparent; border:1px solid #444; color:#888; cursor:not-allowed;">Locked</button>
-                            <button onclick="openModal('${tool.name}')" style="margin-top:10px; background:none; border:none; color:var(--accent); text-decoration:underline; cursor:pointer;">Unlock $10</button>
-                        </div>
-                    `;
-                }
-                card.innerHTML = content;
-                container.appendChild(card);
-            });
-        }
+tools.forEach(tool=>{
+const card=document.createElement('div'); card.className='card';
+let content='';
+if(tool.free){
+content=`
+<div class="thumb">▶</div>
+<div class="info">
+<div class="tag">FREE</div>
+<div class="title">${tool.name}</div>
+<a href="${tool.url}" class="btn-play" target="_blank">Launch Tool</a>
+</div>`;
+}else{
+content=`
+<div class="thumb" style="color:#333;">🔒</div>
+<div class="lock">PREMIUM</div>
+<div class="info">
+<div class="tag" style="color:gold;">PREMIUM</div>
+<div class="title">${tool.name}</div>
+<button class="btn-play" style="background:transparent;border:1px solid #444;color:#888;cursor:not-allowed;">Locked</button>
+<button onclick="openModal('${tool.name}')" style="margin-top:10px;background:none;border:none;color:var(--accent);text-decoration:underline;cursor:pointer;">Unlock $10</button>
+</div>`;
+}
+card.innerHTML=content; container.appendChild(card);
+});
+}
 
-        function openModal(toolName) {
-            const catName = data[currentCategory].name;
-            document.getElementById('modal-tool-name').innerText = toolName;
-            document.getElementById('modal-category-name').innerText = catName;
-            
-            const buyBtn = document.getElementById('paypal-btn');
-            buyBtn.href = paypalLinks[currentCategory];
-            
-            document.getElementById('premium-modal').style.display = 'flex';
-        }
-        function closeModal() {
-            document.getElementById('premium-modal').style.display = 'none';
-        }
+function openModal(toolName){
+document.getElementById('modal-tool-name').innerText=toolName;
+document.getElementById('modal-category-name').innerText=data[currentCategory].name;
+document.getElementById('paypal-btn').href=paypalLinks[currentCategory];
+document.getElementById('premium-modal').style.display='flex';
+}
 
-        window.onload = function() { showCategory('focus'); };
-    </script>
+function closeModal(){ document.getElementById('premium-modal').style.display='none'; }
+
+window.onload=function(){ showCategory('focus'); };
+</script>
+
 </body>
 </html>
