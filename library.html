@@ -150,11 +150,11 @@ const tools=data[cat].tools;
 tools.forEach(tool=>{
 const card=document.createElement('div'); card.className='card';
 let content='';
-if(tool.free){
+if(tool.free || isUnlocked(cat)){
 content=`
 <div class="thumb">▶</div>
 <div class="info">
-<div class="tag">FREE</div>
+<div class="tag">${tool.free ? 'FREE' : 'PREMIUM'}</div>
 <div class="title">${tool.name}</div>
 <a href="${tool.url}" class="btn-play" target="_blank">Launch Tool</a>
 </div>`;
@@ -173,14 +173,36 @@ card.innerHTML=content; container.appendChild(card);
 });
 }
 
+// --- LOCALSTORAGE LÓGICA ---
+function isUnlocked(category) {
+    return localStorage.getItem('zen-unlocked-' + category) === 'true';
+}
+
+function unlockCategory(category) {
+    localStorage.setItem('zen-unlocked-' + category, 'true');
+}
+
+// --- MODAL ---
 function openModal(toolName){
-document.getElementById('modal-tool-name').innerText=toolName;
-document.getElementById('modal-category-name').innerText=data[currentCategory].name;
-document.getElementById('paypal-btn').href=paypalLinks[currentCategory];
-document.getElementById('premium-modal').style.display='flex';
+    document.getElementById('modal-tool-name').innerText=toolName;
+    document.getElementById('modal-category-name').innerText=data[currentCategory].name;
+    document.getElementById('paypal-btn').href=paypalLinks[currentCategory];
+
+    const selectedTool = data[currentCategory].tools.find(t => t.name === toolName);
+    if(selectedTool && !selectedTool.free && isUnlocked(currentCategory)) {
+        window.location.href = `player.html?url=${encodeURIComponent(selectedTool.url)}`;
+        return;
+    }
+
+    document.getElementById('premium-modal').style.display='flex';
 }
 
 function closeModal(){ document.getElementById('premium-modal').style.display='none'; }
+
+// --- PAYPAL CLICK ---
+document.getElementById('paypal-btn').addEventListener('click', () => {
+    unlockCategory(currentCategory);
+});
 
 window.onload=function(){ showCategory('focus'); };
 </script>
