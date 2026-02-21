@@ -69,7 +69,6 @@
             
             <p style="font-size: 0.9rem; color: #ccc;">Includes this tool + 4 others.<br>No subscription. One-time payment.</p>
             
-            <!-- target="_blank" added as suggested -->
             <a id="paypal-btn" href="#" class="btn-buy" target="_blank">Unlock Pack for $10</a>
             
             <p class="fine-print">Access is usually instant. Please allow up to 24 hours for manual verification.</p>
@@ -162,13 +161,13 @@
             }
         };
 
-        // --- PAYPAL LINKS (CORRECTED FORMAT) ---
+        // --- PAYPAL LINKS (NCP FORMAT - VERIFIED WORKING) ---
         const paypalLinks = {
-          focus: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=DPBPUJADKK4E4",
-          relax: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=NN8Y4ZBVDLH36",
-          grounding: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=J7WUU8TXEJB5S",
-          zen: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7G2PUUCFU99DW",
-          sleep: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QEZM27CHBCJ8E"
+            focus: "https://www.paypal.com/ncp/payment/DPBPUJADKK4E4",
+            relax: "https://www.paypal.com/ncp/payment/NN8Y4ZBVDLH36",
+            grounding: "https://www.paypal.com/ncp/payment/J7WUU8TXEJB5S",
+            zen: "https://www.paypal.com/ncp/payment/7G2PUUCFU99DW",
+            sleep: "https://www.paypal.com/ncp/payment/QEZM27CHBCJ8E"
         };
 
         let currentCategory = 'focus';
@@ -224,7 +223,6 @@
             document.getElementById('modal-tool-name').innerText = toolName;
             document.getElementById('modal-category-name').innerText = catName;
             
-            // Set the PayPal link dynamically
             const buyBtn = document.getElementById('paypal-btn');
             buyBtn.href = paypalLinks[currentCategory];
             
