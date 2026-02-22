@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -15,7 +14,7 @@
     <meta name="author" content="Zen Space Digital Sanctuary">
     <link rel="canonical" href="https://zenspace.art/">
 
-    <!-- Open Graph -->
+    <!-- Open Graph (Instagram, WhatsApp, Facebook) -->
     <meta property="og:title" content="Zen Space | Digital Sanctuary for Focus & Relaxation">
     <meta property="og:description" content="Visual environments designed for ADHD focus, relaxation, grounding and deep cognitive stability.">
     <meta property="og:image" content="https://zenspace.art/preview.jpg">
@@ -224,79 +223,95 @@
     <a href="library.html" class="btn btn-premium">Enter The Sanctuary</a>
 </header>
 
+<!-- NUEVA SECCIÓN SEO PARA SALES (Midsection) -->
 <section class="section">
     <div class="content-block">
         <h2>What Zen Space Offers</h2>
         <p>
-            Zen Space is a digital sanctuary designed to support sustained attention, relaxation, and cognitive regulation through animated sensory coherence.
+            Zen Space is a digital sanctuary designed to support sustained attention, relaxation, and cognitive regulation through animated sensory coherence. Our visual environments modulate visual rhythm, movement density, and spatial depth to directly influence perceptual engagement.
         </p>
         <p>
-            Designed for creators, students, and neurodivergent minds, our platform provides structured visual immersion for concentration, ADHD focus training, and rapid mental reset.
+            Designed for creators, students, and neurodivergent minds, our platform provides structured visual immersion for concentration, ADHD focus training, and rapid mental reset. We use principles of gradual induction and stable harmonic pacing to create conditions where stability naturally emerges.
+        </p>
+        <p>
+            Explore our specialized modes: Deep Focus for tunnel vision coding, Relaxation for cortisol reduction, Grounding for sensory integration, and Sleep preparation for delta wave induction.
         </p>
     </div>
 </section>
 
-<!-- COOKIE CONSENT -->
-<div id="cookie-banner" style="
-position: fixed;
-bottom: 30px;
-left: 50%;
-transform: translateX(-50%);
-background: rgba(20,20,20,0.95);
-color: white;
-padding: 20px 30px;
-border-radius: 20px;
-border: 1px solid rgba(255,255,255,0.1);
-backdrop-filter: blur(15px);
-max-width: 500px;
-width: 90%;
-font-size: 0.9rem;
-z-index: 9999;
-display: none;
-text-align: center;
-">
-This site uses analytics cookies to improve performance and user experience.
-<br><br>
-<button id="accept-cookies" style="
-background: white;
-color: black;
-border: none;
-padding: 8px 20px;
-border-radius: 30px;
-cursor: pointer;
-font-weight: 600;
-">Accept</button>
+<section id="science" class="section">
+    <div class="content-block">
+        <h2>The Cognitive Architecture of Focus</h2>
+        <p>Focus is a regulated neural state dependent on large-scale network coordination. Sensory unpredictability fragments attention.</p>
+        <p>Zen Space delivers gradual induction and sensory coherence through controlled motion, stable harmonic pacing and low-disruption visual environments.</p>
+        <p class="highlight">Stability precedes sustained attention.</p>
+    </div>
+</section>
+
+<section id="contact" class="section">
+    <div class="contact-container">
+        <h2>Contact</h2>
+        <form action="https://formspree.io/f/xdalwepw" method="POST">
+            <div class="form-group">
+                <input type="email" name="email" required placeholder="Your Email">
+            </div>
+            <div class="form-group">
+                <textarea name="message" rows="4" required placeholder="Your Message"></textarea>
+            </div>
+            <button type="submit" class="btn btn-premium">Send Message</button>
+        </form>
+    </div>
+</section>
+
+<footer>
+    <div style="font-size: 1.2rem; font-weight: bold; color: white; margin-bottom: 10px;">ZEN SPACE</div>
+    <p>&copy; 2026 Zen Space Digital Sanctuary. All rights reserved.</p>
+    
+    <div class="disclaimer">
+        <strong>MEDICAL DISCLAIMER:</strong> This site does not provide medical advice. The content is intended for informational and wellness purposes only. It is not a substitute for professional medical advice, diagnosis, or treatment.<br><br>
+        <strong>PHOTOSENSITIVITY WARNING:</strong> This site contains visual animations. If you have a history of epilepsy or photosensitive seizures, please consult a doctor before use.<br><br>
+        <strong>SERVICE TERMS:</strong> Access to premium content is provided for the current hosting cycle. The catalog may change over time. Due to the digital nature of the product, refunds are not provided once access is granted.
+    </div>
+</footer>
+
+<!-- COOKIE CONSENT BANNER -->
+<div id="cookie-banner" style="position:fixed;bottom:0;left:0;width:100%;background:#111;color:white;padding:20px;display:flex;justify-content:space-between;align-items:center;z-index:9999;font-family:Inter,sans-serif;border-top:1px solid rgba(255,255,255,0.1);">
+  <span>This site uses analytics cookies to understand traffic and improve user experience.</span>
+  <button onclick="acceptCookies()" style="background:white;color:black;border:none;padding:10px 20px;border-radius:30px;cursor:pointer;font-weight:600;">
+    Accept
+  </button>
 </div>
 
 <script>
 function loadAnalytics() {
+  if (window.analyticsLoaded) return;
+  window.analyticsLoaded = true;
+
   var script = document.createElement('script');
   script.async = true;
   script.src = "https://www.googletagmanager.com/gtag/js?id=G-7MRSS8PH3G";
   document.head.appendChild(script);
 
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  window.gtag = gtag;
+  script.onload = function() {
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    window.gtag = gtag;
+    gtag('js', new Date());
+    gtag('config', 'G-7MRSS8PH3G');
+  }
+}
 
-  gtag('js', new Date());
-  gtag('config', 'G-7MRSS8PH3G');
+function acceptCookies() {
+  localStorage.setItem("cookiesAccepted", "true");
+  document.getElementById("cookie-banner").style.display = "none";
+  loadAnalytics();
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-
-  if(localStorage.getItem("cookieConsent") === "accepted") {
-    loadAnalytics();
-  } else {
-    document.getElementById("cookie-banner").style.display = "block";
-  }
-
-  document.getElementById("accept-cookies").addEventListener("click", function() {
-    localStorage.setItem("cookieConsent", "accepted");
+  if (localStorage.getItem("cookiesAccepted") === "true") {
     document.getElementById("cookie-banner").style.display = "none";
     loadAnalytics();
-  });
-
+  }
 });
 </script>
 
