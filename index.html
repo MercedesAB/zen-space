@@ -195,7 +195,7 @@
             box-sizing: border-box;
         }
 
-        /* --- NEW STORE GRID CSS --- */
+        /* --- STORE GRID & PRODUCT CSS --- */
         .shop-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -220,6 +220,29 @@
             border-color: var(--accent);
             transform: translateY(-5px);
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        /* Specific styles for the product image container */
+        .product-image-container {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border);
+            background-color: #111; /* Placeholder bg if image fails */
+            position: relative;
+        }
+
+        .product-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-image-container img {
+            transform: scale(1.05); /* Subtle zoom effect */
         }
 
         .product-card h3 {
@@ -260,7 +283,7 @@
     <ul class="nav-links">
         <li><a href="library.html">Explore Tools</a></li>
         <li><a href="#science">The Science</a></li>
-        <li><a href="#modules">System Components</a></li> <!-- Added link to store -->
+        <li><a href="#modules">System Components</a></li>
         <li><a href="#contact">Contact</a></li>
     </ul>
     <a href="library.html" class="btn btn-premium">Start Free Session</a>
@@ -297,7 +320,7 @@
     </div>
 </section>
 
-<!-- --- NEW STORE SECTION --- -->
+<!-- --- SYSTEM COMPONENTS STORE SECTION --- -->
 <section id="modules" class="section">
     <div class="content-block">
         <h2>> SYSTEM COMPONENTS</h2>
@@ -305,8 +328,13 @@
     </div>
     
     <div class="shop-grid">
-        <!-- PRODUCT 1: THE PLANNER (ACTIVE) -->
+        <!-- PRODUCT 1: THE PLANNER (ACTIVE WITH IMAGE) -->
         <div class="product-card">
+            <!-- Image Container -->
+            <div class="product-image-container">
+                <img src="assets/planner_mockup.jpg" alt="Architect Elite Planner Mockup">
+            </div>
+            
             <div>
                 <h3>> ARCHITECT_ELITE_2026</h3>
                 <p>The Cognitive Blueprint. (Digital Dark Mode + Printable).</p>
