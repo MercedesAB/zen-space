@@ -222,27 +222,27 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
-        /* Specific styles for the product image container */
+        /* UPDATED: Image Container with Background Swap */
         .product-image-container {
             width: 100%;
-            height: 200px;
+            height: 220px; /* Slightly taller for better showcase */
             overflow: hidden;
             border-radius: 8px;
             margin-bottom: 20px;
             border: 1px solid var(--border);
-            background-color: #111; /* Placeholder bg if image fails */
-            position: relative;
+            background-color: #111; 
+            /* Default Image */
+            background-image: url('assets/mockup_planner1.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: background-image 0.3s ease, transform 0.3s ease;
         }
 
-        .product-image-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .product-card:hover .product-image-container img {
-            transform: scale(1.05); /* Subtle zoom effect */
+        /* Hover Effect: Swaps to Image 2 */
+        .product-card:hover .product-image-container {
+            background-image: url('assets/mockup_planner2.jpg');
+            transform: scale(1.02); 
         }
 
         .product-card h3 {
@@ -257,7 +257,7 @@
             margin: 0 0 20px 0;
             font-size: 0.9rem;
             color: var(--text-muted);
-            flex-grow: 1; /* Pushes button to bottom */
+            flex-grow: 1; 
         }
 
         .card-link {
@@ -328,12 +328,10 @@
     </div>
     
     <div class="shop-grid">
-        <!-- PRODUCT 1: THE PLANNER (ACTIVE WITH IMAGE) -->
+        <!-- PRODUCT 1: THE PLANNER (ACTIVE WITH IMAGE SWAP) -->
         <div class="product-card">
-            <!-- Image Container -->
-            <div class="product-image-container">
-                <img src="assets/planner_mockup.jpg" alt="Architect Elite Planner Mockup">
-            </div>
+            <!-- Image Container (Background image swapped via CSS) -->
+            <div class="product-image-container" title="Hover to see inside"></div>
             
             <div>
                 <h3>> ARCHITECT_ELITE_2026</h3>
