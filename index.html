@@ -195,7 +195,7 @@
             box-sizing: border-box;
         }
 
-        /* --- STORE GRID & PRODUCT CSS (UPDATED WITH IMAGES) --- */
+        /* --- STORE GRID & PRODUCT CSS --- */
         .shop-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -222,7 +222,6 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
-        /* NEW: Image Container using real IMG tags */
         .product-image-container {
             position: relative;
             width: 100%;
@@ -244,12 +243,10 @@
             transition: opacity 0.4s ease;
         }
 
-        /* The second image starts hidden */
         .img-hover {
             opacity: 0;
         }
 
-        /* On hover, show second image */
         .product-card:hover .img-hover {
             opacity: 1;
         }
@@ -267,6 +264,28 @@
             font-size: 0.9rem;
             color: var(--text-muted);
             flex-grow: 1; 
+        }
+        
+        /* Feature List Styling for the Card */
+        .product-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 20px 0;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        
+        .product-features li {
+            margin-bottom: 8px;
+            padding-left: 15px;
+            position: relative;
+        }
+        
+        .product-features li::before {
+            content: "•";
+            color: var(--accent);
+            position: absolute;
+            left: 0;
         }
 
         .card-link {
@@ -329,7 +348,7 @@
     </div>
 </section>
 
-<!-- --- NEW STORE SECTION --- -->
+<!-- --- SYSTEM COMPONENTS SECTION --- -->
 <section id="modules" class="section">
     <div class="content-block">
         <h2>> SYSTEM COMPONENTS</h2>
@@ -337,16 +356,12 @@
     </div>
     
     <div class="shop-grid">
-        <!-- PRODUCT 1: THE PLANNER (MAC & IPAD MOCKUPS) -->
+        <!-- PRODUCT 1: THE PLANNER -->
         <div class="product-card">
-            <!-- Image Container -->
             <div class="product-image-container">
-                <!-- Default Image: Mac Desktop -->
                 <img src="assets/mockup_planner1.jpg" alt="Zen Space Planner on Mac Desktop">
-                <!-- Hover Image: iPad Tablet -->
                 <img src="assets/mockup_planner2.jpg" alt="Zen Space Planner on iPad" class="img-hover">
             </div>
-
             <div>
                 <h3>> ARCHITECT_ELITE_2026</h3>
                 <p>The Cognitive Blueprint. (Digital Dark Mode + Printable).</p>
@@ -356,14 +371,30 @@
             </div>
         </div>
 
-        <!-- PRODUCT 2: NEURAL BEATS (PLACEHOLDER) -->
+        <!-- PRODUCT 2: NEURAL FOCUS SERIES (UPDATED) -->
         <div class="product-card">
+            <div class="product-image-container">
+                <!-- Make sure your image is named focus.jpg and inside the 'assets' folder -->
+                <img src="assets/focus.jpg" alt="Zenspace Neural Focus Series">
+                <!-- Using the same image for hover to maintain stability -->
+                <img src="assets/focus.jpg" alt="Zenspace Neural Focus Series" class="img-hover">
+            </div>
             <div>
-                <h3>> NEURAL_ACTIVATION</h3>
-                <p>High-frequency entrainment for Flow State.</p>
+                <h3>> NEURAL_FOCUS_SERIES</h3>
+                <p>Cognitive Performance Pack. A structured neural audio system designed for deep work and high-intensity focus.</p>
+                
+                <ul class="product-features">
+                    <li>10 Tiered Neural Focus Tracks</li>
+                    <li>Structured Intensity (Levels 01–10)</li>
+                    <li>Session Protocol Guide Included</li>
+                    <li>Engineered Binaural Layering</li>
+                </ul>
             </div>
             <div class="card-link">
-                <button class="btn" style="border:1px solid var(--border); background: transparent; color: var(--text-muted); cursor: default;">[ COMING_SOON ]</button>
+                <!-- Gumroad Overlay Link -->
+                <a href="https://zenspacedigital.gumroad.com/l/zenspace-focus-system" class="gumroad-button btn btn-premium">
+                    Download the System
+                </a>
             </div>
         </div>
 
@@ -447,6 +478,9 @@
     Accept
   </button>
 </div>
+
+<!-- GUMROAD OVERLAY SCRIPT (Added for the popup effect) -->
+<script src="https://gumroad.com/js/gumroad-embed.js"></script>
 
 <script>
 function loadAnalytics() {
