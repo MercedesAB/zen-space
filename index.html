@@ -236,9 +236,9 @@
         .product-image-container img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain; /* Changed from 'cover' to 'contain' to show whole image */
             position: absolute;
-            top: -5px; /* Adjusted to shift image up slightly */
+            top: 0;
             left: 0;
             transition: opacity 0.4s ease;
         }
