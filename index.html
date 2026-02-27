@@ -253,10 +253,12 @@
 
         .product-card h3 {
             margin: 0 0 10px 0;
-            font-size: 1.1rem;
+            font-size: 0.95rem; /* REDUCED FONT SIZE FOR BETTER FIT */
             color: white;
             font-family: 'Inter', sans-serif;
             font-weight: 600;
+            line-height: 1.2; /* Tighter lines */
+            word-break: break-word; /* Allows breaking long words if necessary */
         }
 
         .product-card p {
@@ -395,7 +397,7 @@
             </div>
         </div>
 
-        <!-- PRODUCT 3: PROFESSIONAL RELAXATION SERIES (UPDATED WITH REAL AUDIO CONTENT) -->
+        <!-- PRODUCT 3: PROFESSIONAL RELAXATION SERIES (UPDATED LAYOUT) -->
         <div class="product-card">
             <div class="product-image-container">
                 <!-- User uploaded this as relax1.jpg -->
@@ -403,7 +405,8 @@
                 <img src="assets/relax1.jpg" alt="Zenspace Professional Relaxation Series" class="img-hover">
             </div>
             <div>
-                <h3>> PROFESSIONAL_RELAXATION_SERIES</h3>
+                <!-- Added <br> to force 2 lines, adjusted CSS font-size -->
+                <h3>> PROFESSIONAL<br>RELAXATION_SERIES</h3>
                 <p>Deluxe Edition. A 3-hour audio suite crafted with precise neuroacoustic design for focus and mental clarity.</p>
                 
                 <ul class="product-features">
