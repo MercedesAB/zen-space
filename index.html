@@ -236,7 +236,7 @@
         .product-image-container img {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* Changed from 'cover' to 'contain' to show whole image */
+            object-fit: contain;
             position: absolute;
             top: 0;
             left: 0;
@@ -253,12 +253,12 @@
 
         .product-card h3 {
             margin: 0 0 10px 0;
-            font-size: 0.95rem; /* REDUCED FONT SIZE FOR BETTER FIT */
+            font-size: 0.95rem;
             color: white;
             font-family: 'Inter', sans-serif;
             font-weight: 600;
-            line-height: 1.2; /* Tighter lines */
-            word-break: break-word; /* Allows breaking long words if necessary */
+            line-height: 1.2;
+            word-break: break-word;
         }
 
         .product-card p {
@@ -268,7 +268,6 @@
             flex-grow: 1; 
         }
         
-        /* Feature List Styling for the Card */
         .product-features {
             list-style: none;
             padding: 0;
@@ -294,6 +293,61 @@
             width: 100%;
             text-align: center;
             margin-top: auto;
+        }
+
+        /* --- NEWSLETTER LINK STYLE (HERO) --- */
+        .hero-sub-link {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            transition: 0.3s;
+        }
+        .hero-sub-link a {
+            color: var(--text-muted);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            padding-bottom: 2px;
+        }
+        .hero-sub-link a:hover {
+            color: white;
+            border-bottom-color: white;
+        }
+
+        /* --- FLOATING SUBSCRIPTION BUTTON --- */
+        .floating-sub {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 999;
+            background: rgba(10, 10, 10, 0.9);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 12px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .floating-sub:hover {
+            background: var(--accent);
+            color: white;
+            box-shadow: 0 0 25px rgba(168, 85, 247, 0.6);
+            transform: scale(1.05);
+        }
+
+        /* Adjust for small screens to avoid cookie banner overlap if needed */
+        @media (max-height: 600px) {
+            .floating-sub {
+                bottom: 80px;
+            }
         }
 
         footer {
@@ -327,6 +381,11 @@
     <p>Advanced neuroacoustic and visual tools designed for ADHD focus, relaxation, grounding and deep cognitive regulation.</p>
     
     <a href="library.html" class="btn btn-premium">Enter The Sanctuary</a>
+    
+    <!-- NUEVO: Enlace sutil de suscripción en el Hero -->
+    <div class="hero-sub-link">
+        Or <a href="https://zenspacedigital.gumroad.com/subscribe" target="_blank">Join the Collective</a> for updates & voting rights.
+    </div>
 </header>
 
 <!-- NUEVA SECCIÓN SEO PARA SALES (Midsection) -->
@@ -474,6 +533,19 @@
 </section>
 <!-- --- END STORE SECTION --- -->
 
+<!-- NUEVO: SECCIÓN DE SUSCRIPCIÓN PRE-CONTACTO -->
+<section class="section" style="padding-bottom: 40px;">
+    <div class="contact-container" style="border-color: var(--accent);">
+        <h2 style="color: var(--accent);">> ACCESS_THE_COLLECTIVE</h2>
+        <p style="margin-bottom: 25px; color: #ccc;">
+            Unlock exclusive access. Subscribe to receive updates, vote on future Neural Protocols, and get member-only discounts.
+        </p>
+        <a href="https://zenspacedigital.gumroad.com/subscribe" class="btn btn-premium" target="_blank">
+            Subscribe to Updates
+        </a>
+    </div>
+</section>
+
 <section id="contact" class="section">
     <div class="contact-container">
         <h2>Contact</h2>
@@ -508,8 +580,13 @@
   </button>
 </div>
 
-<!-- GUMROAD OVERLAY SCRIPT (Added for the popup effect) -->
+<!-- GUMROAD OVERLAY SCRIPT -->
 <script src="https://gumroad.com/js/gumroad-embed.js"></script>
+
+<!-- BOTÓN FLOTANTE DE SUSCRIPCIÓN -->
+<a href="https://zenspacedigital.gumroad.com/subscribe" target="_blank" class="floating-sub">
+    <span>JOIN COLLECTIVE</span>
+</a>
 
 <script>
 function loadAnalytics() {
