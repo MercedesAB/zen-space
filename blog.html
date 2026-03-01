@@ -5,11 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zen Space | System Logs</title>
     <meta name="description" content="Technical logs, neuroscience updates, and system architecture diaries from Zen Space.">
-
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-
     <style>
-        /* --- BASE STYLES --- */
         :root {
             --bg-color: #050505;
             --text-main: #ffffff;
@@ -18,7 +15,6 @@
             --glass-bg: rgba(255, 255, 255, 0.03);
             --border: rgba(255, 255, 255, 0.1);
         }
-
         body {
             margin: 0;
             background-color: var(--bg-color);
@@ -27,7 +23,6 @@
             line-height: 1.6;
             scroll-behavior: smooth;
         }
-
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -40,7 +35,6 @@
             backdrop-filter: blur(10px);
             z-index: 100;
         }
-
         .logo {
             font-weight: 700;
             letter-spacing: 2px;
@@ -50,11 +44,9 @@
             font-size: 1.2rem;
         }
         .logo span { font-weight: 300; opacity: 0.7; margin-left: 10px; font-size: 1rem; }
-
         .nav-links { display: flex; gap: 30px; list-style: none; padding: 0; margin: 0; }
         .nav-links a { color: var(--text-muted); text-decoration: none; transition: 0.3s; font-size: 0.9rem; }
         .nav-links a:hover { color: white; }
-
         .btn {
             padding: 10px 25px;
             border-radius: 30px;
@@ -67,7 +59,6 @@
         }
         .btn-premium { background: white; color: black; }
         .btn-premium:hover { transform: translateY(-2px); box-shadow: 0 0 15px rgba(255,255,255,0.2); }
-
         footer {
             padding: 60px 5%;
             text-align: center;
@@ -75,16 +66,11 @@
             font-size: 0.8rem;
             color: #555;
         }
-
-        /* --- BLOG STYLES --- */
         .blog-header { padding: 100px 5% 40px 5%; text-align: center; }
         .blog-header h1 { font-family: 'Playfair Display', serif; font-size: 3rem; margin-bottom: 10px; color: white; }
         .blog-header p { color: var(--text-muted); max-width: 600px; margin: 0 auto; }
-
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px 80px 20px; }
-
         .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
-
         .article-card {
             background: var(--glass-bg);
             border: 1px solid var(--border);
@@ -103,13 +89,11 @@
             background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease;
         }
         .article-card:hover::before { transform: scaleX(1); }
-
         .article-meta { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; font-weight: 600; display: flex; justify-content: space-between; }
         .article-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin: 0 0 15px 0; color: white; line-height: 1.3; }
         .article-excerpt { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 25px; flex-grow: 1; }
         .read-more { color: white; text-decoration: none; font-size: 0.9rem; font-weight: 600; display: inline-flex; align-items: center; gap: 5px; transition: 0.2s; }
         .read-more:hover { color: var(--accent); gap: 10px; }
-
         @media (max-width: 768px) {
             .navbar { flex-direction: column; gap: 15px; }
             .nav-links { flex-wrap: wrap; justify-content: center; }
@@ -146,9 +130,10 @@
             </div>
             <h2 class="article-title">Optimizing the Architect Elite 2026</h2>
             <p class="article-excerpt">
-                The Architect Elite 2026 employs a 70/30 layout principle: 70% of the page is left intentionally blank, forming a “Monolith.” This design choice aligns with Cognitive Load Theory—a cluttered environment overstimulates the dorsolateral prefrontal cortex.
+                The Architect Elite 2026 introduces a 70/30 layout principle designed with cognitive ergonomics in mind. In practice, 70% of each page is left intentionally blank...
             </p>
-            <a href="post-optimization.html" class="read-more">READ LOG <span>&rarr;</span></a>
+            <!-- UPDATED LINK TO POINT TO article.html -->
+            <a href="article.html#optimization" class="read-more">READ LOG <span>&rarr;</span></a>
         </article>
 
         <!-- POST 2: Feb 22, 2026 -->
@@ -159,9 +144,10 @@
             </div>
             <h2 class="article-title">Release: Deep States Ultra-Lux Architecture</h2>
             <p class="article-excerpt">
-                The Deep States Ultra-Lux Series represents a precision-engineered neuroacoustic framework designed to guide the brain from Alpha through Delta into Epsilon states. Its architecture leverages Phi Phasing, maintaining signal coherence at ultra-low frequencies (0.5 Hz).
+                The Deep States Ultra-Lux Series is a neuroacoustic engineering framework designed to guide the brain progressively from Alpha through Theta and Delta states...
             </p>
-            <a href="post-deep-states.html" class="read-more">READ LOG <span>&rarr;</span></a>
+            <!-- UPDATED LINK -->
+            <a href="article.html#deepstates" class="read-more">READ LOG <span>&rarr;</span></a>
         </article>
 
         <!-- POST 3: Feb 10, 2026 -->
@@ -172,9 +158,10 @@
             </div>
             <h2 class="article-title">Entrainment vs. Melodic Distraction</h2>
             <p class="article-excerpt">
-                Why avoid layering piano or melodic content over binaural beats? Musical elements evoke emotion and compete for attention within the auditory cortex, creating cognitive interference. Research shows that for neural entrainment to occur, the auditory signal must remain clean and unambiguous (Thut et al., 2012).
+                One common misconception in neuroacoustic design is that overlaying music—such as piano or soft melodies—enhances the effect of binaural beats...
             </p>
-            <a href="post-entrainment.html" class="read-more">READ LOG <span>&rarr;</span></a>
+            <!-- UPDATED LINK -->
+            <a href="article.html#entrainment" class="read-more">READ LOG <span>&rarr;</span></a>
         </article>
 
         <!-- POST 4: Jan 28, 2026 -->
@@ -185,9 +172,10 @@
             </div>
             <h2 class="article-title">The 320kbps Standard</h2>
             <p class="article-excerpt">
-                Binaural beats rely on precise phase differences between stereo channels. Lossy compression, such as 128 kbps MP3, distorts these phase relationships, introducing micro-errors that the nervous system interprets as noise rather than coherent rhythm.
+                Binaural beats rely on microphase differences between stereo channels. Standard compressed audio formats, such as 128 kbps MP3s, disrupt these microphase relationships...
             </p>
-            <a href="post-fidelity.html" class="read-more">READ LOG <span>&rarr;</span></a>
+            <!-- UPDATED LINK -->
+            <a href="article.html#fidelity" class="read-more">READ LOG <span>&rarr;</span></a>
         </article>
 
     </div>
