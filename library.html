@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Library | Zen Space</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
@@ -22,6 +22,7 @@
         font-family:'Inter',sans-serif; 
         padding-bottom:100px; 
         overflow-x: hidden; 
+        -webkit-font-smoothing: antialiased;
     }
     
     .navbar { 
@@ -30,28 +31,33 @@
         padding:20px 5%; 
         border-bottom:1px solid var(--border); 
         align-items:center; 
+        position: sticky;
+        top: 0;
+        background: var(--bg);
+        z-index: 100;
     }
     
-    .logo { font-weight:bold; text-decoration:none; color:white; }
+    .logo { font-weight:bold; text-decoration:none; color:white; letter-spacing: 1px;}
     
     .tabs { 
         display:flex; 
         justify-content:center; 
-        gap:10px; 
-        margin:40px 0; 
+        gap:8px; 
+        margin:30px 0; 
         flex-wrap:wrap; 
-        padding:0 20px; 
+        padding:0 10px; 
     }
     
     .tab-btn { 
         background:transparent; 
         border:1px solid var(--border); 
         color:var(--muted); 
-        padding:10px 20px; 
+        padding:8px 16px; 
         border-radius:20px; 
         cursor:pointer; 
-        transition:0.3s; 
-        white-space: nowrap; /* Evita que el texto se rompa en botones pequeños */
+        transition:0.2s; 
+        white-space: nowrap; 
+        font-size: 0.85rem;
     }
     
     .tab-btn.active, .tab-btn:hover { 
@@ -83,14 +89,14 @@
     .card:hover { transform:translateY(-5px); border-color:var(--accent); }
     
     .thumb { 
-        height:160px; 
-        background:#111; 
+        height:140px; 
+        background:#0a0a0a; 
         display:flex; 
         align-items:center; 
         justify-content:center; 
         color:#333; 
         font-size:2rem; 
-        flex-shrink: 0; /* Evita que el thumbnail se aplaste */
+        flex-shrink: 0;
     }
     
     .info { 
@@ -101,28 +107,31 @@
     }
     
     .tag { 
-        font-size:0.7rem; 
+        font-size:0.65rem; 
         text-transform:uppercase; 
         letter-spacing:1px; 
         color:var(--muted); 
+        margin-bottom: 5px;
     }
     
     .title { 
-        font-size:1.1rem; 
-        margin:5px 0 10px 0; 
+        font-size:1rem; 
+        margin:0 0 15px 0; 
         font-weight:400; 
-        flex-grow: 1; /* Empuja el botón hacia abajo */
+        flex-grow: 1; 
+        line-height: 1.4;
     }
     
     .lock { 
         position:absolute; 
         top:10px; 
         right:10px; 
-        background:rgba(0,0,0,0.7); 
-        padding:5px 10px; 
-        border-radius:10px; 
-        font-size:0.8rem; 
+        background:rgba(0,0,0,0.8); 
+        padding:4px 8px; 
+        border-radius:8px; 
+        font-size:0.7rem; 
         border:1px solid var(--border); 
+        color: gold;
     }
     
     .btn-play { 
@@ -133,45 +142,47 @@
         color:black; 
         text-align:center; 
         text-decoration:none; 
-        margin-top:auto; /* Asegura que esté al final de la tarjeta */
+        margin-top:auto; 
         border-radius:8px; 
         font-weight:600; 
         cursor:pointer; 
         border:none; 
+        font-size: 0.9rem;
     }
 
-    /* --- REPRODUCTOR FULLSCREEN (FIXED FOR MOBILE) --- */
+    /* --- REPRODUCTOR FULLSCREEN (FIX CRÍTICO PARA MÓVIL) --- */
     #zen-player { 
         display:none; 
         position:fixed; 
         top:0; 
         left:0; 
         width:100%; 
-        /* Usamos 100dvh para móviles (Dynamic Viewport Height) 
-           Esto arregla el problema de que la animación quede corta o no se vea 
-           por la barra de direcciones del navegador */
+        /* 100dvh es vital para móviles (Dynamic Viewport Height) 
+           para ignorar la barra de direcciones del navegador */
         height: 100vh; 
         height: 100dvh; 
         background:black; 
         z-index:9999; 
+        overflow: hidden; 
     }
     
     #zen-iframe { 
+        /* position: absolute es la clave para que el iframe no colapse a altura 0 en móviles */
+        position: absolute; 
+        top: 0; 
+        left: 0; 
         width: 100%; 
         height: 100%; 
         border: none; 
-        /* En móvil eliminamos el margen negativo porque los modos 'present' 
-           de p5js a veces no tienen la barra superior o es más pequeña,
-           y esto cortaba la parte inferior de la animación. */
-        margin-top: 0 !important; 
+        z-index: 10000; /* Por debajo del botón */
     }
     
     .btn-back-float { 
         position:fixed; 
-        top:20px; 
-        left:20px; 
-        z-index:10001; /* Por encima del iframe */
-        background:rgba(0,0,0,0.8); /* Fondo más oscuro para legibilidad */
+        top:15px; 
+        left:15px; 
+        z-index:10002; /* Por encima de TODO */
+        background:rgba(0,0,0,0.7); 
         color:white; 
         padding:10px 20px; 
         border-radius:30px; 
@@ -179,6 +190,8 @@
         backdrop-filter:blur(10px); 
         cursor:pointer; 
         font-family:'Inter', sans-serif;
+        font-size: 0.9rem;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
     }
 
     /* --- MODAL PAYPAL --- */
@@ -189,9 +202,9 @@
         left:0; 
         width:100%; 
         height:100%; 
-        background:rgba(0,0,0,0.8); 
+        background:rgba(0,0,0,0.85); 
         backdrop-filter:blur(5px); 
-        z-index:1000; 
+        z-index:2000; 
         align-items:center; 
         justify-content:center; 
     }
@@ -202,7 +215,7 @@
         padding:40px; 
         border-radius:20px; 
         max-width:90%; 
-        width:400px; /* Ancho máximo fijo */
+        width:400px; 
         text-align:center; 
         position:relative; 
     }
@@ -232,17 +245,16 @@
         display:inline-block; 
         margin-top:20px; 
         font-weight:bold; 
+        width: 100%;
+        box-sizing: border-box;
     }
 
     /* --- MEDIA QUERIES PARA MÓVILES --- */
     @media (max-width: 480px) {
-        /* 1. Forzar una sola columna en el grid */
         .grid {
             grid-template-columns: 1fr !important;
-            width: 95%; /* Un poco más de ancho útil */
+            width: 95%;
         }
-
-        /* 2. Ajustar pestañas para que no se desborden */
         .tabs {
             gap: 5px;
         }
@@ -250,10 +262,9 @@
             padding: 8px 12px;
             font-size: 0.8rem;
         }
-
-        /* 3. Ajustes del modal en pantallas muy pequeñas */
         .modal-content {
             padding: 30px 20px;
+            width: 90%;
         }
     }
 </style>
@@ -262,7 +273,7 @@
 
 <nav class="navbar">
   <a href="index.html" class="logo">ZEN SPACE</a>
-  <a href="index.html" style="color:#888; text-decoration:none;">Back Home</a>
+  <a href="index.html" style="color:#888; text-decoration:none; font-size: 0.9rem;">Back Home</a>
 </nav>
 
 <div class="tabs">
@@ -275,17 +286,19 @@
 
 <div id="grid-container" class="grid"></div>
 
+<!-- CONTENEDOR DEL REPRODUCTOR -->
 <div id="zen-player">
     <button class="btn-back-float" onclick="closePlayer()">← Back to Library</button>
-    <iframe id="zen-iframe" src="" allow="autoplay"></iframe>
+    <!-- Añadido 'allow="fullscreen"' y 'scrolling="no"' para compatibilidad móvil -->
+    <iframe id="zen-iframe" src="" allow="autoplay; fullscreen" scrolling="no"></iframe>
 </div>
 
+<!-- MODAL PREMIUM -->
 <div id="premium-modal" class="modal">
   <div class="modal-content">
     <span class="close-modal" onclick="closeModal()">&times;</span>
-    <h2 style="font-family:'Playfair Display';">Premium Access Required</h2>
-    <p style="color:#aaa;">You selected <span id="modal-tool-name" style="color:var(--accent); font-weight:bold;">Tool Name</span>.</p>
-    <p style="color:#fff;">Unlock the full <span id="modal-category-name" style="font-weight:bold;"></span> collection.</p>
+    <h2 style="font-family:'Playfair Display'; margin-top:0;">Premium Access</h2>
+    <p style="color:#aaa;">Unlock <span id="modal-tool-name" style="color:var(--accent); font-weight:bold;">Tool Name</span>.</p>
     <div class="price-tag">$10.00</div>
     <a id="paypal-btn" href="#" class="btn-buy" target="_blank">Unlock Now</a>
   </div>
@@ -372,30 +385,53 @@ function showCategory(cat) {
       <div class="thumb" style="color:#333;">🔒</div><div class="lock">PREMIUM</div>
       <div class="info"><div class="tag" style="color:gold;">PREMIUM</div><div class="title">${tool.name}</div>
       <button class="btn-play" style="background:transparent;border:1px solid #444;color:#888;cursor:not-allowed;">Locked</button>
-      <button onclick="openModal('${tool.name}')" style="margin-top:10px;background:none;border:none;color:var(--accent);text-decoration:underline;cursor:pointer;">Unlock $10</button></div>`;
+      <button onclick="openModal('${tool.name}')" style="margin-top:10px;background:none;border:none;color:var(--accent);text-decoration:underline;cursor:pointer;font-size:0.8rem;">Unlock $10</button></div>`;
     container.appendChild(card);
   });
 }
 
 function openPlayer(url) {
-  document.getElementById('zen-iframe').src = url;
-  document.getElementById('zen-player').style.display = 'block';
+  const player = document.getElementById('zen-player');
+  const iframe = document.getElementById('zen-iframe');
+  
+  // Mostrar el contenedor
+  player.style.display = 'block';
+  
+  // Asignar la URL
+  iframe.src = url;
+  
+  // Bloquear scroll del body
   document.body.style.overflow = 'hidden';
 }
+
 function closePlayer() {
-  document.getElementById('zen-player').style.display = 'none';
-  document.getElementById('zen-iframe').src = '';
+  const player = document.getElementById('zen-player');
+  const iframe = document.getElementById('zen-iframe');
+  
+  // Ocultar contenedor
+  player.style.display = 'none';
+  
+  // Limpiar URL para detener audio/procesos
+  iframe.src = '';
+  
+  // Restaurar scroll
   document.body.style.overflow = 'auto';
 }
+
 function openModal(toolName) {
   const tool = data[currentCategory].tools.find(t => t.name === toolName);
   document.getElementById('modal-tool-name').innerText = toolName;
-  document.getElementById('modal-category-name').innerText = data[currentCategory].name;
   document.getElementById('paypal-btn').href = tool.url;
   document.getElementById('premium-modal').style.display = 'flex';
 }
-function closeModal() { document.getElementById('premium-modal').style.display = 'none'; }
-window.onload = function() { showCategory('focus'); };
+
+function closeModal() { 
+  document.getElementById('premium-modal').style.display = 'none'; 
+}
+
+window.onload = function() { 
+  showCategory('focus'); 
+};
 </script>
 </body>
 </html>
