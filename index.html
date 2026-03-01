@@ -132,14 +132,14 @@
             font-size: clamp(2rem, 7vw, 3.5rem);
             font-weight: 400;
             margin-bottom: 20px;
-            max-width: 900px; /* Increased max-width slightly for the longer text */
+            max-width: 900px;
             line-height: 1.2;
         }
 
         .hero p {
             font-size: 1.2rem;
             color: var(--text-muted);
-            max-width: 650px; /* Increased max-width slightly */
+            max-width: 650px;
             margin-bottom: 40px;
             font-weight: 300;
         }
@@ -343,19 +343,65 @@
             transform: scale(1.05);
         }
 
-        /* Adjust for small screens to avoid cookie banner overlap if needed */
-        @media (max-height: 600px) {
-            .floating-sub {
-                bottom: 80px;
-            }
-        }
-
         footer {
             padding: 60px 5%;
             text-align: center;
             border-top: 1px solid var(--border);
             font-size: 0.8rem;
             color: #555;
+        }
+
+        /* --- FIXES PARA MÓVIL (Index) --- */
+        @media (max-width: 768px) {
+            /* 1. Ajustar el Navbar para que no se rompa */
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px 5%;
+            }
+            
+            .nav-links {
+                gap: 15px;
+                font-size: 0.85rem;
+                flex-wrap: wrap;
+                justify-content: center;
+                width: 100%;
+                padding: 0;
+            }
+
+            .btn-premium {
+                width: 100%; /* Botón ancho completo en móvil */
+                text-align: center;
+                box-sizing: border-box;
+            }
+
+            /* 2. Ajustar la Grid de Productos para evitar scroll horizontal */
+            .shop-grid {
+                grid-template-columns: 1fr; /* Una sola columna */
+                gap: 25px;
+                padding: 0 10px; /* Un poco menos de padding lateral */
+            }
+            
+            .product-card {
+                padding: 20px;
+            }
+
+            /* 3. Ajustes de texto en móvil */
+            .hero h1 {
+                font-size: 1.8rem; /* Texto más legible */
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+
+            /* 4. Ajuste del botón flotante para no tapar contenido */
+            .floating-sub {
+                bottom: 15px;
+                right: 15px;
+                font-size: 0.75rem;
+                padding: 10px 15px;
+            }
         }
     </style>
 </head>
