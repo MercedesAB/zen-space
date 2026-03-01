@@ -1,1 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zen Space | Article</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #050505;
+            --text-main: #ffffff;
+            --text-muted: #a1a1aa;
+            --accent: #a855f7;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+        body {
+            margin: 0;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.8;
+            padding-top: 80px;
+        }
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 0 20px 100px 20px;
+        }
+        .meta {
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        .date {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 40px;
+            display: block;
+        }
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            line-height: 1.2;
+        }
+        .content p {
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            color: #d1d1d1;
+        }
+        .content strong {
+            color: white;
+            font-weight: 600;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 40px;
+            color: var(--text-muted);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+        }
+        .back-link:hover {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+        .navbar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            padding: 20px 5%;
+            border-bottom: 1px solid var(--border);
+            background: rgba(5,5,5,0.9);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+        .logo {
+            font-weight: 700;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: white;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+<body>
 
+    <nav class="navbar">
+        <a href="index.html" class="logo">ZEN SPACE <span style="opacity:0.7; margin-left:10px;">| DIGITAL SANCTUARY</span></a>
+    </nav>
+
+    <div class="container">
+        <a href="blog.html" class="back-link">&larr; BACK TO SYSTEM LOGS</a>
+        
+        <div id="article-content">
+            <!-- Content will be injected here by JavaScript -->
+            <div class="meta" style="color: #555;">Loading article...</div>
+        </div>
+    </div>
+
+    <script>
+        // --- ARTICLE DATABASE ---
+        const articles = {
+            optimization: {
+                category: "Usage Protocol",
+                date: "Mar 01, 2026",
+                title: "Optimizing the Architect Elite 2026",
+                body: `
+                    <p>The Architect Elite 2026 introduces a 70/30 layout principle designed with cognitive ergonomics in mind. In practice, 70% of each page is left intentionally blank, forming what we call the “Monolith.” This minimal space isn’t aesthetic filler—it directly supports Cognitive Load Theory. Visual clutter can overwhelm the dorsolateral prefrontal cortex, limiting working memory capacity and reducing the efficiency of mental processing. By providing a spacious canvas, the brain has room to breathe, prioritize, and organize information internally.</p>
+                    <p>The remaining 30% of the layout is dedicated to the System Purge grid, a structured zone for dumping and organizing active content. This linear format allows users to externalize thoughts and data without overwhelming the visual field. Combined, these design choices create a framework that actively reduces cognitive saturation, facilitating focus, decision-making, and planning.</p>
+                    <p>Users will notice that their mental load feels lighter, transitions between tasks are smoother, and retention of complex information improves. For anyone tackling dense workflows or creative problem-solving, the 70/30 layout acts as a subtle but powerful regulatory mechanism.</p>
+                `
+            },
+            deepstates: {
+                category: "System Update",
+                date: "Feb 22, 2026",
+                title: "Release: Deep States Ultra-Lux Architecture",
+                body: `
+                    <p>The Deep States Ultra-Lux Series is a neuroacoustic engineering framework designed to guide the brain progressively from Alpha through Theta and Delta states, down to Epsilon frequencies. Each session is crafted to induce deep physiological restoration and cognitive recalibration, creating a structured environment for neural regulation.</p>
+                    <p>At the heart of the system is Phi Phasing, which maintains signal coherence at ultra-low frequencies (as low as 0.5 Hz). Without this precision, the brain’s response to these frequencies can become fragmented, reducing effectiveness. To further prevent habituation, the audio environment includes 3D liquid textures that gently shift in spatial depth and amplitude, keeping neural engagement active throughout the session.</p>
+                    <p>By combining these features, each protocol supports ultradian cycles, aligning with natural physiological rhythms. The result is a consistent, immersive experience that allows the user to reach deep restorative states while keeping neural integrity intact. These protocols are best used in a controlled environment with high-quality stereo headphones, emphasizing uninterrupted engagement for maximal benefit.</p>
+                `
+            },
+            entrainment: {
+                category: "Neuroscience",
+                date: "Feb 10, 2026",
+                title: "Entrainment vs. Melodic Distraction",
+                body: `
+                    <p>One common misconception in neuroacoustic design is that overlaying music—such as piano or soft melodies—enhances the effect of binaural beats. In reality, music evokes emotion and activates widespread cortical networks, competing for auditory attention and increasing cognitive load. When the goal is neural entrainment, the signal must remain clean and focused (Thut et al., 2012).</p>
+                    <p>By stripping away melodic elements, the brain can fully engage with the intended frequency architecture. This eliminates interference, allowing the nervous system to respond to subtle phase differences and low-frequency patterns as designed. Essentially, a clean binaural signal acts as a scaffold for neural recalibration, enabling precise adjustments to baseline brain rhythms without distraction.</p>
+                    <p>The practical takeaway: when designing or using neuroacoustic tools for focus, restoration, or cognitive reset, less is more. Minimalism in sound is intentional, not aesthetic—it’s the foundation of effective entrainment.</p>
+                `
+            },
+            fidelity: {
+                category: "Engineering",
+                date: "Jan 28, 2026",
+                title: "The 320kbps Standard",
+                body: `
+                    <p>Binaural beats rely on microphase differences between stereo channels. Standard compressed audio formats, such as 128 kbps MP3s, disrupt these microphase relationships, creating tiny timing errors that the nervous system interprets as signal noise rather than a coherent pattern.</p>
+                    <p>The Deep States Ultra-Lux Series and other ZenSpace protocols are rendered at 320 kbps, a high-fidelity standard that preserves stereo integrity and the mathematical precision of the audio signal. Maintaining this fidelity ensures that neural entrainment occurs as intended, allowing the auditory system to detect exact phase offsets and frequency sweeps.</p>
+                    <p>Additionally, high-bitrate audio supports subtle spatial and harmonic textures, such as 3D liquid movement and micro-transient golden ratio phasing, which further enhance neural engagement. For listeners seeking deep restoration, cognitive recalibration, or sustained focus, these engineering choices are not optional—they are foundational.</p>
+                `
+            }
+        };
+
+        // --- RENDER LOGIC ---
+        const contentDiv = document.getElementById('article-content');
+        const hash = window.location.hash.replace('#', '');
+        const article = articles[hash];
+
+        if (article) {
+            let html = `
+                <div class="meta">${article.category}</div>
+                <span class="date">${article.date}</span>
+                <h1>${article.title}</h1>
+                <div class="content">${article.body}</div>
+            `;
+            contentDiv.innerHTML = html;
+            document.title = "Zen Space | " + article.title;
+        } else {
+            contentDiv.innerHTML = `
+                <h1>Log Not Found</h1>
+                <p>Please return to the <a href="blog.html" style="color:white;">System Logs</a>.</p>
+            `;
+        }
+    </script>
+</body>
+</html>
