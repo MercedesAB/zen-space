@@ -150,38 +150,36 @@
         font-size: 0.9rem;
     }
 
-    /* --- REPRODUCTOR FULLSCREEN (FIX CRÍTICO PARA MÓVIL) --- */
+    /* --- REPRODUCTOR FULLSCREEN (FIX LOGO + MOBILE) --- */
     #zen-player { 
         display:none; 
         position:fixed; 
         top:0; 
         left:0; 
         width:100%; 
-        /* 100dvh es vital para móviles (Dynamic Viewport Height) 
-           para ignorar la barra de direcciones del navegador */
         height: 100vh; 
-        height: 100dvh; 
+        height: 100dvh; /* Altura dinámica móvil */
         background:black; 
         z-index:9999; 
         overflow: hidden; 
     }
     
     #zen-iframe { 
-        /* position: absolute es la clave para que el iframe no colapse a altura 0 en móviles */
         position: absolute; 
-        top: 0; 
+        top: -45px; /* TRUCO: Subimos el iframe 45px para ocultar el logo */
         left: 0; 
         width: 100%; 
-        height: 100%; 
+        /* TRUCO: Aumentamos la altura 45px para que no se corte la parte inferior en móvil */
+        height: calc(100% + 45px); 
         border: none; 
-        z-index: 10000; /* Por debajo del botón */
+        z-index: 10000; 
     }
     
     .btn-back-float { 
         position:fixed; 
         top:15px; 
         left:15px; 
-        z-index:10002; /* Por encima de TODO */
+        z-index:10002; /* Siempre por encima */
         background:rgba(0,0,0,0.7); 
         color:white; 
         padding:10px 20px; 
@@ -289,7 +287,6 @@
 <!-- CONTENEDOR DEL REPRODUCTOR -->
 <div id="zen-player">
     <button class="btn-back-float" onclick="closePlayer()">← Back to Library</button>
-    <!-- Añadido 'allow="fullscreen"' y 'scrolling="no"' para compatibilidad móvil -->
     <iframe id="zen-iframe" src="" allow="autoplay; fullscreen" scrolling="no"></iframe>
 </div>
 
