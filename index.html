@@ -29,6 +29,9 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
+    <!-- ADDED: Three.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
     <style>
         :root {
             --bg-color: #050505;
@@ -717,6 +720,64 @@
 <a href="https://zenspacedigital.gumroad.com/subscribe" target="_blank" class="floating-sub">
     <span>JOIN COLLECTIVE</span>
 </a>
+
+<!-- ADDED: THREE.JS HERO BACKGROUND ANIMATION -->
+<script>
+    // --- ZENSPACE HERO BACKGROUND ---
+    const scene = new THREE.Scene();
+    
+    // Match the background color to the CSS --bg-color
+    scene.background = new THREE.Color(0x050505); 
+
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    
+    // Alpha: true makes the canvas transparent so the CSS background shows through if needed,
+    // but we are setting the scene color above.
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    // Crucial: Make it a fixed background, not a block element
+    renderer.domElement.style.position = 'fixed';
+    renderer.domElement.style.top = '0';
+    renderer.domElement.style.left = '0';
+    renderer.domElement.style.zIndex = '-1'; // Behind everything
+    renderer.domElement.style.pointerEvents = 'none'; // Allows clicking through to buttons
+    
+    document.body.appendChild(renderer.domElement);
+
+    // The Geometry
+    const geometry = new THREE.IcosahedronGeometry(12, 1);
+    
+    // The Material: Dark grey, very transparent, wireframe
+    const material = new THREE.MeshBasicMaterial({ 
+        color: 0x222222, 
+        wireframe: true, 
+        transparent: true, 
+        opacity: 0.15 
+    });
+    
+    const shape = new THREE.Mesh(geometry, material);
+    scene.add(shape);
+
+    camera.position.z = 30;
+
+    // Handle Window Resize
+    window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    function animate() {
+        requestAnimationFrame(animate);
+        // Very slow, meditative rotation
+        shape.rotation.y += 0.0005; 
+        shape.rotation.x += 0.0002;
+        renderer.render(scene, camera);
+    }
+    animate();
+</script>
+<!-- END THREE.JS SCRIPT -->
 
 <script>
 function loadAnalytics() {
