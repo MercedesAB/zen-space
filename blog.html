@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
     <style>
-        /* --- IMPORTAR ESTILOS BASE (Mismos que index.html) --- */
+        /* --- BASE STYLES --- */
         :root {
             --bg-color: #050505;
             --text-main: #ffffff;
@@ -49,7 +49,6 @@
             color: white;
             font-size: 1.2rem;
         }
-
         .logo span { font-weight: 300; opacity: 0.7; margin-left: 10px; font-size: 1rem; }
 
         .nav-links { display: flex; gap: 30px; list-style: none; padding: 0; margin: 0; }
@@ -66,7 +65,6 @@
             cursor: pointer;
             border: none;
         }
-
         .btn-premium { background: white; color: black; }
         .btn-premium:hover { transform: translateY(-2px); box-shadow: 0 0 15px rgba(255,255,255,0.2); }
 
@@ -78,37 +76,14 @@
             color: #555;
         }
 
-        /* --- ESTILOS ESPECÍFICOS DEL BLOG --- */
+        /* --- BLOG STYLES --- */
+        .blog-header { padding: 100px 5% 40px 5%; text-align: center; }
+        .blog-header h1 { font-family: 'Playfair Display', serif; font-size: 3rem; margin-bottom: 10px; color: white; }
+        .blog-header p { color: var(--text-muted); max-width: 600px; margin: 0 auto; }
 
-        .blog-header {
-            padding: 100px 5% 40px 5%;
-            text-align: center;
-        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px 80px 20px; }
 
-        .blog-header h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            margin-bottom: 10px;
-            color: white;
-        }
-
-        .blog-header p {
-            color: var(--text-muted);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px 80px 20px;
-        }
-
-        .blog-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-        }
+        .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
 
         .article-card {
             background: var(--glass-bg);
@@ -122,74 +97,19 @@
             position: relative;
             overflow: hidden;
         }
-
-        .article-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-
-        /* Efecto de línea superior sutil al hacer hover */
+        .article-card:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
         .article-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: var(--accent);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.3s ease;
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
+            background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease;
         }
+        .article-card:hover::before { transform: scaleX(1); }
 
-        .article-card:hover::before {
-            transform: scaleX(1);
-        }
+        .article-meta { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; font-weight: 600; display: flex; justify-content: space-between; }
+        .article-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin: 0 0 15px 0; color: white; line-height: 1.3; }
+        .article-excerpt { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 25px; flex-grow: 1; }
+        .read-more { color: white; text-decoration: none; font-size: 0.9rem; font-weight: 600; display: inline-flex; align-items: center; gap: 5px; transition: 0.2s; }
+        .read-more:hover { color: var(--accent); gap: 10px; }
 
-        .article-meta {
-            font-size: 0.8rem;
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 15px;
-            font-weight: 600;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .article-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            margin: 0 0 15px 0;
-            color: white;
-            line-height: 1.3;
-        }
-
-        .article-excerpt {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            margin-bottom: 25px;
-            flex-grow: 1;
-        }
-
-        .read-more {
-            color: white;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            transition: 0.2s;
-        }
-
-        .read-more:hover {
-            color: var(--accent);
-            gap: 10px; /* Animación de flecha */
-        }
-
-        /* RESPONSIVE */
         @media (max-width: 768px) {
             .navbar { flex-direction: column; gap: 15px; }
             .nav-links { flex-wrap: wrap; justify-content: center; }
@@ -203,7 +123,7 @@
 <nav class="navbar">
     <a href="index.html" class="logo">ZEN SPACE <span>| DIGITAL SANCTUARY</span></a>
     <ul class="nav-links">
-        <li><a href="index.html">Home</a></li> <!-- Enlace de vuelta -->
+        <li><a href="index.html">Home</a></li>
         <li><a href="blog.html" style="color:white;">System Logs</a></li>
         <li><a href="index.html#contact">Contact</a></li>
     </ul>
@@ -218,73 +138,56 @@
 <main class="container">
     <div class="blog-grid">
 
-        <!-- =========================
-             POST NUEVO (PONER ESTE AL PRINCIPIO CADA SEMANA)
-             ========================= -->
-        <article class="article-card">
-            <div class="article-meta">
-                <span>System Update</span>
-                <span>Oct 24, 2026</span>
-            </div>
-            <h2 class="article-title">Release: Deep States Ultra-Lux Architecture</h2>
-            <p class="article-excerpt">
-                We have finalized the 10-protocol Epsilon induction framework. This log details the signal coherence improvements in the 0.5Hz carrier frequency and the implementation of Phi Phasing in the stereo field.
-            </p>
-            <!-- Para un blog estático simple, el enlace puede llevar a una página individual 'post-deep-states.html' o abrir un modal -->
-            <a href="post-deep-states.html" class="read-more">
-                READ LOG <span>&rarr;</span>
-            </a>
-        </article>
-
-        <!-- =========================
-             POST ANTERIOR 1
-             ========================= -->
-        <article class="article-card">
-            <div class="article-meta">
-                <span>Neuroscience</span>
-                <span>Oct 17, 2026</span>
-            </div>
-            <h2 class="article-title">Entrainment vs. Melodic Distraction</h2>
-            <p class="article-excerpt">
-                Why does the auditory cortex prioritize melody over binaural beats? A deep dive into the Thut et al. (2012) study on rhythmic neural stimulation and signal masking.
-            </p>
-            <a href="#" class="read-more">
-                READ LOG <span>&rarr;</span>
-            </a>
-        </article>
-
-        <!-- =========================
-             POST ANTERIOR 2
-             ========================= -->
+        <!-- POST 1: MARCH 01, 2026 (TODAY) -->
         <article class="article-card">
             <div class="article-meta">
                 <span>Usage Protocol</span>
-                <span>Oct 10, 2026</span>
+                <span>Mar 01, 2026</span>
             </div>
             <h2 class="article-title">Optimizing the Architect Elite 2026</h2>
             <p class="article-excerpt">
-                How to utilize the Cartesian "System Purge" grid effectively during the 90-minute ultradian cycles. A guide to dumping open mental loops before deep work sessions.
+                The design utilizes a **70/30 Layout**: 70% is a blank "Monolith". This addresses **Cognitive Load Theory**. A visually noisy environment saturates the dorsolateral prefrontal cortex. The "System Purge" grid is for linear dumping to free up working memory.
             </p>
-            <a href="#" class="read-more">
-                READ LOG <span>&rarr;</span>
-            </a>
+            <a href="post-optimization.html" class="read-more">READ LOG <span>&rarr;</span></a>
         </article>
 
-        <!-- =========================
-             POST ANTIGUO
-             ========================= -->
+        <!-- POST 2: FEB 22, 2026 -->
+        <article class="article-card">
+            <div class="article-meta">
+                <span>System Update</span>
+                <span>Feb 22, 2026</span>
+            </div>
+            <h2 class="article-title">Release: Deep States Ultra-Lux Architecture</h2>
+            <p class="article-excerpt">
+                The Deep States Ultra-Lux Series is a neuroacoustic engineering framework designed to force a descending transition from Alpha to Epsilon. We implemented **Phi Phasing** to maintain signal coherence at ultra-low frequencies (0.5Hz). 3D liquid textures prevent auditory habituation.
+            </p>
+            <a href="post-deep-states.html" class="read-more">READ LOG <span>&rarr;</span></a>
+        </article>
+
+        <!-- POST 3: FEB 10, 2026 -->
+        <article class="article-card">
+            <div class="article-meta">
+                <span>Neuroscience</span>
+                <span>Feb 10, 2026</span>
+            </div>
+            <h2 class="article-title">Entrainment vs. Melodic Distraction</h2>
+            <p class="article-excerpt">
+                Why no piano over binaural beats? Music evokes emotion and competes for auditory cortex attention. For entrainment to occur, the signal must be clean (Thut et al., 2012). We remove melody to remove cognitive load, allowing nervous system recalibration.
+            </p>
+            <a href="post-entrainment.html" class="read-more">READ LOG <span>&rarr;</span></a>
+        </article>
+
+        <!-- POST 4: JAN 28, 2026 -->
         <article class="article-card">
             <div class="article-meta">
                 <span>Engineering</span>
-                <span>Oct 03, 2026</span>
+                <span>Jan 28, 2026</span>
             </div>
             <h2 class="article-title">The 320kbps Standard</h2>
             <p class="article-excerpt">
-                Why high-fidelity stereo integrity is non-negotiable for binaural beat processing. Analyzing compression artifacts in low-bitrate neuroacoustic environments.
+                Binaural beats rely on phase difference. Compression (128kbps) sacrifices stereo phase precision. For the nervous system, an unstable phase is noise, not rhythm. High fidelity ensures the math remains intact.
             </p>
-            <a href="#" class="read-more">
-                READ LOG <span>&rarr;</span>
-            </a>
+            <a href="post-fidelity.html" class="read-more">READ LOG <span>&rarr;</span></a>
         </article>
 
     </div>
