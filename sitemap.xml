@@ -1,18 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- Página Principal -->
+  
+  <!-- Home Page -->
   <url>
     <loc>https://zenspace.art/</loc>
-    <lastmod>2023-10-27</lastmod>
+    <lastmod>2026-03-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   
-  <!-- Biblioteca de Herramientas -->
+  <!-- Library / Tools -->
   <url>
     <loc>https://zenspace.art/library.html</loc>
-    <lastmod>2023-10-27</lastmod>
+    <lastmod>2026-03-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- System Logs (Blog) -->
+  <url>
+    <loc>https://zenspace.art/blog.html</loc>
+    <lastmod>2026-03-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+
+  <!-- Article View (Handles all 4 posts) -->
+  <url>
+    <loc>https://zenspace.art/article.html</loc>
+    <lastmod>2026-03-01</lastmod>
+    <priority>0.8</priority>
+  </url>
+
 </urlset>
