@@ -6,34 +6,256 @@
 <title>Library | Zen Space</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
-:root { --bg: #050505; --text: #fff; --muted: #a1a1aa; --accent: #a855f7; --glass: rgba(255,255,255,0.03); --border: rgba(255,255,255,0.1); }
-body { margin:0; background:var(--bg); color:var(--text); font-family:'Inter',sans-serif; padding-bottom:100px; overflow-x: hidden; }
-.navbar { display:flex; justify-content:space-between; padding:20px 5%; border-bottom:1px solid var(--border); align-items:center; }
-.logo { font-weight:bold; text-decoration:none; color:white; }
-.tabs { display:flex; justify-content:center; gap:10px; margin:40px 0; flex-wrap:wrap; padding:0 20px; }
-.tab-btn { background:transparent; border:1px solid var(--border); color:var(--muted); padding:10px 20px; border-radius:20px; cursor:pointer; transition:0.3s; }
-.tab-btn.active, .tab-btn:hover { background:var(--glass); color:white; border-color:white; }
-.grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px,1fr)); gap:20px; width:90%; max-width:1200px; margin:0 auto; }
-.card { background:var(--glass); border:1px solid var(--border); border-radius:15px; overflow:hidden; position:relative; transition:0.3s; }
-.card:hover { transform:translateY(-5px); border-color:var(--accent); }
-.thumb { height:160px; background:#111; display:flex; align-items:center; justify-content:center; color:#333; font-size:2rem; }
-.info { padding:20px; }
-.tag { font-size:0.7rem; text-transform:uppercase; letter-spacing:1px; color:var(--muted); }
-.title { font-size:1.1rem; margin:5px 0; font-weight:400; }
-.lock { position:absolute; top:10px; right:10px; background:rgba(0,0,0,0.7); padding:5px 10px; border-radius:10px; font-size:0.8rem; border:1px solid var(--border); }
-.btn-play { display:block; width:100%; padding:10px; background:white; color:black; text-align:center; text-decoration:none; margin-top:15px; border-radius:8px; font-weight:600; cursor:pointer; border:none; }
+    :root { 
+        --bg: #050505; 
+        --text: #fff; 
+        --muted: #a1a1aa; 
+        --accent: #a855f7; 
+        --glass: rgba(255,255,255,0.03); 
+        --border: rgba(255,255,255,0.1); 
+    }
+    
+    body { 
+        margin:0; 
+        background:var(--bg); 
+        color:var(--text); 
+        font-family:'Inter',sans-serif; 
+        padding-bottom:100px; 
+        overflow-x: hidden; 
+    }
+    
+    .navbar { 
+        display:flex; 
+        justify-content:space-between; 
+        padding:20px 5%; 
+        border-bottom:1px solid var(--border); 
+        align-items:center; 
+    }
+    
+    .logo { font-weight:bold; text-decoration:none; color:white; }
+    
+    .tabs { 
+        display:flex; 
+        justify-content:center; 
+        gap:10px; 
+        margin:40px 0; 
+        flex-wrap:wrap; 
+        padding:0 20px; 
+    }
+    
+    .tab-btn { 
+        background:transparent; 
+        border:1px solid var(--border); 
+        color:var(--muted); 
+        padding:10px 20px; 
+        border-radius:20px; 
+        cursor:pointer; 
+        transition:0.3s; 
+        white-space: nowrap; /* Evita que el texto se rompa en botones pequeños */
+    }
+    
+    .tab-btn.active, .tab-btn:hover { 
+        background:var(--glass); 
+        color:white; 
+        border-color:white; 
+    }
+    
+    .grid { 
+        display:grid; 
+        grid-template-columns:repeat(auto-fill, minmax(280px,1fr)); 
+        gap:20px; 
+        width:90%; 
+        max-width:1200px; 
+        margin:0 auto; 
+    }
+    
+    .card { 
+        background:var(--glass); 
+        border:1px solid var(--border); 
+        border-radius:15px; 
+        overflow:hidden; 
+        position:relative; 
+        transition:0.3s; 
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .card:hover { transform:translateY(-5px); border-color:var(--accent); }
+    
+    .thumb { 
+        height:160px; 
+        background:#111; 
+        display:flex; 
+        align-items:center; 
+        justify-content:center; 
+        color:#333; 
+        font-size:2rem; 
+        flex-shrink: 0; /* Evita que el thumbnail se aplaste */
+    }
+    
+    .info { 
+        padding:20px; 
+        flex-grow: 1; 
+        display: flex; 
+        flex-direction: column; 
+    }
+    
+    .tag { 
+        font-size:0.7rem; 
+        text-transform:uppercase; 
+        letter-spacing:1px; 
+        color:var(--muted); 
+    }
+    
+    .title { 
+        font-size:1.1rem; 
+        margin:5px 0 10px 0; 
+        font-weight:400; 
+        flex-grow: 1; /* Empuja el botón hacia abajo */
+    }
+    
+    .lock { 
+        position:absolute; 
+        top:10px; 
+        right:10px; 
+        background:rgba(0,0,0,0.7); 
+        padding:5px 10px; 
+        border-radius:10px; 
+        font-size:0.8rem; 
+        border:1px solid var(--border); 
+    }
+    
+    .btn-play { 
+        display:block; 
+        width:100%; 
+        padding:10px; 
+        background:white; 
+        color:black; 
+        text-align:center; 
+        text-decoration:none; 
+        margin-top:auto; /* Asegura que esté al final de la tarjeta */
+        border-radius:8px; 
+        font-weight:600; 
+        cursor:pointer; 
+        border:none; 
+    }
 
-/* --- REPRODUCTOR FULLSCREEN --- */
-#zen-player { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:black; z-index:9999; }
-#zen-iframe { width: 100%; height: calc(100% + 42px); border: none; margin-top: -42px; }
-.btn-back-float { position:fixed; top:20px; left:20px; z-index:10000; background:rgba(0,0,0,0.5); color:white; padding:10px 20px; border-radius:30px; border:1px solid var(--border); backdrop-filter:blur(10px); cursor:pointer; }
+    /* --- REPRODUCTOR FULLSCREEN (FIXED FOR MOBILE) --- */
+    #zen-player { 
+        display:none; 
+        position:fixed; 
+        top:0; 
+        left:0; 
+        width:100%; 
+        /* Usamos 100dvh para móviles (Dynamic Viewport Height) 
+           Esto arregla el problema de que la animación quede corta o no se vea 
+           por la barra de direcciones del navegador */
+        height: 100vh; 
+        height: 100dvh; 
+        background:black; 
+        z-index:9999; 
+    }
+    
+    #zen-iframe { 
+        width: 100%; 
+        height: 100%; 
+        border: none; 
+        /* En móvil eliminamos el margen negativo porque los modos 'present' 
+           de p5js a veces no tienen la barra superior o es más pequeña,
+           y esto cortaba la parte inferior de la animación. */
+        margin-top: 0 !important; 
+    }
+    
+    .btn-back-float { 
+        position:fixed; 
+        top:20px; 
+        left:20px; 
+        z-index:10001; /* Por encima del iframe */
+        background:rgba(0,0,0,0.8); /* Fondo más oscuro para legibilidad */
+        color:white; 
+        padding:10px 20px; 
+        border-radius:30px; 
+        border:1px solid rgba(255,255,255,0.3); 
+        backdrop-filter:blur(10px); 
+        cursor:pointer; 
+        font-family:'Inter', sans-serif;
+    }
 
-/* --- MODAL PAYPAL --- */
-.modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); backdrop-filter:blur(5px); z-index:1000; align-items:center; justify-content:center; }
-.modal-content { background:#111; border:1px solid var(--border); padding:40px; border-radius:20px; max-width:500px; text-align:center; position:relative; }
-.close-modal { position:absolute; top:15px; right:20px; font-size:1.5rem; cursor:pointer; color:var(--muted); }
-.price-tag { font-size:2.5rem; font-family:'Playfair Display', serif; margin:20px 0; color:white; }
-.btn-buy { background:var(--accent); color:white; padding:15px 30px; border-radius:30px; text-decoration:none; display:inline-block; margin-top:20px; font-weight:bold; }
+    /* --- MODAL PAYPAL --- */
+    .modal { 
+        display:none; 
+        position:fixed; 
+        top:0; 
+        left:0; 
+        width:100%; 
+        height:100%; 
+        background:rgba(0,0,0,0.8); 
+        backdrop-filter:blur(5px); 
+        z-index:1000; 
+        align-items:center; 
+        justify-content:center; 
+    }
+    
+    .modal-content { 
+        background:#111; 
+        border:1px solid var(--border); 
+        padding:40px; 
+        border-radius:20px; 
+        max-width:90%; 
+        width:400px; /* Ancho máximo fijo */
+        text-align:center; 
+        position:relative; 
+    }
+    
+    .close-modal { 
+        position:absolute; 
+        top:15px; 
+        right:20px; 
+        font-size:1.5rem; 
+        cursor:pointer; 
+        color:var(--muted); 
+    }
+    
+    .price-tag { 
+        font-size:2.5rem; 
+        font-family:'Playfair Display', serif; 
+        margin:20px 0; 
+        color:white; 
+    }
+    
+    .btn-buy { 
+        background:var(--accent); 
+        color:white; 
+        padding:15px 30px; 
+        border-radius:30px; 
+        text-decoration:none; 
+        display:inline-block; 
+        margin-top:20px; 
+        font-weight:bold; 
+    }
+
+    /* --- MEDIA QUERIES PARA MÓVILES --- */
+    @media (max-width: 480px) {
+        /* 1. Forzar una sola columna en el grid */
+        .grid {
+            grid-template-columns: 1fr !important;
+            width: 95%; /* Un poco más de ancho útil */
+        }
+
+        /* 2. Ajustar pestañas para que no se desborden */
+        .tabs {
+            gap: 5px;
+        }
+        .tab-btn {
+            padding: 8px 12px;
+            font-size: 0.8rem;
+        }
+
+        /* 3. Ajustes del modal en pantallas muy pequeñas */
+        .modal-content {
+            padding: 30px 20px;
+        }
+    }
 </style>
 </head>
 <body>
