@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zen Space | System Logs</title>
+    <meta name="description" content="Technical logs, neuroscience updates, and system architecture diaries from Zen Space.">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- IMPORTAR ESTILOS BASE (Mismos que index.html) --- */
+        :root {
+            --bg-color: #050505;
+            --text-main: #ffffff;
+            --text-muted: #a1a1aa;
+            --accent: #a855f7;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            margin: 0;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            background: rgba(5,5,5,0.9);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+
+        .logo {
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .logo span { font-weight: 300; opacity: 0.7; margin-left: 10px; font-size: 1rem; }
+
+        .nav-links { display: flex; gap: 30px; list-style: none; padding: 0; margin: 0; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; transition: 0.3s; font-size: 0.9rem; }
+        .nav-links a:hover { color: white; }
+
+        .btn {
+            padding: 10px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+            display: inline-block;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-premium { background: white; color: black; }
+        .btn-premium:hover { transform: translateY(-2px); box-shadow: 0 0 15px rgba(255,255,255,0.2); }
+
+        footer {
+            padding: 60px 5%;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            font-size: 0.8rem;
+            color: #555;
+        }
+
+        /* --- ESTILOS ESPECÍFICOS DEL BLOG --- */
+
+        .blog-header {
+            padding: 100px 5% 40px 5%;
+            text-align: center;
+        }
+
+        .blog-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .blog-header p {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 80px 20px;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .article-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 30px;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .article-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        /* Efecto de línea superior sutil al hacer hover */
+        .article-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .article-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .article-meta {
+            font-size: 0.8rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .article-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin: 0 0 15px 0;
+            color: white;
+            line-height: 1.3;
+        }
+
+        .article-excerpt {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            flex-grow: 1;
+        }
+
+        .read-more {
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: 0.2s;
+        }
+
+        .read-more:hover {
+            color: var(--accent);
+            gap: 10px; /* Animación de flecha */
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .navbar { flex-direction: column; gap: 15px; }
+            .nav-links { flex-wrap: wrap; justify-content: center; }
+            .blog-header h1 { font-size: 2rem; }
+            .blog-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <a href="index.html" class="logo">ZEN SPACE <span>| DIGITAL SANCTUARY</span></a>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li> <!-- Enlace de vuelta -->
+        <li><a href="blog.html" style="color:white;">System Logs</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+    <a href="index.html" class="btn btn-premium">Back to Sanctuary</a>
+</nav>
+
+<header class="blog-header">
+    <h1>SYSTEM LOGS</h1>
+    <p>Technical updates, cognitive science research, and architecture iterations.</p>
+</header>
+
+<main class="container">
+    <div class="blog-grid">
+
+        <!-- =========================
+             POST NUEVO (PONER ESTE AL PRINCIPIO CADA SEMANA)
+             ========================= -->
+        <article class="article-card">
+            <div class="article-meta">
+                <span>System Update</span>
+                <span>Oct 24, 2026</span>
+            </div>
+            <h2 class="article-title">Release: Deep States Ultra-Lux Architecture</h2>
+            <p class="article-excerpt">
+                We have finalized the 10-protocol Epsilon induction framework. This log details the signal coherence improvements in the 0.5Hz carrier frequency and the implementation of Phi Phasing in the stereo field.
+            </p>
+            <!-- Para un blog estático simple, el enlace puede llevar a una página individual 'post-deep-states.html' o abrir un modal -->
+            <a href="post-deep-states.html" class="read-more">
+                READ LOG <span>&rarr;</span>
+            </a>
+        </article>
+
+        <!-- =========================
+             POST ANTERIOR 1
+             ========================= -->
+        <article class="article-card">
+            <div class="article-meta">
+                <span>Neuroscience</span>
+                <span>Oct 17, 2026</span>
+            </div>
+            <h2 class="article-title">Entrainment vs. Melodic Distraction</h2>
+            <p class="article-excerpt">
+                Why does the auditory cortex prioritize melody over binaural beats? A deep dive into the Thut et al. (2012) study on rhythmic neural stimulation and signal masking.
+            </p>
+            <a href="#" class="read-more">
+                READ LOG <span>&rarr;</span>
+            </a>
+        </article>
+
+        <!-- =========================
+             POST ANTERIOR 2
+             ========================= -->
+        <article class="article-card">
+            <div class="article-meta">
+                <span>Usage Protocol</span>
+                <span>Oct 10, 2026</span>
+            </div>
+            <h2 class="article-title">Optimizing the Architect Elite 2026</h2>
+            <p class="article-excerpt">
+                How to utilize the Cartesian "System Purge" grid effectively during the 90-minute ultradian cycles. A guide to dumping open mental loops before deep work sessions.
+            </p>
+            <a href="#" class="read-more">
+                READ LOG <span>&rarr;</span>
+            </a>
+        </article>
+
+        <!-- =========================
+             POST ANTIGUO
+             ========================= -->
+        <article class="article-card">
+            <div class="article-meta">
+                <span>Engineering</span>
+                <span>Oct 03, 2026</span>
+            </div>
+            <h2 class="article-title">The 320kbps Standard</h2>
+            <p class="article-excerpt">
+                Why high-fidelity stereo integrity is non-negotiable for binaural beat processing. Analyzing compression artifacts in low-bitrate neuroacoustic environments.
+            </p>
+            <a href="#" class="read-more">
+                READ LOG <span>&rarr;</span>
+            </a>
+        </article>
+
+    </div>
+</main>
+
+<footer>
+    <div style="font-size: 1.2rem; font-weight: bold; color: white; margin-bottom: 10px;">ZEN SPACE</div>
+    <p>&copy; 2026 Zen Space Digital Sanctuary. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
