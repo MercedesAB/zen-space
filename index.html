@@ -698,7 +698,7 @@
     <span>JOIN COLLECTIVE</span>
 </a>
 
-<!-- THREE.JS HERO BACKGROUND ANIMATION (PURPLE ACCENT VERSION) -->
+<!-- THREE.JS HERO BACKGROUND ANIMATION (UPDATED SPEED & BREATHING EFFECT) -->
 <script>
     if (typeof THREE === 'undefined') {
         console.error("Three.js failed to load.");
@@ -725,7 +725,7 @@
             color: 0xa855f7, 
             wireframe: true, 
             transparent: true, 
-            opacity: 0.2 
+            opacity: 0.3 // Increased opacity slightly for visibility
         });
         
         const shape = new THREE.Mesh(geometry, material);
@@ -743,8 +743,16 @@
 
         function animate() {
             requestAnimationFrame(animate);
-            shape.rotation.y += 0.0005; 
-            shape.rotation.x += 0.0002;
+            
+            // INCREASED ROTATION SPEED (Was 0.0005)
+            shape.rotation.y += 0.003; 
+            shape.rotation.x += 0.001;
+            
+            // ADDED BREATHING EFFECT (Scaling) to ensure movement is visible
+            const time = Date.now() * 0.001;
+            const scale = 1 + Math.sin(time) * 0.05; // Pulses between 0.95 and 1.05
+            shape.scale.set(scale, scale, scale);
+
             renderer.render(scene, camera);
         }
         animate();
