@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zen Space | System Log Detail</title>
+    <title>Zen Space | System Logs</title>
+    <meta name="description" content="Technical logs, neuroscience updates, and system architecture diaries from Zen Space.">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -19,7 +20,8 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             font-family: 'Inter', sans-serif;
-            line-height: 1.8;
+            line-height: 1.6;
+            scroll-behavior: smooth;
         }
         .navbar {
             display: flex;
@@ -45,30 +47,58 @@
         .nav-links { display: flex; gap: 30px; list-style: none; padding: 0; margin: 0; }
         .nav-links a { color: var(--text-muted); text-decoration: none; transition: 0.3s; font-size: 0.9rem; }
         .nav-links a:hover { color: white; }
-        
-        .container { max-width: 800px; margin: 0 auto; padding: 80px 20px; }
-        
-        /* Article Specific Styles */
-        .full-article header { margin-bottom: 40px; border-bottom: 1px solid var(--border); padding-bottom: 20px; }
-        .full-article h1 { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin: 0; color: white; }
-        .article-meta { font-family: 'Inter', sans-serif; font-size: 0.9rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-top: 10px; }
-        
-        .full-article section { margin-bottom: 50px; }
-        .full-article h2 { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: white; margin-bottom: 20px; border-left: 3px solid var(--accent); padding-left: 15px; }
-        
-        .full-article ul { list-style: none; padding: 0; }
-        .full-article li { margin-bottom: 15px; padding-left: 20px; position: relative; border-left: 2px solid var(--border); padding-left: 15px; color: var(--text-muted); }
-        .full-article li strong { color: white; }
-        
-        .full-article a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; transition: 0.2s; }
-        .full-article a:hover { border-bottom-color: var(--accent); }
-
-        footer { padding: 40px 0; text-align: center; color: #555; font-size: 0.8rem; border-top: 1px solid var(--border); }
-        
+        .btn {
+            padding: 10px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+            display: inline-block;
+            cursor: pointer;
+            border: none;
+        }
+        .btn-premium { background: white; color: black; }
+        .btn-premium:hover { transform: translateY(-2px); box-shadow: 0 0 15px rgba(255,255,255,0.2); }
+        footer {
+            padding: 60px 5%;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            font-size: 0.8rem;
+            color: #555;
+        }
+        .blog-header { padding: 100px 5% 40px 5%; text-align: center; }
+        .blog-header h1 { font-family: 'Playfair Display', serif; font-size: 3rem; margin-bottom: 10px; color: white; }
+        .blog-header p { color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px 80px 20px; }
+        .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
+        .article-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 30px;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        .article-card:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .article-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
+            background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease;
+        }
+        .article-card:hover::before { transform: scaleX(1); }
+        .article-meta { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; font-weight: 600; display: flex; justify-content: space-between; }
+        .article-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin: 0 0 15px 0; color: white; line-height: 1.3; }
+        .article-excerpt { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 25px; flex-grow: 1; }
+        .read-more { color: white; text-decoration: none; font-size: 0.9rem; font-weight: 600; display: inline-flex; align-items: center; gap: 5px; transition: 0.2s; }
+        .read-more:hover { color: var(--accent); gap: 10px; }
         @media (max-width: 768px) {
             .navbar { flex-direction: column; gap: 15px; }
-            .full-article h1 { font-size: 1.8rem; }
-            .container { padding: 40px 20px; }
+            .nav-links { flex-wrap: wrap; justify-content: center; }
+            .blog-header h1 { font-size: 2rem; }
+            .blog-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -81,124 +111,88 @@
         <li><a href="blog.html" style="color:white;">System Logs</a></li>
         <li><a href="index.html#contact">Contact</a></li>
     </ul>
-    <a href="index.html" class="btn" style="border: 1px solid var(--border); color: white; text-decoration: none; padding: 10px 20px; border-radius: 30px;">Back to Logs</a>
+    <a href="index.html" class="btn btn-premium">Back to Sanctuary</a>
 </nav>
 
-<div class="container">
+<header class="blog-header">
+    <h1>SYSTEM LOGS</h1>
+    <p>Technical updates, cognitive science research, and architecture iterations.</p>
+</header>
 
-    <!-- ARTICLE 1: DEEP STORAGE (NEW ENTRY) -->
-    <article class="full-article" id="deepstorage">
-        <header>
-            <h1>SYSTEM_UPDATE: NIGHT_ARCHITECTURE_V1.0</h1>
-            <p class="article-meta">Mar 04, 2026 • System Release</p>
-        </header>
+<main class="container">
+    <div class="blog-grid">
 
-        <section class="article-intro">
-            <p>
-                Welcome to the latest evolution in acoustic architecture: the Platinum Edition of ZENSPACE Deep Storage. 
-                Traditional loop-based sleep tracks segment audio into short cycles, often breaking immersion and continuity. 
-                Our new system moves beyond these limitations with <strong>8-hour continuous rendering engines</strong>, engineered to maintain phase coherence and spectral stability throughout the night.
+        <!-- POST 0: Mar 04, 2026 (NEW ENTRY) -->
+        <article class="article-card">
+            <div class="article-meta">
+                <span>System Release</span>
+                <span>Mar 04, 2026</span>
+            </div>
+            <h2 class="article-title">Deep Storage: Platinum Night Architecture</h2>
+            <p class="article-excerpt">
+                Moving beyond segmented loops. The new Platinum Edition introduces 8-hour continuous rendering engines designed to maintain phase coherence and provide uninterrupted acoustic shielding for full nocturnal cycles.
             </p>
-        </section>
+            <a href="article.html#deepstorage" class="read-more">READ LOG <span>&rarr;</span></a>
+        </article>
 
-        <section class="article-engines">
-            <h2>3 Modular Engines – Modes of Night Architecture</h2>
-            <ul>
-                <li>
-                    <strong>Restoration:</strong> Balanced & Neutral. Optimized for standard nightly use, providing a smooth, uninterrupted acoustic baseline.
-                </li>
-                <li>
-                    <strong>Delta Immersion:</strong> Dense & Subterranean. Creates a low-frequency, stable acoustic field for deep isolation and noise masking.
-                </li>
-                <li>
-                    <strong>Neural Drift:</strong> Airy & Fluid. Designed for active minds seeking cognitive flow and deep focus even during nocturnal hours.
-                </li>
-            </ul>
-        </section>
-
-        <section class="article-architecture">
-            <h2>System Architecture & Technical Notes</h2>
-            <p>
-                Each engine utilizes <strong>continuous rendering technology</strong>, eliminating loop restarts that interrupt immersion. 
-                Audio is phase-stable, spectrally coherent, and free from jarring harmonic competition. 
-                The Platinum Edition ensures that your auditory environment remains uninterrupted for the full nocturnal cycle.
+        <!-- POST 1: Mar 01, 2026 -->
+        <article class="article-card">
+            <div class="article-meta">
+                <span>Usage Protocol</span>
+                <span>Mar 01, 2026</span>
+            </div>
+            <h2 class="article-title">Optimizing the Architect Elite 2026</h2>
+            <p class="article-excerpt">
+                The Architect Elite 2026 introduces a 70/30 layout principle designed with cognitive ergonomics in mind. In practice, 70% of each page is left intentionally blank...
             </p>
-            <p>
-                Format: MP3 320kbps CBR | Sample Rate: 44.1 kHz | Duration: 8 hours continuous per engine | Master Manual (PDF) included.
+            <!-- UPDATED LINK TO POINT TO article.html -->
+            <a href="article.html#optimization" class="read-more">READ LOG <span>&rarr;</span></a>
+        </article>
+
+        <!-- POST 2: Feb 22, 2026 -->
+        <article class="article-card">
+            <div class="article-meta">
+                <span>System Update</span>
+                <span>Feb 22, 2026</span>
+            </div>
+            <h2 class="article-title">Release: Deep States Ultra-Lux Architecture</h2>
+            <p class="article-excerpt">
+                The Deep States Ultra-Lux Series is a neuroacoustic engineering framework designed to guide the brain progressively from Alpha through Theta and Delta states...
             </p>
-        </section>
+            <!-- UPDATED LINK -->
+            <a href="article.html#deepstates" class="read-more">READ LOG <span>&rarr;</span></a>
+        </article>
 
-        <section class="article-use">
-            <h2>Usage Recommendations</h2>
-            <ul>
-                <li>Use headphones for full effect.</li>
-                <li>Keep volume low — designed for environmental immersion, not loud listening.</li>
-                <li>Turn off bright screens 30 minutes prior to listening for optimal experience.</li>
-                <li>Choose your engine mode according to desired effect: restoration, deep isolation, or cognitive flow.</li>
-            </ul>
-        </section>
-
-        <section class="article-cta">
-            <p>
-                Upgrade your nightly system today: explore the full <strong>Platinum Edition</strong> and access all three continuous engines, engineered for uninterrupted nocturnal cycles.  
-                <a href="https://zenspacedigital.gumroad.com/l/deepstorage_platinum">Purchase & Explore the System →</a>
+        <!-- POST 3: Feb 10, 2026 -->
+        <article class="article-card">
+            <div class="article-meta">
+                <span>Neuroscience</span>
+                <span>Feb 10, 2026</span>
+            </div>
+            <h2 class="article-title">Entrainment vs. Melodic Distraction</h2>
+            <p class="article-excerpt">
+                One common misconception in neuroacoustic design is that overlaying music—such as piano or soft melodies—enhances the effect of binaural beats...
             </p>
-        </section>
-    </article>
+            <!-- UPDATED LINK -->
+            <a href="article.html#entrainment" class="read-more">READ LOG <span>&rarr;</span></a>
+        </article>
 
-    <hr style="border: 0; border-top: 1px solid var(--border); margin: 60px 0;">
+        <!-- POST 4: Jan 28, 2026 -->
+        <article class="article-card">
+            <div class="article-meta">
+                <span>Engineering</span>
+                <span>Jan 28, 2026</span>
+            </div>
+            <h2 class="article-title">The 320kbps Standard</h2>
+            <p class="article-excerpt">
+                Binaural beats rely on microphase differences between stereo channels. Standard compressed audio formats, such as 128 kbps MP3s, disrupt these microphase relationships...
+            </p>
+            <!-- UPDATED LINK -->
+            <a href="article.html#fidelity" class="read-more">READ LOG <span>&rarr;</span></a>
+        </article>
 
-    <!-- ARTICLE 2: ARCHITECT ELITE (OPTIMIZATION) -->
-    <article class="full-article" id="optimization">
-        <header>
-            <h1>Optimizing the Architect Elite 2026</h1>
-            <p class="article-meta">Mar 01, 2026 • Usage Protocol</p>
-        </header>
-        <p>
-            The Architect Elite 2026 introduces a 70/30 layout principle designed with cognitive ergonomics in mind. In practice, 70% of each page is left intentionally blank, serving as "negative space" that reduces cognitive load and prevents decision fatigue. The remaining 30% is dedicated to high-density information blocks. This structure allows the user to focus purely on execution without visual noise.
-        </p>
-    </article>
-
-    <hr style="border: 0; border-top: 1px solid var(--border); margin: 60px 0;">
-
-    <!-- ARTICLE 3: DEEP STATES (ULTRA-LUX) -->
-    <article class="full-article" id="deepstates">
-        <header>
-            <h1>Release: Deep States Ultra-Lux Architecture</h1>
-            <p class="article-meta">Feb 22, 2026 • System Update</p>
-        </header>
-        <p>
-            The Deep States Ultra-Lux Series is a neuroacoustic engineering framework designed to guide the brain progressively from Alpha through Theta and Delta states. Unlike standard ambient music, this series utilizes strict harmonic limiting and carrier stability to prevent neural distraction during transition phases. The result is a deeper, more coherent restorative state.
-        </p>
-    </article>
-
-    <hr style="border: 0; border-top: 1px solid var(--border); margin: 60px 0;">
-
-    <!-- ARTICLE 4: ENTRAINMENT -->
-    <article class="full-article" id="entrainment">
-        <header>
-            <h1>Entrainment vs. Melodic Distraction</h1>
-            <p class="article-meta">Feb 10, 2026 • Neuroscience</p>
-        </header>
-        <p>
-            One common misconception in neuroacoustic design is that overlaying music—such as piano or soft melodies—enhances the effect of binaural beats. In reality, the auditory cortex prioritizes complex harmonic structures over rhythmic pulses. By removing melodic information and focusing on pure frequency architecture, we allow the brain to synchronize (entrain) more effectively without competing signals.
-        </p>
-    </article>
-
-    <hr style="border: 0; border-top: 1px solid var(--border); margin: 60px 0;">
-
-    <!-- ARTICLE 5: 320KBPS -->
-    <article class="full-article" id="fidelity">
-        <header>
-            <h1>The 320kbps Standard</h1>
-            <p class="article-meta">Jan 28, 2026 • Engineering</p>
-        </header>
-        <p>
-            Binaural beats rely on microphase differences between stereo channels. Standard compressed audio formats, such as 128 kbps MP3s, disrupt these microphase relationships. To ensure the fidelity required for neural entrainment, all ZENSPACE protocols are rendered at 320kbps CBR (Constant Bitrate), preserving the phase integrity essential for the intended cognitive effect.
-        </p>
-    </article>
-
-</div>
+    </div>
+</main>
 
 <footer>
     <div style="font-size: 1.2rem; font-weight: bold; color: white; margin-bottom: 10px;">ZEN SPACE</div>
