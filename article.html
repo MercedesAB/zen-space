@@ -95,7 +95,6 @@
         <a href="blog.html" class="back-link">&larr; BACK TO SYSTEM LOGS</a>
         
         <div id="article-content">
-            <!-- Content will be injected here by JavaScript -->
             <div class="meta" style="color: #555;">Loading article...</div>
         </div>
     </div>
@@ -103,6 +102,39 @@
     <script>
         // --- ARTICLE DATABASE ---
         const articles = {
+            deepstorage: {
+                category: "System Release",
+                date: "Mar 04, 2026",
+                title: "Deep Storage: Platinum Night Architecture",
+                body: `
+                    <p><strong>Deep Storage: Platinum Night Architecture</strong></p>
+                    <p>System Update – Mar 04, 2026</p>
+                    <p>The Platinum Edition of ZENSPACE Deep Storage introduces 8-hour continuous audio engines designed to maintain phase coherence and provide uninterrupted acoustic shielding for full nocturnal cycles. This is not standard music; it is a non-intrusive acoustic environment engineered to support deep rest, sensory isolation, and uninterrupted sleep architecture.</p>
+                    <p><strong>The 3 Engines</strong></p>
+                    <ul>
+                        <li><strong>RESTORATION</strong> – Balanced & Neutral. Delta Floor 1.5Hz. Serves as a baseline for daily grounding, calm, and restorative background acoustics.</li>
+                        <li><strong>DELTA IMMERSION</strong> – Dense & Subterranean. Delta Floor 1.0Hz. Provides high-level environmental masking for deep isolation and protection from auditory distractions.</li>
+                        <li><strong>NEURAL DRIFT</strong> – Airy & Fluid. Delta Floor 2.0Hz. Micro-modulated textures support active minds seeking cognitive flow, creative thinking, or gentle neural engagement during sleep cycles.</li>
+                    </ul>
+                    <p><strong>Usage & Experience</strong></p>
+                    <ul>
+                        <li><strong>Volume:</strong> Keep low, barely audible. Acts as a background acoustic tapestry rather than a focal point.</li>
+                        <li><strong>Duration:</strong> Each session lasts  <strong>8 continuous hours</strong>. No loops, no interruptions.</li>
+                        <li><strong>Device:</strong> Over-ear headphones recommended to experience the full low-frequency carriers and micro-modulations.</li>
+                        <li><strong>Environment:</strong> Best used in a dark, quiet room with blue light sources turned off.</li>
+                    </ul>
+                    <p><strong>Technical Specifications</strong></p>
+                    <ul>
+                        <li><strong>Format:</strong> MP3 320kbps CBR (Phase Coherent)</li>
+                        <li><strong>Sample Rate:</strong> 44.1kHz</li>
+                        <li><strong>Duration:</strong> 8 hours per session</li>
+                        <li><strong>Mastering:</strong> Fixed Headroom (No Reactive Normalization)</li>
+                    </ul>
+                    <p><strong>Important Note:</strong> ZENSPACE Deep Storage is an audio tool for sound masking and atmosphere creation. It is not a medical device and is not intended to diagnose, treat, cure, or prevent any disease or condition.</p>
+                    <p>Experience the full Platinum Night Architecture with three continuous engines: <strong>Restoration, Delta Immersion, and Neural Drift</strong>. Designed for uninterrupted sleep cycles, deep relaxation, and sensory balance.</p>
+                `
+            },
+
             optimization: {
                 category: "Usage Protocol",
                 date: "Mar 01, 2026",
@@ -145,10 +177,10 @@
             }
         };
 
-        // --- RENDER LOGIC ---
+        // --- RENDER LOGIC WITH DEFAULT ---
         const contentDiv = document.getElementById('article-content');
         const hash = window.location.hash.replace('#', '');
-        const article = articles[hash];
+        const article = articles[hash] || articles['deepstorage']; // default to newest article
 
         if (article) {
             let html = `
