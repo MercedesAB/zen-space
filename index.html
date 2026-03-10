@@ -108,16 +108,35 @@
             display: inline-block;
             cursor: pointer;
             border: none;
+            text-align: center;
+            box-sizing: border-box;
         }
 
         .btn-premium {
             background: white;
             color: black;
+            width: 100%; /* Full width for grid consistency */
         }
 
         .btn-premium:hover {
             transform: translateY(-2px);
             box-shadow: 0 0 15px rgba(255,255,255,0.2);
+        }
+
+        /* Ghost Button Style for Free Samples */
+        .btn-sample {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            margin-top: 10px;
+            font-size: 0.8rem;
+            width: 100%;
+            display: block;
+        }
+        
+        .btn-sample:hover {
+            border-color: var(--accent);
+            color: var(--accent);
         }
 
         .hero {
@@ -296,6 +315,9 @@
             width: 100%;
             text-align: center;
             margin-top: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
 
         /* --- NEWSLETTER LINK STYLE (HERO) --- */
@@ -356,7 +378,6 @@
 
         /* --- FIXES PARA MÓVIL (Index) --- */
         @media (max-width: 768px) {
-            /* 1. Ajustar el Navbar para que no se rompa */
             .navbar {
                 flex-direction: column;
                 gap: 15px;
@@ -373,32 +394,29 @@
             }
 
             .btn-premium {
-                width: 100%; /* Botón ancho completo en móvil */
+                width: 100%; 
                 text-align: center;
                 box-sizing: border-box;
             }
 
-            /* 2. Ajustar la Grid de Productos para evitar scroll horizontal */
             .shop-grid {
-                grid-template-columns: 1fr; /* Una sola columna */
+                grid-template-columns: 1fr; 
                 gap: 25px;
-                padding: 0 10px; /* Un poco menos de padding lateral */
+                padding: 0 10px; 
             }
             
             .product-card {
                 padding: 20px;
             }
 
-            /* 3. Ajustes de texto en móvil */
             .hero h1 {
-                font-size: 1.8rem; /* Texto más legible */
+                font-size: 1.8rem; 
             }
             
             .hero p {
                 font-size: 1rem;
             }
 
-            /* 4. Ajuste del botón flotante para no tapar contenido */
             .floating-sub {
                 bottom: 15px;
                 right: 15px;
@@ -413,24 +431,19 @@
 <nav class="navbar">
     <a href="index.html" class="logo">ZEN SPACE <span>| DIGITAL SANCTUARY</span></a>
     <ul class="nav-links">
-        <!-- RENAMED: Sensory Sandbox (Implies a place to play/test, not the main system) -->
         <li><a href="library.html">Sensory Sandbox</a></li>
         <li><a href="#science">The Science</a></li>
-        <!-- CHANGED: System Logs is now standard (no highlight) -->
         <li><a href="blog.html">System Logs</a></li>
-        <!-- CHANGED: System Components is now highlighted (White) -->
         <li><a href="#modules" style="color: white;">System Components</a></li>
         <li><a href="#contact">Contact</a></li>
     </ul>
-    <!-- REMOVED: "Start Free Session" Button from here to reduce focus on the free library -->
 </nav>
 
 <header class="hero">
     <h1>Neuro-acoustic systems designed to extend attentional bandwidth and stabilize cognitive load.</h1>
     <p>Visual environments and structured soundscapes engineered for ADHD support, grounding, and sustained deep work.</p>
     
-    <!-- CHANGED: Main CTA now points to Products (System Components) instead of the free library -->
-    <a href="#modules" class="btn btn-premium">View System Components</a>
+    <a href="#modules" class="btn btn-premium" style="width: auto;">View System Components</a>
     
     <div class="hero-sub-link">
         Or visit the <a href="library.html" style="color: var(--accent);">Sensory Sandbox</a> to test visual experiences.
@@ -497,7 +510,7 @@
     
     <div class="shop-grid">
         
-        <!-- NEW PRODUCT: DEEP STATES ULTRA-LUX -->
+        <!-- PRODUCT: DEEP STATES ULTRA-LUX -->
         <div class="product-card">
             <div class="product-image-container">
                 <img src="assets/deluxe.jpg" alt="Zen Space Deep States Series Ultra-Lux Edition">
@@ -521,7 +534,7 @@
             </div>
         </div>
 
-        <!-- PRODUCT 1: THE PLANNER (UPDATED CONTENT) -->
+        <!-- PRODUCT: THE PLANNER -->
         <div class="product-card">
             <div class="product-image-container">
                 <img src="assets/mockup_planner1.jpg" alt="Zen Space Planner on Mac Desktop">
@@ -543,7 +556,7 @@
             </div>
         </div>
 
-        <!-- PRODUCT 2: NEURAL FOCUS SERIES (Keep Original Focus Product) -->
+        <!-- PRODUCT: NEURAL FOCUS SERIES -->
         <div class="product-card">
             <div class="product-image-container">
                 <img src="assets/focus.jpg" alt="Zenspace Neural Focus Series">
@@ -560,13 +573,17 @@
                 </ul>
             </div>
             <div class="card-link">
-                <a href="https://zenspacedigital.gumroad.com/l/zenspace-focus-system" class="gumroad-button btn btn-premium">
+                <a href="https://zenspacedigital.gumroad.com/l/zenspace-focus-system" class="gumroad-button btn btn-premium" target="_blank">
                     Download the System
+                </a>
+                <!-- Free Sample Button for Focus -->
+                <a href="https://zenspacedigital.gumroad.com/l/studyshieldSAMPLE" class="btn btn-sample" target="_blank">
+                    [ INITIATE_TRIAL ] Download Level 01 Sample
                 </a>
             </div>
         </div>
 
-        <!-- PRODUCT 3: PROFESSIONAL RELAXATION SERIES (UPDATED LAYOUT) -->
+        <!-- PRODUCT: PROFESSIONAL RELAXATION SERIES -->
         <div class="product-card">
             <div class="product-image-container">
                 <img src="assets/relax1.jpg" alt="Zenspace Professional Relaxation Series">
@@ -583,13 +600,13 @@
                 </ul>
             </div>
             <div class="card-link">
-                <a href="https://zenspacedigital.gumroad.com/l/relaxation" class="gumroad-button btn btn-premium">
+                <a href="https://zenspacedigital.gumroad.com/l/relaxation" class="gumroad-button btn btn-premium" target="_blank">
                     Download Audio
                 </a>
             </div>
         </div>
 
-        <!-- PRODUCT 4: GROUNDING SERIES (NEW) -->
+        <!-- PRODUCT: GROUNDING SERIES -->
         <div class="product-card">
             <div class="product-image-container">
                 <img src="assets/grounding.jpg" alt="Zenspace The Grounding Series Pack 03">
@@ -613,7 +630,32 @@
             </div>
         </div>
 
-        <!-- PRODUCT 5 (PLACEHOLDER) -->
+        <!-- NEW CARD: BASELINE ANCHOR (FREE SAMPLE) -->
+        <div class="product-card" style="border-color: var(--accent);">
+            <div class="product-image-container">
+                <img src="assets/anchor.jpg" alt="ZenSpace Baseline Anchor">
+                <img src="assets/anchor.jpg" alt="ZenSpace Baseline Anchor" class="img-hover">
+            </div>
+            <div>
+                <h3 style="color: var(--accent);">> SYSTEM_SAMPLE<br>BASELINE_ANCHOR</h3>
+                <p><strong>Free Grounding Protocol.</strong> Stop forcing focus. Start with grounding. This 10-minute sample acts as a "System Reset" for your nervous system.</p>
+                <ul class="product-features">
+                    <li>Level 01 | Baseline Stabilization</li>
+                    <li>10Hz Alpha Waves (Relaxed Awareness)</li>
+                    <li>Brown Noise with Low-Pass Filter</li>
+                    <li>10 Minutes | MP3 320kbps</li>
+                </ul>
+            </div>
+            <div class="card-link">
+                <!-- Links to the FREE SAMPLE -->
+                <a href="https://zenspacedigital.gumroad.com/l/baselineanchor10m" class="btn btn-premium" target="_blank" style="background: var(--accent); color: white; border: none;">
+                    [ DOWNLOAD_SAMPLE ]
+                </a>
+                <div style="font-size: 0.75rem; color: #777; margin-top: 5px; text-align: center;">Free 10-Minute Protocol</div>
+            </div>
+        </div>
+
+        <!-- PRODUCT: SYSTEM_RESET (PLACEHOLDER) -->
         <div class="product-card">
             <div>
                 <h3>> SYSTEM_RESET</h3>
@@ -624,7 +666,7 @@
             </div>
         </div>
         
-        <!-- PRODUCT 6: IDLE STATE OPTIMIZATION (UPDATED ACTIVE PRODUCT) -->
+        <!-- PRODUCT: IDLE STATE OPTIMIZATION (PAID PRODUCT) -->
         <div class="product-card">
             <div class="product-image-container">
                 <img src="assets/idle.jpg" alt="ZenSpace Idle State Optimization">
@@ -641,13 +683,18 @@
                 </ul>
             </div>
             <div class="card-link">
+                <!-- Main button links to PAID PRODUCT -->
                 <a href="https://zenspacedigital.gumroad.com/l/idlestateoptimization" class="btn btn-premium" target="_blank">
                     Access System
+                </a>
+                <!-- Secondary button links to FREE SAMPLE -->
+                <a href="https://zenspacedigital.gumroad.com/l/baselineanchor10m" class="btn btn-sample" target="_blank">
+                    [ INITIATE_TRIAL ] Download Level 01 Sample
                 </a>
             </div>
         </div>
 
-        <!-- PRODUCT 7: DEEP STORAGE PLATINUM (UPDATED) -->
+        <!-- PRODUCT: DEEP STORAGE PLATINUM -->
         <div class="product-card">
             <div class="product-image-container">
                 <img src="assets/sleep.jpg" alt="Zen Space Deep Storage Platinum Edition">
@@ -665,7 +712,6 @@
                 </ul>
             </div>
             <div class="card-link">
-                <!-- REPLACE THE LINK BELOW WITH YOUR GUMROAD LINK -->
                 <a href="https://zenspacedigital.gumroad.com/l/deepstorage_platinum" class="gumroad-button btn btn-premium" target="_blank">
                     Get Platinum Pack
                 </a>
@@ -729,7 +775,7 @@
     <span>JOIN COLLECTIVE</span>
 </a>
 
-<!-- THREE.JS HERO BACKGROUND ANIMATION (UPDATED SPEED & BREATHING EFFECT) -->
+<!-- THREE.JS HERO BACKGROUND ANIMATION -->
 <script>
     if (typeof THREE === 'undefined') {
         console.error("Three.js failed to load.");
@@ -751,12 +797,12 @@
 
         const geometry = new THREE.IcosahedronGeometry(12, 1);
         
-        // CHANGED TO PURPLE ACCENT
+        // PURPLE ACCENT
         const material = new THREE.MeshBasicMaterial({ 
             color: 0xa855f7, 
             wireframe: true, 
             transparent: true, 
-            opacity: 0.3 // Increased opacity slightly for visibility
+            opacity: 0.3 
         });
         
         const shape = new THREE.Mesh(geometry, material);
@@ -775,13 +821,13 @@
         function animate() {
             requestAnimationFrame(animate);
             
-            // INCREASED ROTATION SPEED (Was 0.0005)
+            // ROTATION
             shape.rotation.y += 0.003; 
             shape.rotation.x += 0.001;
             
-            // ADDED BREATHING EFFECT (Scaling) to ensure movement is visible
+            // BREATHING EFFECT
             const time = Date.now() * 0.001;
-            const scale = 1 + Math.sin(time) * 0.05; // Pulses between 0.95 and 1.05
+            const scale = 1 + Math.sin(time) * 0.05; 
             shape.scale.set(scale, scale, scale);
 
             renderer.render(scene, camera);
