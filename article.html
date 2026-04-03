@@ -102,6 +102,35 @@
     <script>
         // --- ARTICLE DATABASE ---
         const articles = {
+            vagus: {
+                category: "System Release",
+                date: "Apr 04, 2026",
+                title: "System Restore: Vagus Nerve Repair Protocol",
+                body: `
+                    <p><strong>System Restore: Vagus Nerve Repair Protocol</strong></p>
+                    <p>System Release – Apr 04, 2026</p>
+                    <p>The Vagus Nerve acts as the primary control switch for the parasympathetic nervous system—the body's "rest and digest" mode. Our latest release, the <strong>Vagus Nerve Repair Protocol</strong>, is a 4-stage neuroacoustic framework designed specifically to downregulate the sympathetic (fight-or-flight) response and activate the body's "OFF Switch."</p>
+                    
+                    <p>Unlike standard relaxation tracks that rely on masking frequencies, this protocol utilizes two distinct engineering pillars: <strong>Baroreflex Entrainment</strong> and <strong>Somatic Sub-Bass Resonance</strong>.</p>
+                    
+                    <p><strong>The 0.1 Hz Respiratory Envelope</strong></p>
+                    <p>Tracks 01 and 03 feature a strictly timed 10-second amplitude modulation cycle (0.1 Hz). This specific frequency aligns with the human Baroreflex—a critical blood pressure regulation mechanism. By locking the audio volume to this rhythm, we unconsciously pace the user's breathing, maximizing Heart Rate Variability (HRV). This physiological coherence is the foundation of Vagus nerve tonification.</p>
+                    
+                    <p><strong>Somatic Sub-Bass (60Hz)</strong></p>
+                    <p>Track 03 introduces a monaural 60 Hz tone optimized for physical sensation rather than auditory processing. This "felt" vibration stimulates the vagus nerve pathways mechanically. By bypassing the cognitive processing centers and targeting the somatic nervous system, we provide a direct method for tonification without creating mental fatigue.</p>
+                    
+                    <p><strong>The Repair Matrix</strong></p>
+                    <ul>
+                        <li><strong>Safe Harbor:</strong> Establishes immediate safety with 4Hz Theta and a 136.1Hz Golden Anchor carrier.</li>
+                        <li><strong>Deep Repair:</strong> A 90-minute descending sweep from 4Hz to 1.5Hz Delta for cellular recovery.</li>
+                        <li><strong>Vagal Tone:</strong> Active somatic stimulation for "active recovery" or low-focus tasks.</li>
+                        <li><strong>Gentle Dawn:</strong> An ascending ramp to re-integrate the system into an Alpha/Beta waking state.</li>
+                    </ul>
+                    
+                    <p><strong>Usage Note:</strong> This system is designed for headphones. Over-ear cups are recommended to best perceive the 60Hz sub-bass resonance.</p>
+                `
+            },
+
             deepstorage: {
                 category: "System Release",
                 date: "Mar 04, 2026",
@@ -177,10 +206,11 @@
             }
         };
 
-        // --- RENDER LOGIC WITH DEFAULT ---
+        // --- RENDER LOGIC ---
         const contentDiv = document.getElementById('article-content');
         const hash = window.location.hash.replace('#', '');
-        const article = articles[hash] || articles['deepstorage']; // default to newest article
+        // Default to the newest article (vagus) if no hash is present
+        const article = articles[hash] || articles['vagus']; 
 
         if (article) {
             let html = `
