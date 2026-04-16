@@ -474,7 +474,7 @@
 
         <h3 style="font-family: 'Playfair Display'; font-size: 1.8rem; margin-top: 60px; color: var(--text-main);">Engineering vs. Music</h3>
         
-        <p><strong>Why ZenSpace Protocols Are Not “Music with Frequencies”</strong><br>
+        <p><strong>Why ZenSpace Protocols Are Not "Music with Frequencies"</strong><br>
         Standard ambient music is designed to relax the mind. ZenSpace Protocols are engineered to support neural regulation.</p>
         
         <p>When a frequency (such as 7.83 Hz) is layered under soft piano or ambient music, the brain does not primarily synchronize with the frequency. It locks onto the music.</p>
@@ -752,12 +752,11 @@
         <!-- PRODUCT: VISUAL CORTEX & CIRCADIAN SERIES (NEW) -->
         <div class="product-card">
             <div class="product-image-container">
-                <!-- Asegúrate de que tu imagen se llame visual.jpg -->
                 <img src="assets/visual.jpg" alt="Zen Space Visual Cortex & Circadian Series">
                 <img src="assets/visual.jpg" alt="Zen Space Visual Cortex & Circadian Series" class="img-hover">
             </div>
             <div>
-                <h3>> THE VISUAL CORTEX<br>& CIRCADIAN SERIES</h3>
+                <h3>> THE VISUAL CORTEX<br>& CIRCADIAN_SERIES</h3>
                 <p>A 12-hour daily neuroacoustic framework. Synchronize your visual processing centers with the body's natural temporal rhythms. No loops. No repetition. Just a living, breathing soundscape.</p>
                 <ul class="product-features">
                     <li>3 Distinct Sessions (1h, 3h, 8h)</li>
@@ -768,7 +767,6 @@
                 </ul>
             </div>
             <div class="card-link">
-                <!-- REEMPLAZA ESTO CON TU LINK REAL DE GUMROAD -->
                 <a href="https://zenspacedigital.gumroad.com/l/visual_cortex" class="btn btn-premium" target="_blank">
                     Access The Series
                 </a>
@@ -799,6 +797,32 @@
             </div>
         </div>
 
+        <!-- NEW PRODUCT: TELLURIC RESONANCE (PACK 05) -->
+        <div class="product-card" style="border-color: var(--accent);">
+            <div class="product-image-container">
+                <img src="assets/telluric.png" alt="ZenSpace Telluric Resonance Pack 05">
+                <img src="assets/telluric.png" alt="ZenSpace Telluric Resonance Pack 05" class="img-hover">
+            </div>
+            <div>
+                <h3 style="color: var(--accent);">> THE_GROUNDING_SERIES<br>PACK_05:_TELLURIC_RESONANCE</h3>
+                <p>The most advanced binaural architecture in the ZenSpace series. 30-hour neuroacoustic grounding protocol featuring the Triple Binaural Engine — three simultaneous carrier frequencies producing independent binaural beats across multiple frequency bands.</p>
+                <ul class="product-features">
+                    <li>Triple Binaural Engine (68.05 / 136.1 / 272.2 Hz)</li>
+                    <li>30 Hours Audio (10 x 3h Protocols)</li>
+                    <li>Binaural Range: 0.3 Hz – 14.1 Hz</li>
+                    <li>Organic Breath Modulation & Spatial Drift</li>
+                    <li>Analog Warmth Processing</li>
+                    <li>320kbps MP3 + Digital Blueprint Insert</li>
+                </ul>
+            </div>
+            <div class="card-link">
+                <a href="https://zenspacedigital.gumroad.com/l/telluric_binaural" class="btn btn-premium" target="_blank" style="background: var(--accent); color: white;">
+                    Get Telluric Resonance
+                </a>
+                <div style="font-size: 0.75rem; color: #777; margin-top: 5px; text-align: center;">Launch Price — $29.99</div>
+            </div>
+        </div>
+
         <!-- NEW CARD: BASELINE ANCHOR (FREE SAMPLE) -->
         <div class="product-card" style="border-color: var(--accent);">
             <div class="product-image-container">
@@ -816,7 +840,6 @@
                 </ul>
             </div>
             <div class="card-link">
-                <!-- Links to the FREE SAMPLE -->
                 <a href="https://zenspacedigital.gumroad.com/l/baselineanchor10m" class="btn btn-premium" target="_blank" style="background: var(--accent); color: white; border: none;">
                     [ DOWNLOAD_SAMPLE ]
                 </a>
@@ -852,11 +875,9 @@
                 </ul>
             </div>
             <div class="card-link">
-                <!-- Main button links to PAID PRODUCT -->
                 <a href="https://zenspacedigital.gumroad.com/l/idlestateoptimization" class="btn btn-premium" target="_blank">
                     Access System
                 </a>
-                <!-- Secondary button links to FREE SAMPLE -->
                 <a href="https://zenspacedigital.gumroad.com/l/baselineanchor10m" class="btn btn-sample" target="_blank">
                     [ INITIATE_TRIAL ] Download Level 01 Sample
                 </a>
@@ -966,7 +987,6 @@
 
         const geometry = new THREE.IcosahedronGeometry(12, 1);
         
-        // PURPLE ACCENT
         const material = new THREE.MeshBasicMaterial({ 
             color: 0xa855f7, 
             wireframe: true, 
@@ -990,11 +1010,9 @@
         function animate() {
             requestAnimationFrame(animate);
             
-            // ROTATION
             shape.rotation.y += 0.003; 
             shape.rotation.x += 0.001;
             
-            // BREATHING EFFECT
             const time = Date.now() * 0.001;
             const scale = 1 + Math.sin(time) * 0.05; 
             shape.scale.set(scale, scale, scale);
